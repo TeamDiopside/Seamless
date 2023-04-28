@@ -10,6 +10,6 @@ Current Blocks:
 - Tall Flowers/Grass
 - Small Dripleaf
 
-![On and off](https://larsmans64.github.io/assets/compare.png)
+![On and off](https://imgur.com/DosLg8Z.png)
 
-![Door and Flower](https://larsmans64.github.io/assets/door_flower.png)
+![Door and Flower](https://imgur.com/jT5kg38.png)
