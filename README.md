@@ -7,7 +7,7 @@ A Fabric/Forge mod that connects the outlines of Double Blocks, like Doors and B
 Current Blocks:
 - Doors
 - Beds
-- Tall Flowers/Grass
+- Large Plants, like Tall Grass, Peony and Sunflower.
 - Small Dripleaf
 
 ![On and off](https://imgur.com/DosLg8Z.png)

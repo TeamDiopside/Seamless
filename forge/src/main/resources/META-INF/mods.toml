@@ -1,17 +1,17 @@
 modLoader = "javafml"
 loaderVersion = "[45,)"
-#issueTrackerURL = ""
+issueTrackerURL = "https://github.com/TeamDiopside/Seamless/issues"
 license = "MIT"
 
 [[mods]]
 modId = "seamless"
 version = "${version}"
 displayName = "Seamless"
-authors = "LarsMans, curryducker"
+authors = "LarsMans"
 description = '''
-Connected outlines!
+A Fabric/Forge mod that connects the outlines of Double Blocks, like Doors and Beds.
 '''
-#logoFile = ""
+logoFile = "../../../../common/src/main/resources/assets/seamless/icon.png"
 
 [[dependencies.examplemod]]
 modId = "forge"

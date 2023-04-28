@@ -3,17 +3,16 @@
   "id": "seamless",
   "version": "${version}",
   "name": "Seamless",
-  "description": "Connected outlines!",
+  "description": "A Fabric/Forge mod that connects the outlines of Double Blocks, like Doors and Beds.",
   "authors": [
-    "LarsMans",
-    "curryducker"
+    "LarsMans"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/TeamDiopside/Seamless"
+    "sources": "https://github.com/TeamDiopside/Seamless",
+    "issues": "https://github.com/TeamDiopside/Seamless/issues"
   },
   "license": "MIT",
-  "icon": "assets/examplemod/icon.png",
+  "icon": "../../../../common/src/main/resources/assets/seamless/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
