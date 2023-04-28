@@ -4,9 +4,12 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
-    "DoublePlantBlockMixin"
   ],
   "mixins": [
+    "BedBlockMixin",
+    "DoorBlockMixin",
+    "DoublePlantBlockMixin",
+    "SmallDripleafBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

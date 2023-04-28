@@ -24,6 +24,6 @@ public class DoublePlantBlockMixin extends BushBlock {
 
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return blockState.getValue(HALF) == DoubleBlockHalf.LOWER ? Voxelshapes.fullBottom() : Voxelshapes.fullTop();
+        return Voxelshapes.full(blockState.getValue(HALF) == DoubleBlockHalf.LOWER);
     }
 }
