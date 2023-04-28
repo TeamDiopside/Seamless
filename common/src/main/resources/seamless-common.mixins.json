@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "nl.curryducker.seamless.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+    "DoublePlantBlockMixin"
+  ],
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

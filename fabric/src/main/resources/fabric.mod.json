@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "seamless",
+  "version": "${version}",
+  "name": "Seamless",
+  "description": "Connected outlines!",
+  "authors": [
+    "LarsMans",
+    "curryducker"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/TeamDiopside/Seamless"
+  },
+  "license": "MIT",
+  "icon": "assets/examplemod/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "nl.curryducker.seamless.fabric.SeamlessFabric"
+    ]
+  },
+  "mixins": [
+    "seamless.mixins.json",
+    "seamless-common.mixins.json"
+  ],
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.19.4",
+    "architectury": ">=8.1.79"
+  }
+}
