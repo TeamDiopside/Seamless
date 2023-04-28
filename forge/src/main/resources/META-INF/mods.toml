@@ -13,21 +13,21 @@ A Fabric/Forge mod that connects the outlines of Double Blocks, like Doors and B
 '''
 logoFile = "../../../../common/src/main/resources/assets/seamless/icon.png"
 
-[[dependencies.examplemod]]
+[[dependencies.seamless]]
 modId = "forge"
 mandatory = true
 versionRange = "[45,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.examplemod]]
+[[dependencies.seamless]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.19.4,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.examplemod]]
+[[dependencies.seamless]]
 modId = "architectury"
 mandatory = true
 versionRange = "[8.1.79,)"
