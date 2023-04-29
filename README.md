@@ -2,7 +2,7 @@
 
 # Seamless
 
-A Fabric/Forge mod that connects the outlines of Double Blocks, like Doors and Beds.
+A client-side Fabric/Forge mod that connects the outlines of Double Blocks, like Doors and Beds.
 
 Current Blocks:
 
