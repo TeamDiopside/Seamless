@@ -48,4 +48,31 @@ public class DoorBlockMixin extends Block {
             case WEST -> cir.setReturnValue(bl ? west : (bl2 ? south : north));
         }
     }
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+
+        // Vanilla VoxelShape
+        VoxelShape south = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 3.0);
+        VoxelShape north = Block.box(0.0, 0.0, 13.0, 16.0, 16.0, 16.0);
+        VoxelShape west = Block.box(13.0, 0.0, 0.0, 16.0, 16.0, 16.0);
+        VoxelShape east = Block.box(0.0, 0.0, 0.0, 3.0, 16.0, 16.0);
+
+        Direction direction = blockState.getValue(FACING);
+        boolean bl = !blockState.getValue(OPEN);
+        boolean bl2 = blockState.getValue(HINGE) == DoorHingeSide.RIGHT;
+        switch (direction) {
+            default: {
+                return bl ? east : (bl2 ? north : south);
+            }
+            case SOUTH: {
+                return bl ? south : (bl2 ? east : west);
+            }
+            case WEST: {
+                return bl ? west : (bl2 ? south : north);
+            }
+            case NORTH:
+        }
+        return bl ? north : (bl2 ? west : east);
+    }
 }
