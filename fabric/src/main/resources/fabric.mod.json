@@ -12,7 +12,7 @@
     "issues": "https://github.com/TeamDiopside/Seamless/issues"
   },
   "license": "MIT",
-  "icon": "../../../../common/src/main/resources/assets/seamless/icon.png",
+  "icon": "../../../../forge/src/main/resources/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -25,7 +25,7 @@
   ],
   "depends": {
     "fabric": "*",
-    "minecraft": ">=1.19.4",
-    "architectury": ">=8.1.79"
+    "minecraft": ">=1.19",
+    "architectury": ">=5.14.76"
   }
 }

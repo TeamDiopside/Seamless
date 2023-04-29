@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[45,)"
+loaderVersion = "[41,)"
 issueTrackerURL = "https://github.com/TeamDiopside/Seamless/issues"
 license = "MIT"
 
@@ -11,25 +11,25 @@ authors = "LarsMans"
 description = '''
 A Fabric/Forge mod that connects the outlines of Double Blocks, like Doors and Beds.
 '''
-logoFile = "../../../../common/src/main/resources/assets/seamless/icon.png"
+logoFile = "icon.png"
 
 [[dependencies.seamless]]
 modId = "forge"
 mandatory = true
-versionRange = "[45,)"
+versionRange = "[41,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.seamless]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19.4,)"
+versionRange = "[1.19,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.seamless]]
 modId = "architectury"
 mandatory = true
-versionRange = "[8.1.79,)"
+versionRange = "[5.14.76,)"
 ordering = "AFTER"
 side = "BOTH"

@@ -5,25 +5,21 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.block.state.properties.DoorHingeSide;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import nl.curryducker.seamless.Voxelshapes;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static net.minecraft.world.level.block.DoorBlock.*;
+
 @Mixin(DoorBlock.class)
 public class DoorBlockMixin extends Block {
-    @Shadow @Final public static EnumProperty<DoubleBlockHalf> HALF;
-    @Shadow @Final public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    @Shadow @Final public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
-    @Shadow @Final public static final EnumProperty<DoorHingeSide> HINGE = BlockStateProperties.DOOR_HINGE;
 
     public DoorBlockMixin(Properties properties) {
         super(properties);
