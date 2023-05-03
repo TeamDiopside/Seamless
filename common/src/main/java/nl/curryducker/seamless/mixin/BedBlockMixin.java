@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import nl.curryducker.seamless.Voxelshapes;
+import nl.curryducker.seamless.SeamlessShapes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -30,7 +30,7 @@ public class BedBlockMixin extends HorizontalDirectionalBlock {
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
     private void getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir) {
-        cir.setReturnValue(Voxelshapes.bed(blockState.getValue(FACING), blockState.getValue(PART)));
+        cir.setReturnValue(SeamlessShapes.bed(blockState.getValue(FACING), blockState.getValue(PART)));
     }
 
     @Override
