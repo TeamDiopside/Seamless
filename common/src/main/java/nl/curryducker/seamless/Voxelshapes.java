@@ -3,9 +3,7 @@ package nl.curryducker.seamless;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BedPart;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -83,5 +81,27 @@ public class Voxelshapes {
 
     public static VoxelShape smallDripleaf(boolean bottom) {
         return bottom ? Block.box(2, 0, 2, 14, 29, 14) : Block.box(2, -16, 2, 14, 13, 14);
+    }
+
+    public static VoxelShape bedroll(Direction direction, BedPart bedPart) {
+        VoxelShape north = Block.box(0.0, 0.0, -16, 16.0, 2.0, 16.0);
+        VoxelShape east = Block.box(0.0, 0.0, 0.0, 32, 2.0, 16.0);
+        VoxelShape south = Block.box(0.0, 0.0, 0.0, 16.0, 2.0, 32);
+        VoxelShape west = Block.box(-16, 0.0, 0.0, 16.0, 2.0, 16.0);
+
+        boolean isFoot = bedPart == BedPart.FOOT;
+
+        switch (direction) {
+            case NORTH -> {
+                return isFoot ? north : south;
+            }
+            case EAST -> {
+                return isFoot ? east : west;
+            }
+            case SOUTH -> {
+                return isFoot ? south : north;
+            }
+        }
+        return isFoot ? west : east;
     }
 }
