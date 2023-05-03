@@ -27,6 +27,10 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+
+    modCompileOnlyApi("curse.maven:supplementaries-412082:4515558")
+    modCompileOnlyApi("curse.maven:create-624165:4507543")
+    modCompileOnlyApi("curse.maven:farmers_delight-482834:4111426")
 }
 
 processResources {
