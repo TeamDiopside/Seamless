@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import nl.curryducker.seamless.Voxelshapes;
+import nl.curryducker.seamless.SeamlessShapes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -32,10 +32,10 @@ public class DoorBlockMixin extends Block {
         boolean bl = !blockState.getValue(OPEN);
         boolean bl2 = blockState.getValue(HINGE) == DoorHingeSide.RIGHT;
 
-        VoxelShape north = Voxelshapes.door(Direction.NORTH, half);
-        VoxelShape east = Voxelshapes.door(Direction.EAST, half);
-        VoxelShape south = Voxelshapes.door(Direction.SOUTH, half);
-        VoxelShape west = Voxelshapes.door(Direction.WEST, half);
+        VoxelShape north = SeamlessShapes.door(Direction.NORTH, half);
+        VoxelShape east = SeamlessShapes.door(Direction.EAST, half);
+        VoxelShape south = SeamlessShapes.door(Direction.SOUTH, half);
+        VoxelShape west = SeamlessShapes.door(Direction.WEST, half);
 
         switch (direction) {
             case NORTH -> cir.setReturnValue(bl ? north : (bl2 ? west : east));

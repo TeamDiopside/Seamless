@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import nl.curryducker.seamless.Voxelshapes;
+import nl.curryducker.seamless.SeamlessShapes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,7 +26,7 @@ public class BedrollBlockMixin extends BedBlock {
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
     public void getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir) {
-        cir.setReturnValue(Voxelshapes.bedroll(blockState.getValue(FACING), blockState.getValue(PART)));
+        cir.setReturnValue(SeamlessShapes.bedroll(blockState.getValue(FACING), blockState.getValue(PART)));
     }
 
     @Override

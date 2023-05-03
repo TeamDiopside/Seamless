@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import nl.curryducker.seamless.Voxelshapes;
+import nl.curryducker.seamless.SeamlessShapes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,6 +22,6 @@ public class SmallDripleafBlockMixin extends DoublePlantBlock {
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
     private void getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir) {
-        cir.setReturnValue(Voxelshapes.smallDripleaf(blockState.getValue(HALF) == DoubleBlockHalf.LOWER));
+        cir.setReturnValue(SeamlessShapes.smallDripleaf(blockState.getValue(HALF) == DoubleBlockHalf.LOWER));
     }
 }
