@@ -142,14 +142,10 @@ public class SeamlessShapes {
         return extendShape(bottom ? Direction.UP : Direction.DOWN, 2, 0, 2, 14, 13, 14);
     }
 
-    public static VoxelShape bedroll(Direction direction, BedPart bedPart) {
-        return extendShape(bedPart == BedPart.FOOT ? direction : direction.getOpposite(), 0, 0, 0, 16, 2, 16);
-    }
-
     public static VoxelShape tallSeaGrass(boolean bottom) {
         return extendShape(bottom ? Direction.UP : Direction.DOWN,2, 0, 2, 14, 16, 14);
     }
-    
+
     public static VoxelShape piston(Direction direction, boolean isHead) {
         VoxelShape east_head = Block.box(12.0, 0.0, 0.0, 16.0, 16.0, 16.0);
         VoxelShape west_head = Block.box(0.0, 0.0, 0.0, 4.0, 16.0, 16.0);
@@ -207,5 +203,21 @@ public class SeamlessShapes {
         }
 
         return Shapes.or(base, head, arm);
+    }
+
+    public static VoxelShape bedroll(Direction direction, BedPart bedPart) {
+        return extendShape(bedPart == BedPart.FOOT ? direction : direction.getOpposite(), 0, 0, 0, 16, 2, 16);
+    }
+
+    public static VoxelShape flax(boolean isBottom, int age) {
+        VoxelShape FULL_BOTTOM = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
+        VoxelShape[] SHAPES_BOTTOM = new VoxelShape[]{Block.box(4.0, 0.0, 4.0, 12.0, 6.0, 12.0), Block.box(3.0, 0.0, 3.0, 13.0, 10.0, 13.0), Block.box(3.0, 0.0, 3.0, 13.0, 13.0, 13.0), Block.box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0), Block.box(2.0, 0.0, 2.0, 14.0, 16.0, 14.0), FULL_BOTTOM, FULL_BOTTOM, FULL_BOTTOM};
+        VoxelShape[] SHAPES_TOP = new VoxelShape[]{FULL_BOTTOM, FULL_BOTTOM, FULL_BOTTOM, FULL_BOTTOM, Block.box(2.0, 0.0, 2.0, 14.0, 3.0, 14.0), Block.box(1.0, 0.0, 1.0, 15.0, 7.0, 15.0), Block.box(1.0, 0.0, 1.0, 15.0, 14.0, 15.0), Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)};
+
+        if (isBottom) {
+            return Shapes.or(SHAPES_BOTTOM[age], moveShape(Direction.UP, SHAPES_TOP[age]));
+        } else {
+            return Shapes.or(SHAPES_TOP[age], moveShape(Direction.DOWN, SHAPES_BOTTOM[age]));
+        }
     }
 }

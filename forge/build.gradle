@@ -37,6 +37,10 @@ dependencies {
 
     modCompileOnlyApi("curse.maven:upgrade_aquatic-326895:4415517")
     modCompileOnlyApi("curse.maven:blueprint-382216:4442628")
+    modCompileOnlyApi("curse.maven:supplementaries-412082:4515557")
+    modCompileOnlyApi("curse.maven:create-328085:4371809")
+    modCompileOnlyApi("curse.maven:biomes_o_plenty-220318:4473556")
+    modCompileOnlyApi("curse.maven:farmers_delight-398521:3999157")
 }
 
 processResources {
