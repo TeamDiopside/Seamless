@@ -1,30 +1,25 @@
 package nl.curryducker.seamless.forge.mixin;
 
 import biomesoplenty.common.block.BrimstoneClusterBlock;
+import biomesoplenty.common.block.DoublePlantBlockBOP;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import nl.curryducker.seamless.SeamlessShapes;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BrimstoneClusterBlock.class)
-public class BrimstoneClusterBlockMixin extends BedBlock {
-    @Shadow @Final public static EnumProperty<DoubleBlockHalf> HALF;
+public class BrimstoneClusterBlockMixin extends DoublePlantBlockBOP {
 
-    public BrimstoneClusterBlockMixin(DyeColor arg, Properties arg2) {
-        super(arg, arg2);
+    public BrimstoneClusterBlockMixin(Properties arg2) {
+        super(arg2);
     }
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)

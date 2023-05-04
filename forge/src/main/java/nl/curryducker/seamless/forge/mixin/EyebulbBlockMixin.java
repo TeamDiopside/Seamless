@@ -1,25 +1,21 @@
 package nl.curryducker.seamless.forge.mixin;
 
+import biomesoplenty.common.block.DoublePlantBlockBOP;
 import biomesoplenty.common.block.EyebulbBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import nl.curryducker.seamless.SeamlessShapes;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(EyebulbBlock.class)
-public class EyebulbBlockMixin extends CropBlock {
-    @Shadow @Final public static EnumProperty<DoubleBlockHalf> HALF;
+public class EyebulbBlockMixin extends DoublePlantBlockBOP {
 
     public EyebulbBlockMixin(Properties properties) {
         super(properties);
