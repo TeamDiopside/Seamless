@@ -6,7 +6,12 @@
   "client": [
   ],
   "mixins": [
-    "FlaxBlockMixin"
+    "FlaxBlockMixin",
+    "RiceCropBlockMixin",
+    "SlidingDoorBlockMixin",
+    "SpringLauncherBlockMixin",
+    "SpringLauncherHeadBlockMixin",
+    "TatamiMatBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

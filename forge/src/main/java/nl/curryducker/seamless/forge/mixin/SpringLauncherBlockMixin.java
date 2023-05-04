@@ -1,12 +1,11 @@
-package nl.curryducker.seamless.mixin;
+package nl.curryducker.seamless.forge.mixin;
 
+import net.mehvahdjukaar.supplementaries.common.block.blocks.SpringLauncherBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.DirectionalBlock;
-import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -18,19 +17,21 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(PistonBaseBlock.class)
-public class PistonBaseBlockMixin extends DirectionalBlock {
+import static net.mehvahdjukaar.supplementaries.common.block.blocks.SpringLauncherBlock.EXTENDED;
 
-    @Shadow @Final public static BooleanProperty EXTENDED;
+@Mixin(SpringLauncherBlock.class)
+public class SpringLauncherBlockMixin extends Block {
 
-    public PistonBaseBlockMixin(Properties properties) {
+    @Shadow @Final public static DirectionProperty FACING;
+
+    public SpringLauncherBlockMixin(Properties properties) {
         super(properties);
     }
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
-    public void getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir) {
-        if (blockState.getValue(EXTENDED)) {
-            cir.setReturnValue(SeamlessShapes.piston(blockState.getValue(FACING), false, false));
+    public void getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
+        if (state.getValue(EXTENDED)) {
+            cir.setReturnValue(SeamlessShapes.piston(state.getValue(FACING), false, true));
         }
     }
 
