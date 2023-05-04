@@ -1,7 +1,7 @@
 # Seamless Changelog
 
 ## 1.1.0
-- Added Tall Seagrass and Pistons
+- Added outlines for Pistons and Tall Seagrass
 - Added optional compatibility for:
   - Create (Glass and Train Door)
   - Supplementaries (Flax, Spring Launcher)

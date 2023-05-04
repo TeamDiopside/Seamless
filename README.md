@@ -4,14 +4,25 @@
 
 A client-side Fabric/Forge mod that connects the outlines of Double Blocks, like Doors and Beds.
 
-Current Blocks:
+**[Architectury API](https://modrinth.com/mod/architectury-api/versions)  is required!**
+
+**Current Blocks:**
 
 - Doors  
 - Beds  
 - Large Plants, like Tall Grass, Peony and Sunflower.  
 - Small Dripleaf  
+- Piston
+- Tall Seagrass
 
-**[Architectury API](https://modrinth.com/mod/architectury-api/versions)  is required!**
+**Optional Compatibility with:**
+
+- Create (Glass and Train Door)
+- Supplementaries (Flax, Spring Launcher)
+- Farmer's Delight (Rice and Full Tatami Mat)
+- Upgrade Aquatic (Bedrolls)
+- Biomes o' Plenty (Brimstone Cluster, Eyebulb)
+
 
 ![On and off](https://imgur.com/DosLg8Z.png)
 
