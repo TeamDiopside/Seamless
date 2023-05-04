@@ -1,30 +1,35 @@
-package nl.curryducker.seamless.mixin;
+package nl.curryducker.seamless.forge.mixin;
 
+import net.mehvahdjukaar.supplementaries.common.block.blocks.SpringLauncherHeadBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
-import net.minecraft.world.level.block.piston.PistonHeadBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import nl.curryducker.seamless.SeamlessShapes;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(PistonHeadBlock.class)
-public class PistonHeadBlockMixin extends DirectionalBlock {
+@Mixin(SpringLauncherHeadBlock.class)
+public class SpringLauncherHeadBlockMixin extends DirectionalBlock {
 
-    public PistonHeadBlockMixin(Properties properties) {
+    @Shadow @Final public static DirectionProperty FACING;
+
+    public SpringLauncherHeadBlockMixin(Properties properties) {
         super(properties);
     }
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
-    public void getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir) {
-        cir.setReturnValue(SeamlessShapes.piston(blockState.getValue(FACING), true, false));
+    public void getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
+        cir.setReturnValue(SeamlessShapes.piston(state.getValue(FACING), true, true));
     }
 
     @Override
@@ -38,12 +43,12 @@ public class PistonHeadBlockMixin extends DirectionalBlock {
         VoxelShape UP_AABB = Block.box(0.0, 12.0, 0.0, 16.0, 16.0, 16.0);
         VoxelShape DOWN_AABB = Block.box(0.0, 0.0, 0.0, 16.0, 4.0, 16.0);
 
-        VoxelShape UP_ARM_AABB = Block.box(6.0, -4.0, 6.0, 10.0, 12.0, 10.0);
-        VoxelShape DOWN_ARM_AABB = Block.box(6.0, 4.0, 6.0, 10.0, 20.0, 10.0);
-        VoxelShape SOUTH_ARM_AABB = Block.box(6.0, 6.0, -4.0, 10.0, 10.0, 12.0);
-        VoxelShape NORTH_ARM_AABB = Block.box(6.0, 6.0, 4.0, 10.0, 10.0, 20.0);
-        VoxelShape EAST_ARM_AABB = Block.box(-4.0, 6.0, 6.0, 12.0, 10.0, 10.0);
-        VoxelShape WEST_ARM_AABB = Block.box(4.0, 6.0, 6.0, 20.0, 10.0, 10.0);
+        VoxelShape UP_ARM_AABB = Block.box(1.0, -4.0, 1.0, 15.0, 12.0, 15.0);
+        VoxelShape DOWN_ARM_AABB = Block.box(1.0, 4.0, 1.0, 15.0, 20.0, 15.0);
+        VoxelShape SOUTH_ARM_AABB = Block.box(1.0, 1.0, -4.0, 15.0, 15.0, 12.0);
+        VoxelShape NORTH_ARM_AABB = Block.box(1.0, 1.0, 4.0, 15.0, 15.0, 20.0);
+        VoxelShape EAST_ARM_AABB = Block.box(-4.0, 1.0, 1.0, 12.0, 15.0, 15.0);
+        VoxelShape WEST_ARM_AABB = Block.box(4.0, 1.0, 1.0, 20.0, 15.0, 15.0);
 
         switch (blockState.getValue(FACING)) {
             case NORTH -> {

@@ -1,10 +1,13 @@
 # Seamless Changelog
 
 ## 1.1.0
-- Added Tall Seagrass and Piston
+- Added Tall Seagrass and Pistons
 - Added optional compatibility for:
   - Create (Glass and Train Door)
-  - Supplementaries (Flax, )
+  - Supplementaries (Flax, Spring Launcher)
+  - Farmer's Delight (Rice and Full Tatami Mat)
+  - Upgrade Aquatic (Bedrolls)
+  - Biomes o' Plenty (Brimstone Cluster, Eyebulb)
 
 ## 1.0.1
 - Fixed getting stuck in doors on servers

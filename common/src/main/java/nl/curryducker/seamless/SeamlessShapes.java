@@ -77,8 +77,6 @@ public class SeamlessShapes {
     }
 
     public static VoxelShape bed(Direction direction, BedPart part) {
-        int a = 16;
-
         VoxelShape leg_nw = Block.box(0, 0, 0, 3, 3, 3);
         VoxelShape leg_sw = Block.box(0, 0, 13, 3, 3, 16);
         VoxelShape leg_ne = Block.box(13, 0, 0, 16, 3, 3);
@@ -146,27 +144,29 @@ public class SeamlessShapes {
         return extendShape(bottom ? Direction.UP : Direction.DOWN,2, 0, 2, 14, 16, 14);
     }
 
-    public static VoxelShape piston(Direction direction, boolean isHead) {
-        VoxelShape east_head = Block.box(12.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-        VoxelShape west_head = Block.box(0.0, 0.0, 0.0, 4.0, 16.0, 16.0);
-        VoxelShape south_head = Block.box(0.0, 0.0, 12.0, 16.0, 16.0, 16.0);
-        VoxelShape north_head = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 4.0);
-        VoxelShape up_head = Block.box(0.0, 12.0, 0.0, 16.0, 16.0, 16.0);
-        VoxelShape down_head = Block.box(0.0, 0.0, 0.0, 16.0, 4.0, 16.0);
+    public static VoxelShape piston(Direction direction, boolean isHead, boolean wideArm) {
+        VoxelShape east_head = Block.box(12, 0, 0, 16, 16, 16);
+        VoxelShape west_head = Block.box(0, 0, 0, 4, 16, 16);
+        VoxelShape south_head = Block.box(0, 0, 12, 16, 16, 16);
+        VoxelShape north_head = Block.box(0, 0, 0, 16, 16, 4);
+        VoxelShape up_head = Block.box(0, 12, 0, 16, 16, 16);
+        VoxelShape down_head = Block.box(0, 0, 0, 16, 4, 16);
 
-        VoxelShape up_arm = Block.box(6.0, -4.0, 6.0, 10.0, 12.0, 10.0);
-        VoxelShape down_arm = Block.box(6.0, 4.0, 6.0, 10.0, 20.0, 10.0);
-        VoxelShape south_arm = Block.box(6.0, 6.0, -4.0, 10.0, 10.0, 12.0);
-        VoxelShape north_arm = Block.box(6.0, 6.0, 4.0, 10.0, 10.0, 20.0);
-        VoxelShape east_arm = Block.box(-4.0, 6.0, 6.0, 12.0, 10.0, 10.0);
-        VoxelShape west_arm = Block.box(4.0, 6.0, 6.0, 20.0, 10.0, 10.0);
+        double d = wideArm ? 1 : 6;
+        double e = wideArm ? 15 : 10;
+        VoxelShape up_arm = Block.box(d, -4, d, e, 12, e);
+        VoxelShape down_arm = Block.box(d, 4, d, e, 20, e);
+        VoxelShape south_arm = Block.box(d, d, -4, e, e, 12);
+        VoxelShape north_arm = Block.box(d, d, 4, e, e, 20);
+        VoxelShape east_arm = Block.box(-4, d, d, 12, e, e);
+        VoxelShape west_arm = Block.box(4, d, d, 20, e, e);
 
-        VoxelShape east_base = Block.box(0.0, 0.0, 0.0, 12.0, 16.0, 16.0);
-        VoxelShape west_base = Block.box(4.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-        VoxelShape south_base = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 12.0);
-        VoxelShape north_base = Block.box(0.0, 0.0, 4.0, 16.0, 16.0, 16.0);
-        VoxelShape up_base = Block.box(0.0, 0.0, 0.0, 16.0, 12.0, 16.0);
-        VoxelShape down_base = Block.box(0.0, 4.0, 0.0, 16.0, 16.0, 16.0);
+        VoxelShape east_base = Block.box(0, 0, 0, 12, 16, 16);
+        VoxelShape west_base = Block.box(4, 0, 0, 16, 16, 16);
+        VoxelShape south_base = Block.box(0, 0, 0, 16, 16, 12);
+        VoxelShape north_base = Block.box(0, 0, 4, 16, 16, 16);
+        VoxelShape up_base = Block.box(0, 0, 0, 16, 12, 16);
+        VoxelShape down_base = Block.box(0, 4, 0, 16, 16, 16);
 
         VoxelShape base = switch (direction) {
             case NORTH -> north_base;
@@ -210,14 +210,58 @@ public class SeamlessShapes {
     }
 
     public static VoxelShape flax(boolean isBottom, int age) {
-        VoxelShape FULL_BOTTOM = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
-        VoxelShape[] SHAPES_BOTTOM = new VoxelShape[]{Block.box(4.0, 0.0, 4.0, 12.0, 6.0, 12.0), Block.box(3.0, 0.0, 3.0, 13.0, 10.0, 13.0), Block.box(3.0, 0.0, 3.0, 13.0, 13.0, 13.0), Block.box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0), Block.box(2.0, 0.0, 2.0, 14.0, 16.0, 14.0), FULL_BOTTOM, FULL_BOTTOM, FULL_BOTTOM};
-        VoxelShape[] SHAPES_TOP = new VoxelShape[]{FULL_BOTTOM, FULL_BOTTOM, FULL_BOTTOM, FULL_BOTTOM, Block.box(2.0, 0.0, 2.0, 14.0, 3.0, 14.0), Block.box(1.0, 0.0, 1.0, 15.0, 7.0, 15.0), Block.box(1.0, 0.0, 1.0, 15.0, 14.0, 15.0), Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)};
+        VoxelShape FULL_BOTTOM = Block.box(1, 0, 1, 15, 16, 15);
+        VoxelShape[] SHAPES_BOTTOM = new VoxelShape[]{Block.box(4, 0, 4, 12, 6, 12), Block.box(3, 0, 3, 13, 10, 13), Block.box(3, 0, 3, 13, 13, 13), Block.box(3, 0, 3, 13, 16, 13), Block.box(2, 0, 2, 14, 16, 14), FULL_BOTTOM, FULL_BOTTOM, FULL_BOTTOM};
+        VoxelShape[] SHAPES_TOP = new VoxelShape[]{FULL_BOTTOM, FULL_BOTTOM, FULL_BOTTOM, FULL_BOTTOM, Block.box(2, 0, 2, 14, 3, 14), Block.box(1, 0, 1, 15, 7, 15), Block.box(1, 0, 1, 15, 14, 15), Block.box(1, 0, 1, 15, 16, 15)};
 
         if (isBottom) {
             return Shapes.or(SHAPES_BOTTOM[age], moveShape(Direction.UP, SHAPES_TOP[age]));
         } else {
             return Shapes.or(SHAPES_TOP[age], moveShape(Direction.DOWN, SHAPES_BOTTOM[age]));
         }
+    }
+
+    public static VoxelShape rice(int age, int topAge) {
+        VoxelShape[] SHAPE_BY_AGE_BOTTOM = new VoxelShape[]{Block.box(3, 0, 3, 13, 8, 13), Block.box(3, 0, 3, 13, 10, 13), Block.box(2, 0, 2, 14, 12, 14), Block.box(1, 0, 1, 15, 16, 15)};
+        VoxelShape[] SHAPE_BY_AGE_TOP = new VoxelShape[]{Block.box(3, 0, 3, 13, 8, 13), Block.box(3, 0, 3, 13, 10, 13), Block.box(2, 0, 2, 14, 12, 14), Block.box(1, 0, 1, 15, 16, 15)};
+
+        if (age <= 2) {
+            return SHAPE_BY_AGE_BOTTOM[age];
+        }
+        return Shapes.or(SHAPE_BY_AGE_BOTTOM[age], moveShape(Direction.UP, SHAPE_BY_AGE_TOP[topAge]));
+    }
+
+    public static VoxelShape slidingDoor(Direction direction, boolean isBottom, boolean hingeRight) {
+        VoxelShape se = Block.box(0, 0, -13, 3, 16, 3);
+        VoxelShape es = Block.box(-13, 0, 0, 3, 16, 3);
+        VoxelShape nw = Block.box(13, 0, 13, 16, 16, 29);
+        VoxelShape wn = Block.box(13, 0, 13, 29, 16, 16);
+        VoxelShape sw = Block.box(13, 0, -13, 16, 16, 3);
+        VoxelShape ws = Block.box(13, 0, 0, 29, 16, 3);
+        VoxelShape ne = Block.box(0, 0, 13, 3, 16, 29);
+        VoxelShape en = Block.box(-13, 0, 13, 3, 16, 16);
+
+        VoxelShape shape = switch (direction) {
+            case DOWN, UP -> se; // just to make IntelliJ happy
+            case NORTH -> hingeRight ? wn : en;
+            case EAST -> hingeRight ? ne : se;
+            case SOUTH -> hingeRight ? es : ws;
+            case WEST -> hingeRight ? sw : nw;
+        };
+
+        return extendShape(isBottom ? Direction.UP : Direction.DOWN, shape);
+    }
+
+    public static VoxelShape fullTatamiMat(Direction direction, boolean isHead) {
+        return extendShape(isHead ? direction : direction.getOpposite(), 0, 0, 0, 16, 2, 16);
+    }
+
+    public static VoxelShape brimstoneClusterBlock(boolean isBottom) {
+        VoxelShape SHAPE = Block.box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0);
+        VoxelShape SHAPE_TOP = Block.box(6.0, 0.0, 6.0, 10.0, 8.0, 10.0);
+        if (isBottom) {
+            return Shapes.or(SHAPE, moveShape(Direction.UP, SHAPE_TOP));
+        }
+        return Shapes.or(SHAPE_TOP, moveShape(Direction.DOWN, SHAPE));
     }
 }
