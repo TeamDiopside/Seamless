@@ -6,8 +6,13 @@
   "client": [
     "BedrollBlockMixin",
     "BrimstoneClusterBlockMixin",
+    "CornBaseBlockMixin",
+    "CornMiddleBlockMixin",
+    "CornTopBlockMixin",
     "EyebulbBlockMixin",
     "FlaxBlockMixin",
+    "HammockBlockMixin",
+    "NightBagBlockMixin",
     "RiceCropBlockMixin",
     "SlidingDoorBlockMixin",
     "SpringLauncherBlockMixin",
