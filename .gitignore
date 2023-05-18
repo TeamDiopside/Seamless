@@ -18,4 +18,5 @@ classes/
 .settings
 *.launch
 
-*.lnk
+fabric libs.lnk
+forge libs.lnk
