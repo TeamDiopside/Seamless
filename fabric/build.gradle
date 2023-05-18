@@ -28,9 +28,12 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
-    modCompileOnlyApi("curse.maven:supplementaries-412082:4515558")
-    modCompileOnlyApi("curse.maven:create-624165:4507543")
-    modCompileOnlyApi("curse.maven:farmers_delight-482834:4111426")
+    modCompileOnlyApi("curse.maven:supplementaries_fabric-412082:4515558")
+    modCompileOnlyApi("curse.maven:create_fabric-624165:4507543")
+    modCompileOnlyApi("curse.maven:farmers_delight_fabric-482834:4111426")
+    modCompileOnlyApi("curse.maven:haunted_harvest_fabric-541753:4417097")
+    modCompileOnlyApi("curse.maven:sleep_tight_fabric-817564:4521655")
+    modCompileOnlyApi("curse.maven:moonlight_fabric-499980:4491268")
 }
 
 processResources {

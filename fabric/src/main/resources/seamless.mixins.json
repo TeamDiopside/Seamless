@@ -4,7 +4,12 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
+    "CornBaseBlockMixin",
+    "CornMiddleBlockMixin",
+    "CornTopBlockMixin",
     "FlaxBlockMixin",
+    "HammockBlockMixin",
+    "NightBagBlockMixin",
     "RiceCropBlockMixin",
     "SlidingDoorBlockMixin",
     "SpringLauncherBlockMixin",

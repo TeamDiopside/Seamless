@@ -35,12 +35,15 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
-    modCompileOnlyApi("curse.maven:upgrade_aquatic-326895:4415517")
-    modCompileOnlyApi("curse.maven:blueprint-382216:4442628")
-    modCompileOnlyApi("curse.maven:supplementaries-412082:4515557")
-    modCompileOnlyApi("curse.maven:create-328085:4371809")
-    modCompileOnlyApi("curse.maven:biomes_o_plenty-220318:4473556")
-    modCompileOnlyApi("curse.maven:farmers_delight-398521:3999157")
+    modCompileOnlyApi("curse.maven:upgrade_aquatic_forge-326895:4415517")
+    modCompileOnlyApi("curse.maven:blueprint_forge-382216:4442628")
+    modCompileOnlyApi("curse.maven:supplementaries_forge-412082:4515557")
+    modCompileOnlyApi("curse.maven:create_forge-328085:4371809")
+    modCompileOnlyApi("curse.maven:biomes_o_plenty_forge-220318:4473556")
+    modCompileOnlyApi("curse.maven:farmers_delight_forge-398521:3999157")
+    modCompileOnlyApi("curse.maven:haunted_harvest_forge-541753:4417094")
+    modCompileOnlyApi("curse.maven:sleep_tight_forge-817564:4521654")
+    modCompileOnlyApi("curse.maven:moonlight_forge-499980:4491267")
 }
 
 processResources {

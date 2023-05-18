@@ -1,12 +1,12 @@
-package nl.curryducker.seamless.fabric.mixin;
+package nl.curryducker.seamless.forge.mixin;
 
-import com.nhoryzon.mc.farmersdelight.block.TatamiMatBlock;
+import net.mehvahdjukaar.hauntedharvest.blocks.AbstractCornBlock;
+import net.mehvahdjukaar.hauntedharvest.blocks.CornMiddleBlock;
+import net.mehvahdjukaar.hauntedharvest.blocks.CornTopBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BedPart;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import nl.curryducker.seamless.SeamlessShapes;
@@ -17,17 +17,19 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(TatamiMatBlock.class)
-public class TatamiMatBlockMixin extends HorizontalDirectionalBlock {
+@Mixin(CornMiddleBlock.class)
+public abstract class CornMiddleBlockMixin extends AbstractCornBlock {
 
-    @Shadow @Final public static EnumProperty<BedPart> PART;
+    @Shadow @Final public static IntegerProperty AGE;
 
-    public TatamiMatBlockMixin(Properties properties) {
+    public CornMiddleBlockMixin(Properties properties) {
         super(properties);
     }
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
     public void getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
-        cir.setReturnValue(SeamlessShapes.mat(state.getValue(FACING), state.getValue(PART) == BedPart.FOOT));
+        int midAge = state.getValue(AGE);
+        int topAge = midAge == 2 ? worldIn.getBlockState(pos.above()).getValue(CornTopBlock.AGE) : 0;
+        cir.setReturnValue(SeamlessShapes.corn(1, 3, midAge, topAge));
     }
 }

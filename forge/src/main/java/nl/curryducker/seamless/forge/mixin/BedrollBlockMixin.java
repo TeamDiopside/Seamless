@@ -6,6 +6,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import nl.curryducker.seamless.SeamlessShapes;
@@ -26,7 +27,7 @@ public class BedrollBlockMixin extends BedBlock {
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
     public void getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir) {
-        cir.setReturnValue(SeamlessShapes.bedroll(blockState.getValue(FACING), blockState.getValue(PART)));
+        cir.setReturnValue(SeamlessShapes.mat(blockState.getValue(FACING), blockState.getValue(PART) == BedPart.FOOT));
     }
 
     @Override

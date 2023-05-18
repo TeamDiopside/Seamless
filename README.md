@@ -10,6 +10,7 @@ A client-side Fabric/Forge mod that connects the outlines of Double Blocks, like
 
 - Doors  
 - Beds  
+- Double Chests
 - Large Plants, like Tall Grass, Peony and Sunflower.  
 - Small Dripleaf  
 - Piston
@@ -22,6 +23,8 @@ A client-side Fabric/Forge mod that connects the outlines of Double Blocks, like
 - Farmer's Delight (Rice and Full Tatami Mat)
 - Upgrade Aquatic (Bedrolls)
 - Biomes o' Plenty (Brimstone Cluster, Eyebulb)
+- Haunted harvest (Corn)
+- Sleep Tight (Hammocks, Night Bag)
 
 
 ![On and off](https://imgur.com/DosLg8Z.png)

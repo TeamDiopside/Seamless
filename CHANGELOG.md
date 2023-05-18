@@ -1,5 +1,11 @@
 # Seamless Changelog
 
+## 1.2.0
+- Added support for:
+  - Double Chests
+  - Haunted harvest (Corn)
+  - Sleep Tight (Hammocks, Night Bag)
+
 ## 1.1.0
 - Added outlines for Pistons and Tall Seagrass
 - Added optional compatibility for:
