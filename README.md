@@ -8,11 +8,11 @@ A client-side Fabric/Forge mod that connects the outlines of Double Blocks, like
 
 **Current Blocks:**
 
-- Doors  
-- Beds  
+- Doors
+- Beds
 - Double Chests
-- Large Plants, like Tall Grass, Peony and Sunflower.  
-- Small Dripleaf  
+- Large Plants, like Tall Grass, Peony and Sunflower.
+- Small Dripleaf
 - Piston
 - Tall Seagrass
 

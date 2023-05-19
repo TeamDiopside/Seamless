@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import vectorwing.farmersdelight.common.block.RiceBlock;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
 
 @Mixin(RiceBlock.class)
 public class RiceCropBlockMixin extends BushBlock {
@@ -28,6 +29,6 @@ public class RiceCropBlockMixin extends BushBlock {
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
     public void getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
         int age = state.getValue(AGE);
-        cir.setReturnValue(SeamlessShapes.rice(age, age <= 2 ? 0 : worldIn.getBlockState(pos.above()).getValue(AGE)));
+        cir.setReturnValue(SeamlessShapes.rice(age, worldIn.getBlockState(pos.above()).getBlock() == ModBlocks.RICE_CROP_PANICLES.get() ? worldIn.getBlockState(pos.above()).getValue(AGE) : 0));
     }
 }

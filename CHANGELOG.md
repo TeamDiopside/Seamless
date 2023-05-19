@@ -1,5 +1,8 @@
 # Seamless Changelog
 
+# 1.2.1
+- Fixed some crashes
+
 ## 1.2.0
 - Added support for:
   - Double Chests
