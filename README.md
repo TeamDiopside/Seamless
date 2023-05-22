@@ -18,7 +18,7 @@ A client-side Fabric/Forge mod that connects the outlines of Double Blocks, like
 
 **Optional Compatibility with:**
 
-- Create (Glass and Train Door)
+- Create (Glass, Train, Brass, Copper and Andesite Door)
 - Supplementaries (Flax, Spring Launcher)
 - Farmer's Delight (Rice and Full Tatami Mat)
 - Upgrade Aquatic (Bedrolls)
