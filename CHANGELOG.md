@@ -1,6 +1,10 @@
 # Seamless Changelog
 
-# 1.2.1
+## 1.3.0
+- Added support for:
+  - Copper and Andesite Doors (Create 0.5.1)
+
+## 1.2.1
 - Fixed some crashes
 
 ## 1.2.0

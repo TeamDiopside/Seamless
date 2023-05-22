@@ -34,7 +34,7 @@ public class SlidingDoorBlockMixin extends DoorBlock {
         if (!blockState.getValue(OPEN) || (blockState.getValue(VISIBLE) || blockGetter instanceof ContraptionWorld)) {
             cir.setReturnValue(SeamlessShapes.door(blockState.getValue(FACING), blockState.getValue(HALF)));
         } else {
-            cir.setReturnValue(SeamlessShapes.slidingDoor(blockState.getValue(FACING), blockState.getValue(HALF) == DoubleBlockHalf.LOWER, blockState.getValue(HINGE) == DoorHingeSide.RIGHT));
+            cir.setReturnValue(SeamlessShapes.slidingDoor(blockState.getValue(FACING), blockState.getValue(HALF) == DoubleBlockHalf.LOWER, blockState.getValue(HINGE) == DoorHingeSide.RIGHT, false));
         }
     }
 

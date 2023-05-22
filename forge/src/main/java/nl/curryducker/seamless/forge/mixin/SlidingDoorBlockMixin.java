@@ -1,7 +1,7 @@
 package nl.curryducker.seamless.forge.mixin;
 
-import com.simibubi.create.content.contraptions.components.structureMovement.ContraptionWorld;
-import com.simibubi.create.content.curiosities.deco.SlidingDoorBlock;
+import com.simibubi.create.content.contraptions.ContraptionWorld;
+import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -22,8 +22,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SlidingDoorBlock.class)
-public class SlidingDoorBlockMixin extends DoorBlock {
+public abstract class SlidingDoorBlockMixin extends DoorBlock {
     @Shadow @Final public static BooleanProperty VISIBLE;
+
+    @Shadow public abstract boolean isFoldingDoor();
 
     public SlidingDoorBlockMixin(Properties properties) {
         super(properties);
@@ -34,7 +36,7 @@ public class SlidingDoorBlockMixin extends DoorBlock {
         if (!blockState.getValue(OPEN) || (blockState.getValue(VISIBLE) || blockGetter instanceof ContraptionWorld)) {
             cir.setReturnValue(SeamlessShapes.door(blockState.getValue(FACING), blockState.getValue(HALF)));
         } else {
-            cir.setReturnValue(SeamlessShapes.slidingDoor(blockState.getValue(FACING), blockState.getValue(HALF) == DoubleBlockHalf.LOWER, blockState.getValue(HINGE) == DoorHingeSide.RIGHT));
+            cir.setReturnValue(SeamlessShapes.slidingDoor(blockState.getValue(FACING), blockState.getValue(HALF) == DoubleBlockHalf.LOWER, blockState.getValue(HINGE) == DoorHingeSide.RIGHT, isFoldingDoor()));
         }
     }
 
@@ -42,14 +44,15 @@ public class SlidingDoorBlockMixin extends DoorBlock {
     public VoxelShape getCollisionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
 
         // Vanilla VoxelShape
-        VoxelShape SE_AABB = Block.box(0.0, 0.0, -13.0, 3.0, 16.0, 3.0);
-        VoxelShape ES_AABB = Block.box(-13.0, 0.0, 0.0, 3.0, 16.0, 3.0);
-        VoxelShape NW_AABB = Block.box(13.0, 0.0, 13.0, 16.0, 16.0, 29.0);
-        VoxelShape WN_AABB = Block.box(13.0, 0.0, 13.0, 29.0, 16.0, 16.0);
-        VoxelShape SW_AABB = Block.box(13.0, 0.0, -13.0, 16.0, 16.0, 3.0);
-        VoxelShape WS_AABB = Block.box(13.0, 0.0, 0.0, 29.0, 16.0, 3.0);
-        VoxelShape NE_AABB = Block.box(0.0, 0.0, 13.0, 3.0, 16.0, 29.0);
-        VoxelShape EN_AABB = Block.box(-13.0, 0.0, 13.0, 3.0, 16.0, 16.0);
+        boolean folding = isFoldingDoor();
+        VoxelShape se = folding ? Block.box(0.0, 0.0, -3.0, 9.0, 16.0, 3.0) : Block.box(0, 0, -13, 3, 16, 3);
+        VoxelShape es = folding ? Block.box(-3.0, 0.0, 0.0, 3.0, 16.0, 9.0) : Block.box(-13, 0, 0, 3, 16, 3);
+        VoxelShape nw = folding ? Block.box(7.0, 0.0, 13.0, 16.0, 16.0, 19.0) : Block.box(13, 0, 13, 16, 16, 29);
+        VoxelShape wn = folding ? Block.box(13.0, 0.0, 7.0, 19.0, 16.0, 16.0) : Block.box(13, 0, 13, 29, 16, 16);
+        VoxelShape sw = folding ? Block.box(7.0, 0.0, -3.0, 16.0, 16.0, 3.0) : Block.box(13, 0, -13, 16, 16, 3);
+        VoxelShape ws = folding ? Block.box(13.0, 0.0, 0.0, 19.0, 16.0, 9.0) : Block.box(13, 0, 0, 29, 16, 3);
+        VoxelShape ne = folding ? Block.box(0.0, 0.0, 13.0, 9.0, 16.0, 19.0) : Block.box(0, 0, 13, 3, 16, 29);
+        VoxelShape en = folding ? Block.box(-3.0, 0.0, 7.0, 3.0, 16.0, 16.0) : Block.box(-13, 0, 13, 3, 16, 16);
 
         if (!(Boolean)pState.getValue(OPEN) && (pState.getValue(VISIBLE) || pLevel instanceof ContraptionWorld)) {
             return super.getCollisionShape(pState, pLevel, pPos, pContext);
@@ -58,10 +61,10 @@ public class SlidingDoorBlockMixin extends DoorBlock {
             boolean hinge = pState.getValue(HINGE) == DoorHingeSide.RIGHT;
 
             return switch (direction) {
-                case SOUTH -> hinge ? ES_AABB : WS_AABB;
-                case WEST -> hinge ? SW_AABB : NW_AABB;
-                case NORTH -> hinge ? WN_AABB : EN_AABB;
-                default -> hinge ? NE_AABB : SE_AABB;
+                case SOUTH -> hinge ? es : ws;
+                case WEST -> hinge ? sw : nw;
+                case NORTH -> hinge ? wn : en;
+                default -> hinge ? ne : se;
             };
         }
     }

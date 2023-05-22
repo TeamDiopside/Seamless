@@ -241,15 +241,15 @@ public class SeamlessShapes {
         return Shapes.or(bottom[age], moveShape(Direction.UP, top[topAge]));
     }
 
-    public static VoxelShape slidingDoor(Direction direction, boolean isBottom, boolean hingeRight) {
-        VoxelShape se = Block.box(0, 0, -13, 3, 16, 3);
-        VoxelShape es = Block.box(-13, 0, 0, 3, 16, 3);
-        VoxelShape nw = Block.box(13, 0, 13, 16, 16, 29);
-        VoxelShape wn = Block.box(13, 0, 13, 29, 16, 16);
-        VoxelShape sw = Block.box(13, 0, -13, 16, 16, 3);
-        VoxelShape ws = Block.box(13, 0, 0, 29, 16, 3);
-        VoxelShape ne = Block.box(0, 0, 13, 3, 16, 29);
-        VoxelShape en = Block.box(-13, 0, 13, 3, 16, 16);
+    public static VoxelShape slidingDoor(Direction direction, boolean isBottom, boolean hingeRight, boolean folding) {
+        VoxelShape se = folding ? Block.box(0.0, 0.0, -3.0, 9.0, 16.0, 3.0) : Block.box(0, 0, -13, 3, 16, 3);
+        VoxelShape es = folding ? Block.box(-3.0, 0.0, 0.0, 3.0, 16.0, 9.0) : Block.box(-13, 0, 0, 3, 16, 3);
+        VoxelShape nw = folding ? Block.box(7.0, 0.0, 13.0, 16.0, 16.0, 19.0) : Block.box(13, 0, 13, 16, 16, 29);
+        VoxelShape wn = folding ? Block.box(13.0, 0.0, 7.0, 19.0, 16.0, 16.0) : Block.box(13, 0, 13, 29, 16, 16);
+        VoxelShape sw = folding ? Block.box(7.0, 0.0, -3.0, 16.0, 16.0, 3.0) : Block.box(13, 0, -13, 16, 16, 3);
+        VoxelShape ws = folding ? Block.box(13.0, 0.0, 0.0, 19.0, 16.0, 9.0) : Block.box(13, 0, 0, 29, 16, 3);
+        VoxelShape ne = folding ? Block.box(0.0, 0.0, 13.0, 9.0, 16.0, 19.0) : Block.box(0, 0, 13, 3, 16, 29);
+        VoxelShape en = folding ? Block.box(-3.0, 0.0, 7.0, 3.0, 16.0, 16.0) : Block.box(-13, 0, 13, 3, 16, 16);
 
         VoxelShape shape = switch (direction) {
             case DOWN, UP -> se; // just to make IntelliJ happy
@@ -311,17 +311,17 @@ public class SeamlessShapes {
         }
 
         if (Objects.equals(part, "foot") || Objects.equals(part, "head")) {
-            return Shapes.or(hammockDirectionFence(direction.getOpposite()), moveShape(direction, hammockDirectionFence(direction)));
+            return Shapes.or(fenceHammock(direction.getOpposite()), moveShape(direction, fenceHammock(direction)));
         }
 
         if (Objects.equals(part, "middle")) {
-            return Shapes.or(full, moveShape(direction.getOpposite(), hammockDirectionBlock(direction.getOpposite())), moveShape(direction, hammockDirectionBlock(direction)));
+            return Shapes.or(full, moveShape(direction.getOpposite(), blockHammock(direction.getOpposite())), moveShape(direction, blockHammock(direction)));
         }
 
-        return Shapes.or(hammockDirectionBlock(direction.getOpposite()), moveShape(direction, full), moveShape(direction, 2, hammockDirectionBlock(direction)));
+        return Shapes.or(blockHammock(direction.getOpposite()), moveShape(direction, full), moveShape(direction, 2, blockHammock(direction)));
     }
 
-    public static VoxelShape hammockDirectionBlock(Direction direction) {
+    public static VoxelShape blockHammock(Direction direction) {
         VoxelShape north = Block.box(0, 3, 6, 16, 6, 16);
         VoxelShape south = Block.box(0, 3, 0, 16, 6, 10);
         VoxelShape west = Block.box(6, 3, 0, 16, 6, 16);
@@ -335,7 +335,7 @@ public class SeamlessShapes {
         };
     }
 
-    public static VoxelShape hammockDirectionFence(Direction direction) {
+    public static VoxelShape fenceHammock(Direction direction) {
         VoxelShape north = Block.box(0, 3, -2, 16, 6, 16);
         VoxelShape east = Block.box(0, 3, 0, 18, 6, 16);
         VoxelShape south = Block.box(0, 3, 0, 16, 6, 18);
