@@ -13,7 +13,7 @@
     "discord": "https://discord.gg/PJCXjSJnu2"
   },
   "license": "MIT",
-  "icon": "../../../../forge/src/main/resources/icon.png",
+  "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
