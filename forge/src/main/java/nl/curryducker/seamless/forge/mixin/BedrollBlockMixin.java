@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -18,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BedrollBlock.class)
-public class BedrollBlockMixin extends BedBlock {
+public abstract class BedrollBlockMixin extends BedBlock implements SimpleWaterloggedBlock {
     @Shadow @Final private static VoxelShape SHAPE;
 
     public BedrollBlockMixin(DyeColor arg, Properties arg2) {

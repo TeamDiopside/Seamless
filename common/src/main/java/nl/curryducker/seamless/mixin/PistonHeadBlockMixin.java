@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PistonHeadBlock.class)
-public class PistonHeadBlockMixin extends DirectionalBlock {
+public abstract class PistonHeadBlockMixin extends DirectionalBlock {
 
     public PistonHeadBlockMixin(Properties properties) {
         super(properties);

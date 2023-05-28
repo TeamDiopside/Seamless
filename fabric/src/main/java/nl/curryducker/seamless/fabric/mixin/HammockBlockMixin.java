@@ -1,10 +1,13 @@
 package nl.curryducker.seamless.fabric.mixin;
 
+import net.mehvahdjukaar.moonlight.api.block.IRotatable;
 import net.mehvahdjukaar.sleep_tight.common.HammockPart;
 import net.mehvahdjukaar.sleep_tight.common.blocks.HammockBlock;
+import net.mehvahdjukaar.sleep_tight.common.blocks.IModBed;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -19,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(HammockBlock.class)
-public abstract class HammockBlockMixin extends HorizontalDirectionalBlock {
+public abstract class HammockBlockMixin extends HorizontalDirectionalBlock implements EntityBlock, IRotatable, IModBed {
 
     @Shadow @Final public static EnumProperty<HammockPart> PART;
 
@@ -29,15 +32,7 @@ public abstract class HammockBlockMixin extends HorizontalDirectionalBlock {
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
     public void getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
-        String part = switch (state.getValue(PART)) {
-            case FOOT -> "foot";
-            case HEAD -> "head";
-            case MIDDLE -> "middle";
-            case HALF_FOOT -> "half-foot";
-            case HALF_HEAD -> "half-head";
-        };
-
-        cir.setReturnValue(SeamlessShapes.hammock(part, state.getValue(FACING)));
+        cir.setReturnValue(SeamlessShapes.hammock(state.getValue(PART).toString(), state.getValue(FACING)));
     }
 
     @Override

@@ -2,6 +2,7 @@ package nl.curryducker.seamless.forge.mixin;
 
 import biomesoplenty.common.block.DoublePlantBlockBOP;
 import biomesoplenty.common.block.EyebulbBlock;
+import net.mehvahdjukaar.moonlight.api.block.IBeeGrowable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(EyebulbBlock.class)
-public class EyebulbBlockMixin extends DoublePlantBlockBOP {
+public abstract class EyebulbBlockMixin extends DoublePlantBlockBOP implements IBeeGrowable {
 
     public EyebulbBlockMixin(Properties properties) {
         super(properties);

@@ -1,35 +1,31 @@
-package nl.curryducker.seamless.fabric.mixin;
+package nl.curryducker.seamless.forge.mixin;
 
-import net.mehvahdjukaar.moonlight.api.block.IBeeGrowable;
-import net.mehvahdjukaar.supplementaries.common.block.blocks.FlaxBlock;
+import com.teamabnormals.atmospheric.common.block.YuccaFlowerDoubleBlock;
+import com.teamabnormals.atmospheric.common.block.YuccaPlant;
+import com.teamabnormals.blueprint.common.block.BlueprintTallFlowerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import nl.curryducker.seamless.SeamlessShapes;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(FlaxBlock.class)
-public abstract class FlaxBlockMixin extends CropBlock implements IBeeGrowable {
-    @Shadow @Final public static EnumProperty<DoubleBlockHalf> HALF;
+@Mixin(YuccaFlowerDoubleBlock.class)
+public abstract class YuccaFlowerDoubleBlockMixin extends BlueprintTallFlowerBlock implements YuccaPlant {
 
-    public FlaxBlockMixin(Properties properties) {
+    public YuccaFlowerDoubleBlockMixin(Properties properties) {
         super(properties);
     }
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
     public void getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
-        if (state.getValue(AGE)>=4) {
-            cir.setReturnValue(SeamlessShapes.flax(state.getValue(HALF) == DoubleBlockHalf.LOWER, state.getValue(AGE)));
-        }
+        Vec3 vec3d = state.getOffset(worldIn, pos);
+        cir.setReturnValue(SeamlessShapes.tallSeaGrass(state.getValue(HALF) == DoubleBlockHalf.LOWER).move(vec3d.x, vec3d.y, vec3d.z));
     }
 }

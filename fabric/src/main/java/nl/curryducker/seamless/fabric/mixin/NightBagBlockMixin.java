@@ -1,5 +1,6 @@
 package nl.curryducker.seamless.fabric.mixin;
 
+import net.mehvahdjukaar.sleep_tight.common.blocks.IModBed;
 import net.mehvahdjukaar.sleep_tight.common.blocks.NightBagBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.DyeColor;
@@ -17,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(NightBagBlock.class)
-public class NightBagBlockMixin extends BedBlock {
+public abstract class NightBagBlockMixin extends BedBlock implements IModBed {
 
     public NightBagBlockMixin(DyeColor dyeColor, Properties properties) {
         super(dyeColor, properties);

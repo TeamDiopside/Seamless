@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PistonBaseBlock.class)
-public class PistonBaseBlockMixin extends DirectionalBlock {
+public abstract class PistonBaseBlockMixin extends DirectionalBlock {
 
     @Shadow @Final public static BooleanProperty EXTENDED;
 

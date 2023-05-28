@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(TatamiMatBlock.class)
-public class TatamiMatBlockMixin extends HorizontalDirectionalBlock {
+public abstract class TatamiMatBlockMixin extends HorizontalDirectionalBlock {
 
     @Shadow @Final public static EnumProperty<BedPart> PART;
 

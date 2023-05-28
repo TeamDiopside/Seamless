@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BrimstoneClusterBlock.class)
-public class BrimstoneClusterBlockMixin extends DoublePlantBlockBOP {
+public abstract class BrimstoneClusterBlockMixin extends DoublePlantBlockBOP {
 
     public BrimstoneClusterBlockMixin(Properties arg2) {
         super(arg2);

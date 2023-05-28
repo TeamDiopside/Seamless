@@ -3,6 +3,10 @@
 ## 1.3.0
 - Added support for:
   - Copper and Andesite Doors (Create 0.5.1)
+  - Cattail, Large and Giant Lily Pads, Tall Dead Bush (Environmental)
+  - Water Hyacinth, Yucca Flower (Atmospheric)
+  - Flowering Rush, Pickerelweed, Beach Grass (Upgrade Aquatic)
+- Fixed rice
 
 ## 1.2.1
 - Fixed some crashes

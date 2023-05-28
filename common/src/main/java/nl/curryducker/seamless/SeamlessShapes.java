@@ -2,16 +2,14 @@ package nl.curryducker.seamless;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.properties.BedPart;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Objects;
 
 public class SeamlessShapes {
-    public static VoxelShape extendShape(Direction direction, double x1, double y1, double z1, double x2, double y2, double z2) {
-        int a = 16;
+    public static VoxelShape extendShape(Direction direction, int distance, double x1, double y1, double z1, double x2, double y2, double z2) {
+        int a = 16 * distance;
         switch (direction) {
             case NORTH -> z1-=a;
             case EAST -> x2+=a;
@@ -23,14 +21,14 @@ public class SeamlessShapes {
         return Block.box(x1, y1, z1, x2, y2, z2);
     }
 
+    public static VoxelShape extendShape(Direction direction, int distance, VoxelShape shape) {
+        VoxelShape[] newshape = new VoxelShape[]{Shapes.empty()};
+        shape.forAllBoxes((a, b, c, d, e, f) -> newshape[0] = Shapes.or(newshape[0], extendShape(direction, distance, a * 16, b * 16, c * 16, d * 16, e * 16, f * 16)));
+        return newshape[0];
+    }
+
     public static VoxelShape extendShape(Direction direction, VoxelShape voxelShape) {
-        double x1 = voxelShape.min(Direction.Axis.X) * 16;
-        double y1 = voxelShape.min(Direction.Axis.Y) * 16;
-        double z1 = voxelShape.min(Direction.Axis.Z) * 16;
-        double x2 = voxelShape.max(Direction.Axis.X) * 16;
-        double y2 = voxelShape.max(Direction.Axis.Y) * 16;
-        double z2 = voxelShape.max(Direction.Axis.Z) * 16;
-        return extendShape(direction, x1, y1, z1, x2, y2, z2);
+        return extendShape(direction, 1, voxelShape);
     }
     
     public static VoxelShape moveShape(Direction direction, int distance, double x1, double y1, double z1, double x2, double y2, double z2) {
@@ -64,117 +62,103 @@ public class SeamlessShapes {
         return Block.box(x1, y1, z1, x2, y2, z2);
     }
 
-    public static VoxelShape moveShape(Direction direction, double x1, double y1, double z1, double x2, double y2, double z2) {
-        return moveShape(direction, 1, x1, y1, z1, x2, y2, z2);
+    public static VoxelShape moveShape(Direction direction, int distance, VoxelShape shape) {
+        VoxelShape[] newshape = new VoxelShape[]{Shapes.empty()};
+        shape.forAllBoxes((a, b, c, d, e, f) -> newshape[0] = Shapes.or(newshape[0], moveShape(direction, distance, a * 16, b * 16, c * 16, d * 16, e * 16, f * 16)));
+        return newshape[0];
     }
 
-    public static VoxelShape moveShape(Direction direction, int distance, VoxelShape voxelShape) {
-        double x1 = voxelShape.min(Direction.Axis.X) * 16;
-        double y1 = voxelShape.min(Direction.Axis.Y) * 16;
-        double z1 = voxelShape.min(Direction.Axis.Z) * 16;
-        double x2 = voxelShape.max(Direction.Axis.X) * 16;
-        double y2 = voxelShape.max(Direction.Axis.Y) * 16;
-        double z2 = voxelShape.max(Direction.Axis.Z) * 16;
-        return moveShape(direction, distance, x1, y1, z1, x2, y2, z2);
-    }
-
-    public static VoxelShape moveShape(Direction direction, VoxelShape voxelShape) {
+    public static VoxelShape moveShape(Direction direction,  VoxelShape voxelShape) {
         return moveShape(direction, 1, voxelShape);
     }
 
-    public static VoxelShape full(boolean bottom) {
-        return extendShape(bottom ? Direction.UP : Direction.DOWN, 0, 0, 0, 16, 16, 16);
+    public static VoxelShape doubleBlock(Direction direction, boolean bl, VoxelShape shape, VoxelShape movingShape) {
+        return bl ? Shapes.or(shape, moveShape(direction, movingShape)) : Shapes.or(movingShape, moveShape(direction.getOpposite(), shape));
     }
 
-    public static VoxelShape bed(Direction direction, BedPart part) {
+    public static VoxelShape doubleHighSameShape(boolean bottom, VoxelShape shape) {
+        return extendShape(bottom ? Direction.UP : Direction.DOWN, shape);
+    }
+
+    public static VoxelShape fullDoubleHigh(boolean bottom) {
+        return doubleHighSameShape(bottom, Block.box(0, 0, 0, 16, 16, 16));
+    }
+
+    public static VoxelShape bed(Direction direction, boolean foot) {
         VoxelShape leg_nw = Block.box(0, 0, 0, 3, 3, 3);
         VoxelShape leg_sw = Block.box(0, 0, 13, 3, 3, 16);
         VoxelShape leg_ne = Block.box(13, 0, 0, 16, 3, 3);
         VoxelShape leg_se = Block.box(13, 0, 13, 16, 3, 16);
-
-        VoxelShape leg_nnw = moveShape(Direction.NORTH, leg_nw);
-        VoxelShape leg_nne = moveShape(Direction.NORTH, leg_ne);
-        VoxelShape leg_ene = moveShape(Direction.EAST, leg_ne);
-        VoxelShape leg_ese = moveShape(Direction.EAST, leg_se);
-        VoxelShape leg_sse = moveShape(Direction.SOUTH, leg_se);
-        VoxelShape leg_ssw = moveShape(Direction.SOUTH, leg_sw);
-        VoxelShape leg_wsw = moveShape(Direction.WEST, leg_sw);
-        VoxelShape leg_wnw = moveShape(Direction.WEST, leg_nw);
-
         VoxelShape body = Block.box(0, 3, 0, 16, 9, 16);
 
-        boolean isFoot = part == BedPart.FOOT;
-
-        VoxelShape base = extendShape(isFoot ? direction : direction.getOpposite(), body);
+        VoxelShape north = Shapes.or(leg_se, leg_sw, body);
+        VoxelShape east = Shapes.or(leg_nw, leg_sw, body);
+        VoxelShape south = Shapes.or(leg_ne, leg_nw, body);
+        VoxelShape west = Shapes.or(leg_ne, leg_se, body);
 
         switch (direction) {
             case NORTH -> {
-                return isFoot ? Shapes.or(leg_sw, leg_se, leg_nne, leg_nnw, base) :
-                        Shapes.or(leg_ne, leg_nw, leg_sse, leg_ssw, base);
+                return doubleBlock(direction, foot, north, south);
             }
             case EAST -> {
-                return isFoot ? Shapes.or(leg_sw, leg_nw, leg_ene, leg_ese, base) :
-                        Shapes.or(leg_ne, leg_se, leg_wnw, leg_wsw, base);
+                return doubleBlock(direction, foot, east, west);
             }
             case SOUTH -> {
-                return isFoot ? Shapes.or(leg_nw, leg_ne, leg_sse, leg_ssw, base) :
-                        Shapes.or(leg_se, leg_sw, leg_nne, leg_nnw, base);
+                return doubleBlock(direction, foot, south, north);
             }
         }
-        return isFoot ? Shapes.or(leg_ne, leg_se, leg_wnw, leg_wsw, base) :
-                Shapes.or(leg_sw, leg_nw, leg_ene, leg_ese, base);
+        return doubleBlock(direction, foot, west, east);
     }
 
-    public static VoxelShape door(Direction direction, DoubleBlockHalf half) {
+    public static VoxelShape door(Direction direction, boolean bottom) {
         VoxelShape north = Block.box(0, 0, 13, 16, 16, 16);
         VoxelShape east = Block.box(0, 0, 0, 3, 16, 16);
         VoxelShape south = Block.box(0, 0, 0, 16, 16, 3);
         VoxelShape west = Block.box(13, 0, 0, 16, 16, 16);
 
-        Direction vertical = half == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN;
         switch (direction) {
             case NORTH -> {
-                return extendShape(vertical, north);
+                return doubleHighSameShape(bottom, north);
             }
             case EAST -> {
-                return extendShape(vertical, east);
+                return doubleHighSameShape(bottom, east);
             }
             case SOUTH -> {
-                return extendShape(vertical, south);
+                return doubleHighSameShape(bottom, south);
             }
         }
-        return extendShape(vertical, west);
+        return doubleHighSameShape(bottom, west);
     }
 
     public static VoxelShape smallDripleaf(boolean bottom) {
-        return extendShape(bottom ? Direction.UP : Direction.DOWN, 2, 0, 2, 14, 13, 14);
+        return doubleHighSameShape(bottom, Block.box(2, 0, 2, 14, 13, 14));
     }
 
     public static VoxelShape tallSeaGrass(boolean bottom) {
-        return extendShape(bottom ? Direction.UP : Direction.DOWN,2, 0, 2, 14, 16, 14);
+        return doubleHighSameShape(bottom, Block.box(2, 0, 2, 14, 16, 14));
     }
 
     public static VoxelShape piston(Direction direction, boolean isHead, boolean wideArm) {
-        VoxelShape east_head = Block.box(12, 0, 0, 16, 16, 16);
-        VoxelShape west_head = Block.box(0, 0, 0, 4, 16, 16);
-        VoxelShape south_head = Block.box(0, 0, 12, 16, 16, 16);
         VoxelShape north_head = Block.box(0, 0, 0, 16, 16, 4);
+        VoxelShape east_head = Block.box(12, 0, 0, 16, 16, 16);
+        VoxelShape south_head = Block.box(0, 0, 12, 16, 16, 16);
+        VoxelShape west_head = Block.box(0, 0, 0, 4, 16, 16);
         VoxelShape up_head = Block.box(0, 12, 0, 16, 16, 16);
         VoxelShape down_head = Block.box(0, 0, 0, 16, 4, 16);
 
         double d = wideArm ? 1 : 6;
         double e = wideArm ? 15 : 10;
-        VoxelShape up_arm = Block.box(d, -4, d, e, 12, e);
-        VoxelShape down_arm = Block.box(d, 4, d, e, 20, e);
-        VoxelShape south_arm = Block.box(d, d, -4, e, e, 12);
         VoxelShape north_arm = Block.box(d, d, 4, e, e, 20);
         VoxelShape east_arm = Block.box(-4, d, d, 12, e, e);
+        VoxelShape south_arm = Block.box(d, d, -4, e, e, 12);
         VoxelShape west_arm = Block.box(4, d, d, 20, e, e);
+        VoxelShape up_arm = Block.box(d, -4, d, e, 12, e);
+        VoxelShape down_arm = Block.box(d, 4, d, e, 20, e);
 
-        VoxelShape east_base = Block.box(0, 0, 0, 12, 16, 16);
-        VoxelShape west_base = Block.box(4, 0, 0, 16, 16, 16);
-        VoxelShape south_base = Block.box(0, 0, 0, 16, 16, 12);
         VoxelShape north_base = Block.box(0, 0, 4, 16, 16, 16);
+        VoxelShape east_base = Block.box(0, 0, 0, 12, 16, 16);
+        VoxelShape south_base = Block.box(0, 0, 0, 16, 16, 12);
+        VoxelShape west_base = Block.box(4, 0, 0, 16, 16, 16);
         VoxelShape up_base = Block.box(0, 0, 0, 16, 12, 16);
         VoxelShape down_base = Block.box(0, 4, 0, 16, 16, 16);
 
@@ -188,57 +172,40 @@ public class SeamlessShapes {
         };
 
         VoxelShape head = switch (direction) {
-            case NORTH -> north_head;
-            case EAST -> east_head;
-            case SOUTH -> south_head;
-            case WEST -> west_head;
-            case UP -> up_head;
-            case DOWN -> down_head;
+            case NORTH -> Shapes.or(north_head, north_arm);
+            case EAST -> Shapes.or(east_head, east_arm);
+            case SOUTH -> Shapes.or(south_head, south_arm);
+            case WEST -> Shapes.or(west_head, west_arm);
+            case UP -> Shapes.or(up_head, up_arm);
+            case DOWN -> Shapes.or(down_head, down_arm);
         };
 
-        VoxelShape arm = switch (direction) {
-            case NORTH -> north_arm;
-            case EAST -> east_arm;
-            case SOUTH -> south_arm;
-            case WEST -> west_arm;
-            case UP -> up_arm;
-            case DOWN -> down_arm;
-        };
-
-        if (isHead) {
-            base = moveShape(direction.getOpposite(), base);
-        } else {
-            head = moveShape(direction, head);
-            arm = moveShape(direction, arm);
-        }
-
-        return Shapes.or(base, head, arm);
+        return doubleBlock(direction.getOpposite(), isHead, head, base);
     }
 
-    public static VoxelShape mat(Direction direction, boolean b) {
-        return extendShape(b ? direction : direction.getOpposite(), 0, 0, 0, 16, 2, 16);
+    public static VoxelShape chest(Direction direction) {
+        return extendShape(direction, Block.box(1, 0, 1, 15, 14, 15));
+    }
+
+    public static VoxelShape mat(Direction direction, boolean bl) {
+        return extendShape(bl ? direction : direction.getOpposite(), Block.box(0, 0, 0, 16, 2, 16));
     }
 
     public static VoxelShape flax(boolean isBottom, int age) {
         VoxelShape fullBottom = Block.box(1, 0, 1, 15, 16, 15);
         VoxelShape[] bottom = new VoxelShape[]{Block.box(4, 0, 4, 12, 6, 12), Block.box(3, 0, 3, 13, 10, 13), Block.box(3, 0, 3, 13, 13, 13), Block.box(3, 0, 3, 13, 16, 13), Block.box(2, 0, 2, 14, 16, 14), fullBottom, fullBottom, fullBottom};
         VoxelShape[] top = new VoxelShape[]{fullBottom, fullBottom, fullBottom, fullBottom, Block.box(2, 0, 2, 14, 3, 14), Block.box(1, 0, 1, 15, 7, 15), Block.box(1, 0, 1, 15, 14, 15), Block.box(1, 0, 1, 15, 16, 15)};
-
-        if (isBottom) {
-            return Shapes.or(bottom[age], moveShape(Direction.UP, top[age]));
-        } else {
-            return Shapes.or(top[age], moveShape(Direction.DOWN, bottom[age]));
-        }
+        return doubleBlock(Direction.UP, isBottom, bottom[age], top[age]);
     }
 
-    public static VoxelShape rice(int age, int topAge) {
+    public static VoxelShape rice(int bottomAge, int topAge, boolean isBottom) {
         VoxelShape[] bottom = new VoxelShape[]{Block.box(3, 0, 3, 13, 8, 13), Block.box(3, 0, 3, 13, 10, 13), Block.box(2, 0, 2, 14, 12, 14), Block.box(1, 0, 1, 15, 16, 15)};
         VoxelShape[] top = new VoxelShape[]{Block.box(3, 0, 3, 13, 8, 13), Block.box(3, 0, 3, 13, 10, 13), Block.box(2, 0, 2, 14, 12, 14), Block.box(1, 0, 1, 15, 16, 15)};
 
-        if (age <= 2) {
-            return bottom[age];
+        if (topAge == -1) {
+            return bottom[bottomAge];
         }
-        return Shapes.or(bottom[age], moveShape(Direction.UP, top[topAge]));
+        return doubleBlock(Direction.UP, isBottom, bottom[3], top[topAge]);
     }
 
     public static VoxelShape slidingDoor(Direction direction, boolean isBottom, boolean hingeRight, boolean folding) {
@@ -251,24 +218,18 @@ public class SeamlessShapes {
         VoxelShape ne = folding ? Block.box(0.0, 0.0, 13.0, 9.0, 16.0, 19.0) : Block.box(0, 0, 13, 3, 16, 29);
         VoxelShape en = folding ? Block.box(-3.0, 0.0, 7.0, 3.0, 16.0, 16.0) : Block.box(-13, 0, 13, 3, 16, 16);
 
-        VoxelShape shape = switch (direction) {
-            case DOWN, UP -> se; // just to make IntelliJ happy
-            case NORTH -> hingeRight ? wn : en;
+        return doubleHighSameShape(isBottom, switch (direction) {
+            case DOWN, UP, NORTH -> hingeRight ? wn : en;
             case EAST -> hingeRight ? ne : se;
             case SOUTH -> hingeRight ? es : ws;
             case WEST -> hingeRight ? sw : nw;
-        };
-
-        return extendShape(isBottom ? Direction.UP : Direction.DOWN, shape);
+        });
     }
 
     public static VoxelShape brimstoneClusterBlock(boolean isBottom) {
         VoxelShape shape = Block.box(3, 0, 3, 13, 16, 13);
         VoxelShape shapeTop = Block.box(6, 0, 6, 10, 8, 10);
-        if (isBottom) {
-            return Shapes.or(shape, moveShape(Direction.UP, shapeTop));
-        }
-        return Shapes.or(shapeTop, moveShape(Direction.DOWN, shape));
+        return doubleBlock(Direction.UP, isBottom, shape, shapeTop);
     }
 
     public static VoxelShape corn(int plantLevel, int baseAge, int midAge, int topAge) {
@@ -349,7 +310,36 @@ public class SeamlessShapes {
         };
     }
 
-    public static VoxelShape chest(Direction direction) {
-        return extendShape(direction, 1, 0, 1, 15, 14, 15);
+    public static VoxelShape tallDeadBush(boolean bottom) {
+        VoxelShape lower = Block.box(2.0, 0.0, 2.0, 14.0, 16.0, 14.0);
+        VoxelShape upper = Block.box(2.0, 0.0, 2.0, 14.0, 13.0, 14.0);
+        return doubleBlock(Direction.UP, bottom, lower, upper);
+    }
+
+    public static VoxelShape cattail(boolean bottom) {
+        VoxelShape lower = Block.box(2.0, 0.0, 2.0, 14.0, 16.0, 14.0);
+        VoxelShape upper = Block.box(3.0, 0.0, 3.0, 13.0, 14.0, 13.0);
+        return doubleBlock(Direction.UP, bottom, lower, upper);
+    }
+
+    public static VoxelShape largeLilyPad(String pos) {
+        VoxelShape shape = Block.box(0.0, 0.0, 0.0, 16.0, 3.2001, 16.0);
+        if (pos.contains("north")) shape = extendShape(Direction.SOUTH, shape);
+        if (pos.contains("east")) shape = extendShape(Direction.WEST, shape);
+        if (pos.contains("south")) shape = extendShape(Direction.NORTH, shape);
+        if (pos.contains("west")) shape = extendShape(Direction.EAST, shape);
+        return shape;
+    }
+
+    public static VoxelShape giantLilyPad(String pos) {
+        VoxelShape shape = Block.box(0.0, 0.0, 0.0, 16.0, 3.2001, 16.0);
+        if (pos.contains("north")) shape = extendShape(Direction.SOUTH, 2, shape);
+        if (pos.contains("east")) shape = extendShape(Direction.WEST, 2, shape);
+        if (pos.contains("south")) shape = extendShape(Direction.NORTH, 2, shape);
+        if (pos.contains("west")) shape = extendShape(Direction.EAST, 2, shape);
+        if (pos.equals("north") || pos.equals("south")) shape = extendShape(Direction.EAST, extendShape(Direction.WEST, shape));
+        if (pos.equals("east") || pos.equals("west")) shape = extendShape(Direction.NORTH, extendShape(Direction.SOUTH, shape));
+        if (pos.equals("center")) shape = extendShape(Direction.NORTH, extendShape(Direction.EAST, extendShape(Direction.SOUTH, extendShape(Direction.WEST, shape))));
+        return shape;
     }
 }

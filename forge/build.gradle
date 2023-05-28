@@ -45,6 +45,8 @@ dependencies {
     modCompileOnlyApi("curse.maven:haunted_harvest_forge-541753:4417094")
     modCompileOnlyApi("curse.maven:sleep_tight_forge-817564:4521654")
     modCompileOnlyApi("curse.maven:moonlight_forge-499980:4491267")
+    modCompileOnlyApi("curse.maven:atmospheric_forge-362393:4415516")
+    modCompileOnlyApi("curse.maven:environmental_forge-388992:4415514")
 }
 
 processResources {
