@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BedPart;
@@ -21,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BedBlock.class)
-public class BedBlockMixin extends HorizontalDirectionalBlock {
+public abstract class BedBlockMixin extends HorizontalDirectionalBlock implements EntityBlock {
     @Shadow @Final public static EnumProperty<BedPart> PART;
 
     protected BedBlockMixin(Properties properties) {
@@ -30,7 +31,7 @@ public class BedBlockMixin extends HorizontalDirectionalBlock {
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
     private void getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir) {
-        cir.setReturnValue(SeamlessShapes.bed(blockState.getValue(FACING), blockState.getValue(PART)));
+        cir.setReturnValue(SeamlessShapes.bed(blockState.getValue(FACING), blockState.getValue(PART) == BedPart.FOOT));
     }
 
     @Override

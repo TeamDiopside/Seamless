@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SpringLauncherHeadBlock.class)
-public class SpringLauncherHeadBlockMixin extends DirectionalBlock {
+public abstract class SpringLauncherHeadBlockMixin extends DirectionalBlock {
 
     public SpringLauncherHeadBlockMixin(Properties properties) {
         super(properties);

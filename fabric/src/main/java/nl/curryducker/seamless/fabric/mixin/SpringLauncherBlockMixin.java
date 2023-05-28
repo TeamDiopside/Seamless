@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import static net.mehvahdjukaar.supplementaries.common.block.blocks.SpringLauncherBlock.EXTENDED;
 
 @Mixin(SpringLauncherBlock.class)
-public class SpringLauncherBlockMixin extends Block {
+public abstract class SpringLauncherBlockMixin extends Block {
 
     @Shadow @Final public static DirectionProperty FACING;
 

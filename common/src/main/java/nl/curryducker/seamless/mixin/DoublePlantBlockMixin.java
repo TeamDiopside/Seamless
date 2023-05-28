@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(DoublePlantBlock.class)
-public class DoublePlantBlockMixin extends BushBlock {
+public abstract class DoublePlantBlockMixin extends BushBlock {
     @Shadow @Final public static EnumProperty<DoubleBlockHalf> HALF;
 
     public DoublePlantBlockMixin(Properties properties) {
@@ -24,6 +24,6 @@ public class DoublePlantBlockMixin extends BushBlock {
 
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return SeamlessShapes.full(blockState.getValue(HALF) == DoubleBlockHalf.LOWER);
+        return SeamlessShapes.fullDoubleHigh(blockState.getValue(HALF) == DoubleBlockHalf.LOWER);
     }
 }

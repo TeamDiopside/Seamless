@@ -2,7 +2,9 @@ package nl.curryducker.seamless.mixin;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.SmallDripleafBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -15,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SmallDripleafBlock.class)
-public class SmallDripleafBlockMixin extends DoublePlantBlock {
+public abstract class SmallDripleafBlockMixin extends DoublePlantBlock implements BonemealableBlock, SimpleWaterloggedBlock {
     protected SmallDripleafBlockMixin(Properties properties) {
         super(properties);
     }

@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.LiquidBlockContainer;
 import net.minecraft.world.level.block.TallSeagrassBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -18,7 +19,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(TallSeagrassBlock.class)
-public class TallSeagrassBlockMixin extends DoublePlantBlock {
+public abstract class TallSeagrassBlockMixin extends DoublePlantBlock implements LiquidBlockContainer {
     @Shadow @Final public static EnumProperty<DoubleBlockHalf> HALF;
 
     public TallSeagrassBlockMixin(Properties properties) {

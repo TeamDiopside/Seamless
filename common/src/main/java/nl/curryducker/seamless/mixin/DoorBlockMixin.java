@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import static net.minecraft.world.level.block.DoorBlock.*;
 
 @Mixin(DoorBlock.class)
-public class DoorBlockMixin extends Block {
+public abstract class DoorBlockMixin extends Block {
 
     public DoorBlockMixin(Properties properties) {
         super(properties);
@@ -27,21 +27,21 @@ public class DoorBlockMixin extends Block {
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
     public void getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir) {
-        DoubleBlockHalf half = blockState.getValue(HALF);
+        boolean lower = blockState.getValue(HALF) == DoubleBlockHalf.LOWER;
         Direction direction = blockState.getValue(FACING);
-        boolean bl = !blockState.getValue(OPEN);
-        boolean bl2 = blockState.getValue(HINGE) == DoorHingeSide.RIGHT;
+        boolean closed = !blockState.getValue(OPEN);
+        boolean hingeRight = blockState.getValue(HINGE) == DoorHingeSide.RIGHT;
 
-        VoxelShape north = SeamlessShapes.door(Direction.NORTH, half);
-        VoxelShape east = SeamlessShapes.door(Direction.EAST, half);
-        VoxelShape south = SeamlessShapes.door(Direction.SOUTH, half);
-        VoxelShape west = SeamlessShapes.door(Direction.WEST, half);
+        VoxelShape north = SeamlessShapes.door(Direction.NORTH, lower);
+        VoxelShape east = SeamlessShapes.door(Direction.EAST, lower);
+        VoxelShape south = SeamlessShapes.door(Direction.SOUTH, lower);
+        VoxelShape west = SeamlessShapes.door(Direction.WEST, lower);
 
         switch (direction) {
-            case NORTH -> cir.setReturnValue(bl ? north : (bl2 ? west : east));
-            case EAST -> cir.setReturnValue(bl ? east : (bl2 ? north : south));
-            case SOUTH -> cir.setReturnValue(bl ? south : (bl2 ? east : west));
-            case WEST -> cir.setReturnValue(bl ? west : (bl2 ? south : north));
+            case NORTH -> cir.setReturnValue(closed ? north : (hingeRight ? west : east));
+            case EAST -> cir.setReturnValue(closed ? east : (hingeRight ? north : south));
+            case SOUTH -> cir.setReturnValue(closed ? south : (hingeRight ? east : west));
+            case WEST -> cir.setReturnValue(closed ? west : (hingeRight ? south : north));
         }
     }
 

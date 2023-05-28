@@ -1,10 +1,11 @@
-package nl.curryducker.seamless.fabric.mixin;
+package nl.curryducker.seamless.forge.mixin;
 
-import net.mehvahdjukaar.moonlight.api.block.IBeeGrowable;
-import net.mehvahdjukaar.supplementaries.common.block.blocks.FlaxBlock;
+import com.teamabnormals.upgrade_aquatic.common.block.PickerelweedDoublePlantBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -18,18 +19,17 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(FlaxBlock.class)
-public abstract class FlaxBlockMixin extends CropBlock implements IBeeGrowable {
-    @Shadow @Final public static EnumProperty<DoubleBlockHalf> HALF;
+@Mixin(PickerelweedDoublePlantBlock.class)
+public abstract class PickerelweedDoublePlantBlockMixin extends Block implements BonemealableBlock, SimpleWaterloggedBlock {
 
-    public FlaxBlockMixin(Properties properties) {
+    public PickerelweedDoublePlantBlockMixin(Properties properties) {
         super(properties);
     }
 
+    @Shadow @Final public static EnumProperty<DoubleBlockHalf> HALF;
+
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
     public void getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
-        if (state.getValue(AGE)>=4) {
-            cir.setReturnValue(SeamlessShapes.flax(state.getValue(HALF) == DoubleBlockHalf.LOWER, state.getValue(AGE)));
-        }
+        cir.setReturnValue(SeamlessShapes.smallDripleaf(state.getValue(HALF) == DoubleBlockHalf.LOWER));
     }
 }

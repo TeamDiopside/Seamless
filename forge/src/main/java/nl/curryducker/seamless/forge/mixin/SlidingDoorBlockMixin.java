@@ -2,6 +2,9 @@ package nl.curryducker.seamless.forge.mixin;
 
 import com.simibubi.create.content.contraptions.ContraptionWorld;
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlock;
+import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlockEntity;
+import com.simibubi.create.content.equipment.wrench.IWrenchable;
+import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -22,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SlidingDoorBlock.class)
-public abstract class SlidingDoorBlockMixin extends DoorBlock {
+public abstract class SlidingDoorBlockMixin extends DoorBlock implements IWrenchable, IBE<SlidingDoorBlockEntity> {
     @Shadow @Final public static BooleanProperty VISIBLE;
 
     @Shadow public abstract boolean isFoldingDoor();
@@ -34,7 +37,7 @@ public abstract class SlidingDoorBlockMixin extends DoorBlock {
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
     public void getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir) {
         if (!blockState.getValue(OPEN) || (blockState.getValue(VISIBLE) || blockGetter instanceof ContraptionWorld)) {
-            cir.setReturnValue(SeamlessShapes.door(blockState.getValue(FACING), blockState.getValue(HALF)));
+            cir.setReturnValue(SeamlessShapes.door(blockState.getValue(FACING), blockState.getValue(HALF) == DoubleBlockHalf.LOWER));
         } else {
             cir.setReturnValue(SeamlessShapes.slidingDoor(blockState.getValue(FACING), blockState.getValue(HALF) == DoubleBlockHalf.LOWER, blockState.getValue(HINGE) == DoorHingeSide.RIGHT, isFoldingDoor()));
         }
