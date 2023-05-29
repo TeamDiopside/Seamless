@@ -1,6 +1,6 @@
-[![Discord](https://i.imgur.com/JiW4MLF.png)](https://discord.gg/PJCXjSJnu2)
+[![Discord](https://teamdiopside.github.io/assets/diopside/Serverbanner.png)](https://discord.gg/PJCXjSJnu2)
 
-# Seamless
+![](https://teamdiopside.github.io/assets/seamless/Seamless.png)
 
 A client-side Fabric/Forge mod that connects the outlines of Double Blocks, like Doors and Beds.
 
@@ -31,6 +31,6 @@ A client-side Fabric/Forge mod that connects the outlines of Double Blocks, like
 ***Most other modded Plants, Doors, Chests and Beds should work too!***
 
 
-![On and off](https://imgur.com/DosLg8Z.png)
+![On and off](https://teamdiopside.github.io/assets/seamless/compare.png)
 
-![Door and Flower](https://imgur.com/jT5kg38.png)
+![Door and Flower](https://teamdiopside.github.io/assets/seamless/door_flower.png)
