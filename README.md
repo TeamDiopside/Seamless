@@ -15,11 +15,13 @@ A client-side Fabric/Forge mod that connects the outlines of Double Blocks, like
 - Small Dripleaf
 - Piston
 - Tall Seagrass
+- Pitcher Plant Crop
 
 **Optional Compatibility with:**
 
 - Create (Glass, Train, Brass, Copper and Andesite Door)
 - Supplementaries (Flax, Spring Launcher)
+- Fast Paintings (Paintings)
 - Farmer's Delight (Rice, Full Tatami Mat)
 - Upgrade Aquatic (Bedrolls, Flowering Rush, Pickerelweed, Beach Grass)
 - Biomes o' Plenty (Brimstone Cluster, Eyebulb)

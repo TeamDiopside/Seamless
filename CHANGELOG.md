@@ -1,5 +1,11 @@
 # Seamless Changelog
 
+## 1.4.0
+- Updated to 1.20.1
+- Added support for:
+  - Pitcher Plant Crop
+  - Paintings from Fast Paintings
+
 ## 1.3.0
 - Added support for:
   - Copper and Andesite Doors (Create 0.5.1)

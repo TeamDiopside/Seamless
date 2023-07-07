@@ -10,6 +10,7 @@
         "FlaxBlockMixin",
         "HammockBlockMixin",
         "NightBagBlockMixin",
+        "PaintingBlockMixin",
         "RiceCropBlockMixin",
         "RiceUpperCropBlockMixin",
         "SlidingDoorBlockMixin",
