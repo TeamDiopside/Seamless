@@ -10,6 +10,7 @@
     "DoublePlantBlockMixin",
     "PistonBaseBlockMixin",
     "PistonHeadBlockMixin",
+    "PitcherCropBlockMixin",
     "SmallDripleafBlockMixin",
     "TallSeagrassBlockMixin"
   ],
