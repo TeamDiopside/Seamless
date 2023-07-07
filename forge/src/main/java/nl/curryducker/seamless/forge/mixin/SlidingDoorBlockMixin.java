@@ -11,6 +11,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -30,8 +31,8 @@ public abstract class SlidingDoorBlockMixin extends DoorBlock implements IWrench
 
     @Shadow public abstract boolean isFoldingDoor();
 
-    public SlidingDoorBlockMixin(Properties properties) {
-        super(properties);
+    public SlidingDoorBlockMixin(Properties properties, BlockSetType blockSetType) {
+        super(properties, blockSetType);
     }
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)

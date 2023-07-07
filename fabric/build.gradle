@@ -56,7 +56,7 @@ remapJar {
     input.set shadowJar.archiveFile
     dependsOn shadowJar
     classifier null
-    archiveClassifier = "fabric-${rootProject.minecraft_version}"
+    archiveClassifier = "fabric-${rootProject.version_names}"
 }
 
 jar {
