@@ -172,11 +172,11 @@ public class SeamlessShapes {
     }
 
     public static VoxelShape pitcherCrop(boolean isBottom, int age) {
-        VoxelShape fullUpper = Block.box(3.0, 0.0, 3.0, 13.0, 15.0, 13.0);
-        VoxelShape fullLower = Block.box(3.0, -1.0, 3.0, 13.0, 16.0, 13.0);
-        VoxelShape bulb = Block.box(5.0, -1.0, 5.0, 11.0, 3.0, 11.0);
-        VoxelShape[] upperShapeByAge = new VoxelShape[]{Shapes.empty(), Shapes.empty(), Shapes.empty(), Block.box(3.0, 0.0, 3.0, 13.0, 11.0, 13.0), fullUpper};
-        VoxelShape[] lowerShapeByAge = new VoxelShape[]{bulb, Block.box(3.0, -1.0, 3.0, 13.0, 14.0, 13.0), fullLower, fullLower, fullLower};
+        VoxelShape fullUpper = Block.box(3, 0, 3, 13, 15, 13);
+        VoxelShape fullLower = Block.box(3, -1, 3, 13, 16, 13);
+        VoxelShape bulb = Block.box(5, -1, 5, 11, 3, 11);
+        VoxelShape[] upperShapeByAge = new VoxelShape[]{Shapes.empty(), Shapes.empty(), Shapes.empty(), Block.box(3, 0, 3, 13, 11, 13), fullUpper};
+        VoxelShape[] lowerShapeByAge = new VoxelShape[]{bulb, Block.box(3, -1, 3, 13, 14, 13), fullLower, fullLower, fullLower};
 
         return doubleBlock(Direction.UP, isBottom, lowerShapeByAge[age], upperShapeByAge[age]);
     }
@@ -202,8 +202,8 @@ public class SeamlessShapes {
     }
 
     public static VoxelShape slidingDoor(Direction direction, boolean isBottom, boolean hingeRight, boolean folding) {
-        VoxelShape right = rotateShapeDirectional(folding ? Block.box(13.0, 0.0, 7.0, 19.0, 16.0, 16.0) : Block.box(13, 0, 13, 29, 16, 16), direction);
-        VoxelShape left = rotateShapeDirectional(folding ? Block.box(-3.0, 0.0, 7.0, 3.0, 16.0, 16.0) : Block.box(-13, 0, 13, 3, 16, 16), direction);
+        VoxelShape right = rotateShapeDirectional(folding ? Block.box(13, 0, 7, 19, 16, 16) : Block.box(13, 0, 13, 29, 16, 16), direction);
+        VoxelShape left = rotateShapeDirectional(folding ? Block.box(-3, 0, 7, 3, 16, 16) : Block.box(-13, 0, 13, 3, 16, 16), direction);
         return doubleHighSameShape(isBottom, hingeRight ? right : left);
     }
 
@@ -253,38 +253,38 @@ public class SeamlessShapes {
         }
 
         if (Objects.equals(part, "foot") || Objects.equals(part, "head")) {
-            return Shapes.or(fenceHammock(direction.getOpposite()), moveShape(direction, fenceHammock(direction)));
+            return Shapes.or(hammockFence(direction.getOpposite()), moveShape(direction, hammockFence(direction)));
         }
 
         if (Objects.equals(part, "middle")) {
-            return Shapes.or(full, moveShape(direction.getOpposite(), blockHammock(direction.getOpposite())), moveShape(direction, blockHammock(direction)));
+            return Shapes.or(full, moveShape(direction.getOpposite(), hammockBlock(direction.getOpposite())), moveShape(direction, hammockBlock(direction)));
         }
 
-        return Shapes.or(blockHammock(direction.getOpposite()), moveShape(direction, full), moveShape(direction, 2, blockHammock(direction)));
+        return Shapes.or(hammockBlock(direction.getOpposite()), moveShape(direction, full), moveShape(direction, 2, hammockBlock(direction)));
     }
 
-    public static VoxelShape blockHammock(Direction direction) {
+    public static VoxelShape hammockBlock(Direction direction) {
         return rotateShapeDirectional(Block.box(0, 3, 6, 16, 6, 16), direction);
     }
 
-    public static VoxelShape fenceHammock(Direction direction) {
+    public static VoxelShape hammockFence(Direction direction) {
         return rotateShapeDirectional(Block.box(0, 3, -2, 16, 6, 16), direction);
     }
 
     public static VoxelShape tallDeadBush(boolean bottom) {
-        VoxelShape lower = Block.box(2.0, 0.0, 2.0, 14.0, 16.0, 14.0);
-        VoxelShape upper = Block.box(2.0, 0.0, 2.0, 14.0, 13.0, 14.0);
+        VoxelShape lower = Block.box(2, 0, 2, 14, 16, 14);
+        VoxelShape upper = Block.box(2, 0, 2, 14, 13, 14);
         return doubleBlock(Direction.UP, bottom, lower, upper);
     }
 
     public static VoxelShape cattail(boolean bottom) {
-        VoxelShape lower = Block.box(2.0, 0.0, 2.0, 14.0, 16.0, 14.0);
-        VoxelShape upper = Block.box(3.0, 0.0, 3.0, 13.0, 14.0, 13.0);
+        VoxelShape lower = Block.box(2, 0, 2, 14, 16, 14);
+        VoxelShape upper = Block.box(3, 0, 3, 13, 14, 13);
         return doubleBlock(Direction.UP, bottom, lower, upper);
     }
 
     public static VoxelShape largeLilyPad(String pos) {
-        VoxelShape shape = Block.box(0.0, 0.0, 0.0, 16.0, 3.2001, 16.0);
+        VoxelShape shape = Block.box(0, 0, 0, 16, 3.2001, 16);
         if (pos.contains("north")) shape = extendShape(Direction.SOUTH, shape);
         if (pos.contains("east")) shape = extendShape(Direction.WEST, shape);
         if (pos.contains("south")) shape = extendShape(Direction.NORTH, shape);
@@ -293,7 +293,7 @@ public class SeamlessShapes {
     }
 
     public static VoxelShape giantLilyPad(String pos) {
-        VoxelShape shape = Block.box(0.0, 0.0, 0.0, 16.0, 3.2001, 16.0);
+        VoxelShape shape = Block.box(0, 0, 0, 16, 3.2001, 16);
         if (pos.contains("north")) shape = extendShape(Direction.SOUTH, 2, shape);
         if (pos.contains("east")) shape = extendShape(Direction.WEST, 2, shape);
         if (pos.contains("south")) shape = extendShape(Direction.NORTH, 2, shape);
@@ -302,5 +302,15 @@ public class SeamlessShapes {
         if (pos.equals("east") || pos.equals("west")) shape = extendShape(Direction.NORTH, extendShape(Direction.SOUTH, shape));
         if (pos.equals("center")) shape = extendShape(Direction.NORTH, extendShape(Direction.EAST, extendShape(Direction.SOUTH, extendShape(Direction.WEST, shape))));
         return shape;
+    }
+
+    public static VoxelShape painting(Direction direction, int x, int y, int width, int height) {
+        VoxelShape shape = Block.box(0, 0, 15, 16, 16, 16);
+        VoxelShape extendedShape =
+            extendShape(Direction.WEST, width / 16 - x - 1,
+                extendShape(Direction.DOWN, height / 16 - y - 1,
+                    extendShape(Direction.EAST, x,
+                        extendShape(Direction.UP, y, shape))));
+        return rotateShapeDirectional(extendedShape, direction);
     }
 }

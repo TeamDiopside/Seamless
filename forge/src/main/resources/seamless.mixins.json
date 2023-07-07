@@ -17,6 +17,7 @@
     "HammockBlockMixin",
     "LargeLilyPadBlockMixin",
     "NightBagBlockMixin",
+    "PaintingBlockMixin",
     "PickerelweedDoublePlantBlockMixin",
     "RiceBlockMixin",
     "RicePaniclesBlockMixin",
