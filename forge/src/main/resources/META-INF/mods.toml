@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[43,)"
+loaderVersion = "[46,)"
 issueTrackerURL = "https://github.com/TeamDiopside/Seamless/issues"
 license = "MIT"
 
@@ -16,20 +16,20 @@ logoFile = "icon.png"
 [[dependencies.seamless]]
 modId = "forge"
 mandatory = true
-versionRange = "[43,)"
+versionRange = "[46,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.seamless]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19.2,)"
+versionRange = "[1.20,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.seamless]]
 modId = "architectury"
 mandatory = true
-versionRange = "[6.5.77,)"
+versionRange = "[9.0.8,)"
 ordering = "AFTER"
 side = "BOTH"
