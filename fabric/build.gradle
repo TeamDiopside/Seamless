@@ -76,7 +76,6 @@ curseforge {
         }
         options {
             javaVersionAutoDetect = false
-            forgeGradleIntegration = false
         }
     }
 }
