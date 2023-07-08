@@ -6,7 +6,7 @@
 
 A client-side Fabric/Forge mod that connects the outlines of Double Blocks, like Doors and Beds.
 
-**[Architectury API](https://modrinth.com/mod/architectury-api/versions)  is required!**
+**[Architectury API](https://modrinth.com/mod/architectury-api/versions) is required!**
 
 [![RocketNode](https://teamdiopside.nl/assets/diopside/rocketnode.png)](https://billing.rocketnode.com/aff.php?aff=150440)
 
