@@ -1,6 +1,8 @@
 plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
     id "java-library"
+    id "com.modrinth.minotaur" version "2.+"
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
 architectury {
@@ -48,6 +50,48 @@ dependencies {
     modCompileOnlyApi("curse.maven:atmospheric_forge-362393:4415516") // Not updated
     modCompileOnlyApi("curse.maven:environmental_forge-388992:4415514") // Not updated
     modCompileOnlyApi("curse.maven:fast_paintings_forge-883287:4621175")
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN")
+    projectId = "seamless"
+    versionNumber = "${rootProject.mod_version}"
+    versionName = "Seamless ${rootProject.mod_version} Forge"
+    versionType = "release"
+    uploadFile = remapJar
+    gameVersions = ["1.20", "1.20.1"]
+    loaders = ["forge"]
+    dependencies {
+        required.project "architectury-api"
+    }
+    changelog = rootProject.file("CHANGELOG_LATEST.md").text
+
+    syncBodyFrom = rootProject.file("README.md").text
+    tasks.modrinth.dependsOn(tasks.modrinthSyncBody)
+}
+
+curseforge {
+    project {
+        apiKey = System.getenv('CURSEFORGE_TOKEN')
+        id = '855593'
+        changelog = rootProject.file("CHANGELOG_LATEST.md").text
+        changelogType = "markdown"
+        releaseType = 'release'
+        addGameVersion '1.20'
+        addGameVersion '1.20.1'
+
+        relations {
+            requiredDependency "architectury-api"
+        }
+        mainArtifact(remapJar) {
+            displayName = "Seamless ${rootProject.mod_version} Forge"
+        }
+        options {
+            debug = true
+            javaVersionAutoDetect = false
+            forgeGradleIntegration = false
+        }
+    }
 }
 
 processResources {

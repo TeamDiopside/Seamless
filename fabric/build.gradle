@@ -1,5 +1,7 @@
 plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
+    id "com.modrinth.minotaur" version "2.+"
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
 architectury {
@@ -35,6 +37,49 @@ dependencies {
     modCompileOnlyApi("curse.maven:sleep_tight_fabric-817564:4610338")
     modCompileOnlyApi("curse.maven:moonlight_fabric-499980:4627904")
     modCompileOnlyApi("curse.maven:fast_paintings_fabric-883287:4621174")
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN")
+    projectId = "seamless"
+    versionNumber = "${rootProject.mod_version}"
+    versionName = "Seamless ${rootProject.mod_version} Fabric"
+    versionType = "release"
+    uploadFile = remapJar
+    gameVersions = ["1.20", "1.20.1"]
+    loaders = ["fabric"]
+    dependencies {
+        required.project "architectury-api"
+    }
+    changelog = rootProject.file("CHANGELOG_LATEST.md").text
+
+    syncBodyFrom = rootProject.file("README.md").text
+    tasks.modrinth.dependsOn(tasks.modrinthSyncBody)
+}
+
+curseforge {
+    project {
+        apiKey = System.getenv('CURSEFORGE_TOKEN')
+        id = '855593'
+        changelog = rootProject.file("CHANGELOG_LATEST.md").text
+        changelogType = "markdown"
+        releaseType = 'release'
+        addGameVersion '1.20'
+        addGameVersion '1.20.1'
+        addGameVersion 'Fabric'
+
+        relations {
+            requiredDependency "architectury-api"
+        }
+        mainArtifact(remapJar) {
+            displayName = "Seamless ${rootProject.mod_version} Fabric"
+        }
+        options {
+            debug = true
+            javaVersionAutoDetect = false
+            forgeGradleIntegration = false
+        }
+    }
 }
 
 processResources {
