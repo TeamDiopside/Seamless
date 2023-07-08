@@ -1,10 +1,12 @@
 [![Discord](https://teamdiopside.nl/assets/diopside/Serverbanner.png)](https://discord.gg/PJCXjSJnu2)
 
-![](https://teamdiopside.nl/assets/seamless/Seamless.png)
+![](https://teamdiopside.nl/assets/seamless/Seamless2.png)
 
 A client-side Fabric/Forge mod that connects the outlines of Double Blocks, like Doors and Beds.
 
 **[Architectury API](https://modrinth.com/mod/architectury-api/versions)  is required!**
+
+[![RocketNode](https://teamdiopside.nl/assets/diopside/rocketnode.png)](https://billing.rocketnode.com/aff.php?aff=150440)
 
 **Current Blocks:**
 
