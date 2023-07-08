@@ -38,6 +38,7 @@ A client-side Fabric/Forge mod that connects the outlines of Double Blocks, like
 
 ***Most other modded Plants, Doors, Chests and Beds should work too!***
 
+---
 
 ![On and off](https://teamdiopside.nl/assets/seamless/compare.png)
 
