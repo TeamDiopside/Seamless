@@ -35,6 +35,7 @@ A client-side Fabric/Forge mod that connects the outlines of Double Blocks, like
 - Sleep Tight (Hammocks, Night Bag)
 - Environmental (Cattail, Large and Giant Lily Pads, Tall Dead Bush)
 - Atmospheric (Water Hyacinth, Yucca Flower)
+- *Have a suggestion? Please let me know!*
 
 ***Most other modded Plants, Doors, Chests and Beds should work too!***
 
