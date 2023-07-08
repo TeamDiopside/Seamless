@@ -87,7 +87,6 @@ curseforge {
             displayName = "Seamless ${rootProject.mod_version} Forge"
         }
         options {
-            debug = true
             javaVersionAutoDetect = false
             forgeGradleIntegration = false
         }
