@@ -8,6 +8,7 @@
     "ChestBlockMixin",
     "DoorBlockMixin",
     "DoublePlantBlockMixin",
+    "LevelRendererMixin",
     "PistonBaseBlockMixin",
     "PistonHeadBlockMixin",
     "PitcherCropBlockMixin",

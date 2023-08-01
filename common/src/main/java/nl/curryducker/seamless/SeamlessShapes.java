@@ -1,6 +1,7 @@
 package nl.curryducker.seamless;
 
 import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -11,12 +12,12 @@ import java.util.Objects;
 public class SeamlessShapes {
     private static VoxelShape extendShape(Direction direction, int distance, double x1, double y1, double z1, double x2, double y2, double z2) {
         switch (direction) {
-            case NORTH -> z1-=distance;
-            case EAST -> x2+=distance;
-            case SOUTH -> z2+=distance;
-            case WEST -> x1-=distance;
-            case UP -> y2+=distance;
-            case DOWN -> y1-=distance;
+            case NORTH -> z1 -= distance;
+            case EAST ->  x2 += distance;
+            case SOUTH -> z2 += distance;
+            case WEST ->  x1 -= distance;
+            case UP ->    y2 += distance;
+            case DOWN ->  y1 -= distance;
         }
         return Shapes.box(x1, y1, z1, x2, y2, z2);
     }
@@ -33,43 +34,16 @@ public class SeamlessShapes {
     public static VoxelShape extendShape(Direction direction, VoxelShape voxelShape) {
         return extendShape(direction, 1, voxelShape);
     }
-    
-    private static VoxelShape moveShape(Direction direction, int distance, double x1, double y1, double z1, double x2, double y2, double z2) {
-        switch (direction) {
-            case NORTH -> {
-                z1-=distance;
-                z2-=distance;
-            }
-            case EAST -> {
-                x1+=distance;
-                x2+=distance;
-            }
-            case SOUTH -> {
-                z1+=distance;
-                z2+=distance;
-            }
-            case WEST -> {
-                x1-=distance;
-                x2-=distance;
-            }
-            case UP -> {
-                y1+=distance;
-                y2+=distance;
-            }
-            case DOWN -> {
-                y1-=distance;
-                y2-=distance;
-            }
-        }
-        return Shapes.box(x1, y1, z1, x2, y2, z2);
-    }
 
     public static VoxelShape moveShape(Direction direction, int distance, VoxelShape shape) {
         if (shape.isEmpty()) {
             return shape;
         }
         VoxelShape[] newshape = new VoxelShape[]{Shapes.empty()};
-        shape.forAllBoxes((a, b, c, d, e, f) -> newshape[0] = Shapes.or(newshape[0], moveShape(direction, distance, a, b, c, d, e, f)));
+        shape.forAllBoxes((a, b, c, d, e, f) -> {
+            Vec3i normal = direction.getNormal().multiply(distance);
+            newshape[0] = Shapes.or(newshape[0], shape.move(normal.getX(), normal.getY(), normal.getZ()));
+        });
         return newshape[0];
     }
 
@@ -307,8 +281,8 @@ public class SeamlessShapes {
     public static VoxelShape painting(Direction direction, int x, int y, int width, int height) {
         VoxelShape shape = Block.box(0, 0, 15, 16, 16, 16);
         VoxelShape extendedShape =
-            extendShape(Direction.WEST, width / 16 - x - 1,
-                extendShape(Direction.DOWN, height / 16 - y - 1,
+            extendShape(Direction.WEST, width - x - 1,
+                extendShape(Direction.DOWN, height - y - 1,
                     extendShape(Direction.EAST, x,
                         extendShape(Direction.UP, y, shape))));
         return rotateShapeDirectional(extendedShape, direction);

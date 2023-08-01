@@ -1,0 +1,22 @@
+{
+  "any": {
+    "model": "minecraft:block/cube_all",
+    "up, down": {
+      "blocks": ["minecraft:dirt"]
+    },
+    "opposite": {
+      "blocks": ["minecraft:red_bed"],
+      "blockstates": {
+        "facing": ["north, same"],
+        "part": ["head"]
+      }
+    }
+  },
+  "facing=north": {
+    "model": "seamless:bed"
+  },
+  "facing=east,age=0": {
+    "model": "modid:some_crop",
+    "y": 90
+  }
+}

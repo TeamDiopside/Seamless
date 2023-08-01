@@ -45,6 +45,6 @@ public abstract class PaintingBlockMixin extends WaterBlock implements EntityBlo
 
         int height = variant.getHeight();
         int width = variant.getWidth();
-        cir.setReturnValue(SeamlessShapes.painting(facing, x, y, width, height));
+        cir.setReturnValue(SeamlessShapes.painting(facing, x, y, width / 16, height / 16));
     }
 }
