@@ -42,7 +42,7 @@ dependencies {
 modrinth {
     token = System.getenv("MODRINTH_TOKEN")
     projectId = "seamless"
-    versionNumber = "${rootProject.mod_version}"
+    versionNumber = "${rootProject.mod_version}-fabric"
     versionName = "Seamless ${rootProject.mod_version} Fabric"
     versionType = "release"
     uploadFile = remapJar
