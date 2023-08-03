@@ -30,13 +30,13 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
-    modCompileOnlyApi("curse.maven:supplementaries_fabric-412082:4627387")
-    modCompileOnlyApi("curse.maven:create_fabric-624165:4507543") // Not updated
-    modCompileOnlyApi("curse.maven:farmers_delight_fabric-482834:4111426") // Not updated
-    modCompileOnlyApi("curse.maven:haunted_harvest_fabric-541753:4622563")
-    modCompileOnlyApi("curse.maven:sleep_tight_fabric-817564:4610338")
-    modCompileOnlyApi("curse.maven:moonlight_fabric-499980:4627904")
-    modCompileOnlyApi("curse.maven:fast_paintings_fabric-883287:4621174")
+    modCompileOnly("curse.maven:supplementaries_fabric-412082:4627387")
+    modCompileOnly("curse.maven:create_fabric-624165:4507543") // Not updated
+    modCompileOnly("maven.modrinth:farmers-delight-fabric:1.4.1")
+    modCompileOnly("curse.maven:haunted_harvest_fabric-541753:4622563")
+    modCompileOnly("curse.maven:sleep_tight_fabric-817564:4610338")
+    modCompileOnly("curse.maven:moonlight_fabric-499980:4627904")
+    modCompileOnly("curse.maven:fast_paintings_fabric-883287:4621174")
 }
 
 modrinth {
