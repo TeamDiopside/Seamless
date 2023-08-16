@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import vectorwing.farmersdelight.common.block.RicePaniclesBlock;
 
 @Mixin(RicePaniclesBlock.class)
-public class RicePaniclesBlockMixin extends CropBlock {
+public abstract class RicePaniclesBlockMixin extends CropBlock {
 
     @Shadow @Final public static IntegerProperty RICE_AGE;
 

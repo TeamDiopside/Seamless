@@ -31,6 +31,6 @@ public abstract class RiceCropBlockMixin extends BushBlock implements Bonemealab
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
     public void getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
         int age = state.getValue(AGE);
-        cir.setReturnValue(SeamlessShapes.rice(age, worldIn.getBlockState(pos.above()).getBlock() == BlocksRegistry.RICE_UPPER_CROP.get() ? worldIn.getBlockState(pos.above()).getValue(AGE) : -1, true));
+        cir.setReturnValue(SeamlessShapes.rice(age, worldIn.getBlockState(pos.above()).getBlock() == BlocksRegistry.RICE_PANICLE.get() ? worldIn.getBlockState(pos.above()).getValue(AGE) : -1, true));
     }
 }
