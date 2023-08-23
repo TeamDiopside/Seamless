@@ -12,7 +12,7 @@ A client-side Fabric/Forge mod that connects the outlines of Double Blocks, like
 
 ---
 
-**Current Blocks:**
+**Connected outlines for:**
 
 - Doors
 - Beds
