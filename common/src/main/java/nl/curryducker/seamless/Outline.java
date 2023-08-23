@@ -27,6 +27,8 @@ public class Outline extends SimpleJsonResourceReloadListener {
         super(new Gson(), "outline_rules");
     }
 
+    //git
+
     public static record OutlineRule(Block self, RuleTest selfTest, Map<Direction, RuleTest> targets) {
     }
 
