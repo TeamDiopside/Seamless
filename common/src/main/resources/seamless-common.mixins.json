@@ -4,16 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
-    "BedBlockMixin",
-    "ChestBlockMixin",
-    "DoorBlockMixin",
-    "DoublePlantBlockMixin",
-    "LevelRendererMixin",
-    "PistonBaseBlockMixin",
-    "PistonHeadBlockMixin",
-    "PitcherCropBlockMixin",
-    "SmallDripleafBlockMixin",
-    "TallSeagrassBlockMixin"
+    "LevelRendererMixin"
   ],
   "mixins": [
   ],

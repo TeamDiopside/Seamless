@@ -1,0 +1,12 @@
+{
+  "blocks": ["minecraft:red_bed", "minecraft:orange_bed"],
+  "blockstates": {
+    "part": ["head"],
+    "facing": ["north", "south"]
+  },
+  "directions": ["north", "south", "east", "west"],
+  "connecting_blocks": ["minecraft:red_bed"],
+  "connecting_blockstates": {
+    "part": ["foot"]
+  }
+}

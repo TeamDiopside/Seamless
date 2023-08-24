@@ -1,0 +1,7 @@
+{
+  "blocks": ["minecraft:iron_block"],
+  "blockstates": {},
+  "directions": ["north", "east", "south", "west", "up", "down"],
+  "connecting_blocks": ["minecraft:iron_block"],
+  "connecting_blockstates": {}
+}
