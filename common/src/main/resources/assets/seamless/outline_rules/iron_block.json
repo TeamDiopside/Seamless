@@ -1,7 +1,7 @@
 {
-  "blocks": ["minecraft:iron_block"],
+  "blocks": ["#minecraft:planks", "minecraft:blue_wool"],
   "blockstates": {},
   "directions": ["north", "east", "south", "west", "up", "down"],
-  "connecting_blocks": ["minecraft:iron_block"],
+  "connecting_blocks": ["#minecraft:planks", "minecraft:blue_wool"],
   "connecting_blockstates": {}
 }
