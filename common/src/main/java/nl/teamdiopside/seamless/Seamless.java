@@ -9,4 +9,13 @@ public class Seamless {
 
     public static void init() {
     }
+
+    /*
+     TODO
+      small dripleaf lower shape
+      game start fix
+      compat
+      check states
+
+    */
 }

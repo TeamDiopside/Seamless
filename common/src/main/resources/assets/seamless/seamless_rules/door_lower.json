@@ -1,0 +1,11 @@
+{
+  "blocks": ["#doors"],
+  "blockstates": {
+    "half": ["lower"]
+  },
+  "directions": ["up"],
+  "connecting_blocks": ["#doors"],
+  "connecting_blockstates": {
+    "half": ["upper"]
+  }
+}

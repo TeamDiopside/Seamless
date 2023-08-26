@@ -1,0 +1,5 @@
+{
+  "blocks": ["supplementaries:flax"],
+  "directions": ["up", "down"],
+  "connecting_blocks": ["supplementaries:spring_launcher_head"]
+}

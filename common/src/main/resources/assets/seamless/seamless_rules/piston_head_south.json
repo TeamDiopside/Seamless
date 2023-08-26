@@ -1,0 +1,12 @@
+{
+  "blocks": ["piston_head"],
+  "blockstates": {
+    "facing": ["south"]
+  },
+  "directions": ["north"],
+  "connecting_blocks": ["piston", "sticky_piston"],
+  "connecting_blockstates": {
+    "facing": ["south"],
+    "extended": ["true"]
+  }
+}

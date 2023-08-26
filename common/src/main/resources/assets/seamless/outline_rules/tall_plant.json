@@ -1,7 +1,0 @@
-{
-  "blocks": ["#minecraft:tall_flowers"],
-  "blockstates": {},
-  "directions": ["up", "down"],
-  "connecting_blocks": ["#minecraft:tall_flowers"],
-  "connecting_blockstates": {}
-}

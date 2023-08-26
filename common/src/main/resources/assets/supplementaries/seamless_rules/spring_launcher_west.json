@@ -1,0 +1,12 @@
+{
+  "blocks": ["supplementaries:spring_launcher"],
+  "blockstates": {
+    "facing": ["west"],
+    "extended": ["true"]
+  },
+  "directions": ["west"],
+  "connecting_blocks": ["supplementaries:spring_launcher_head"],
+  "connecting_blockstates": {
+    "facing": ["west"]
+  }
+}

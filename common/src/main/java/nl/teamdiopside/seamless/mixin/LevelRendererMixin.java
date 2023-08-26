@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -51,6 +52,10 @@ public abstract class LevelRendererMixin implements ResourceManagerReloadListene
         BlockPos relativePos = pos.subtract(originalPos);
         VoxelShape shape = state.getShape(level, pos, CollisionContext.of(entity)).move(relativePos.getX(), relativePos.getY(), relativePos.getZ());
 
+        if (connectedPositions.size() > 2000) {
+            return new Recursion(shape, connectedPositions);
+        }
+
         for (OutlineReloadListener.OutlineRule outlineRule : RULES) {
             if (!outlineRule.blocks().contains(state.getBlock())) {
                 continue;
@@ -61,7 +66,13 @@ public abstract class LevelRendererMixin implements ResourceManagerReloadListene
                 Property<?> property = state.getBlock().getStateDefinition().getProperty(entry.getKey());
                 assert property != null : "Blockstate property " + entry.getKey() + " does not exist for " + state.getBlock().getName();
                 boolean propertyEquals = entry.getKey().equals(property.getName());
-                boolean valueEquals = entry.getValue().contains(state.getValue(property).toString());
+
+                String valueName = state.getValue(property).toString();
+                if (state.getValue(property) instanceof StringRepresentable representable) {
+                    valueName = representable.getSerializedName();
+                }
+
+                boolean valueEquals = entry.getValue().contains(valueName);
                 if (!(propertyEquals && valueEquals)) {
                     blockstatesMatch = false;
                     break;
@@ -84,7 +95,13 @@ public abstract class LevelRendererMixin implements ResourceManagerReloadListene
                     Property<?> property = checkingState.getBlock().getStateDefinition().getProperty(entry.getKey());
                     assert property != null : "Blockstate property " + entry.getKey() + " does not exist for " + checkingState.getBlock().getName();
                     boolean propertyEquals = entry.getKey().equals(property.getName());
-                    boolean valueEquals = entry.getValue().contains(checkingState.getValue(property).toString());
+
+                    String valueName = checkingState.getValue(property).toString();
+                    if (checkingState.getValue(property) instanceof StringRepresentable representable) {
+                        valueName = representable.getSerializedName();
+                    }
+
+                    boolean valueEquals = entry.getValue().contains(valueName);
                     if (!(propertyEquals && valueEquals)) {
                         connectingBlockstatesMatch = false;
                         break;

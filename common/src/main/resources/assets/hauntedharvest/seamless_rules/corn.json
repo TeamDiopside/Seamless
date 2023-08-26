@@ -1,0 +1,5 @@
+{
+  "blocks": ["hauntedharvest:corn_base", "hauntedharvest:corn_middle", "hauntedharvest:corn_top"],
+  "directions": ["up", "down"],
+  "connecting_blocks": ["hauntedharvest:corn_base", "hauntedharvest:corn_middle", "hauntedharvest:corn_top"]
+}
