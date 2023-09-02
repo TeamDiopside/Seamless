@@ -16,8 +16,8 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import nl.teamdiopside.seamless.OutlineReloadListener;
 import nl.teamdiopside.seamless.Recursion;
+import nl.teamdiopside.seamless.Reload;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import static nl.teamdiopside.seamless.OutlineReloadListener.RULES;
+import static nl.teamdiopside.seamless.Reload.RULES;
 
 @Mixin(LevelRenderer.class)
 public abstract class LevelRendererMixin implements ResourceManagerReloadListener, AutoCloseable {
@@ -57,14 +57,14 @@ public abstract class LevelRendererMixin implements ResourceManagerReloadListene
             return new Recursion(shape, connectedPositions);
         }
 
-        for (OutlineReloadListener.OutlineRule outlineRule : RULES) {
+        for (Reload.OutlineRule outlineRule : RULES) {
             if (!outlineRule.blocks().contains(state.getBlock())) {
                 continue;
             }
 
             boolean blockstatesMatch = true;
             for (HashMap.Entry<String, Set<String>> entry : outlineRule.blockstates().entrySet()) {
-                if (propertyMatches(state, entry.getKey(), entry.getValue())) {
+                if (!propertyMatches(state, entry.getKey(), entry.getValue())) {
                     blockstatesMatch = false;
                 }
             }

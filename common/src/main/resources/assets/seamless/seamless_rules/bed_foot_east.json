@@ -5,7 +5,7 @@
     "part": ["foot"]
   },
   "directions": ["east"],
-  "connecting_blocks": ["#beds"],
+  "connecting_blocks": ["/this"],
   "connecting_blockstates": {
     "facing": ["east"],
     "part": ["head"]
