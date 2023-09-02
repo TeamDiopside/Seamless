@@ -2,6 +2,7 @@ package nl.teamdiopside.seamless;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import dev.architectury.platform.Platform;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -23,16 +24,26 @@ public class OutlineReloadListener extends SimpleJsonResourceReloadListener {
 
     public record OutlineRule(Set<Block> blocks, HashMap<String, Set<String>> blockstates, Set<Direction> directions, Set<Block> connectingBlocks, HashMap<String, Set<String>> connectingBlockstates) {}
 
+    public record JsonFile(ResourceLocation key, JsonElement json) {}
+
     public static final List<OutlineRule> RULES = new ArrayList<>();
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> jsons, ResourceManager resourceManager, ProfilerFiller profiler) {
         RULES.clear();
         List<OutlineRule> temp = new ArrayList<>();
-        jsons.forEach((key, json) -> {
-//            if (!Platform.getModIds().contains(key.getNamespace())) {
-//                return;
-//            }
+
+        List<JsonFile> files = new ArrayList<>();
+        jsons.forEach((key, json) -> files.add(new JsonFile(key, json)));
+        files.sort(Comparator.comparing(jsonFile -> jsonFile.key.toString()));
+
+        for (JsonFile file : files) {
+            ResourceLocation key = file.key;
+            JsonElement json = file.json;
+
+            if (!Platform.getModIds().contains(key.getNamespace())) {
+                return;
+            }
             try {
                 Set<Block> blocks = getBlocks(key, json, "blocks");
                 HashMap<String, Set<String>> blockstates = getBlockStates(json, "blockstates");
@@ -45,7 +56,7 @@ public class OutlineReloadListener extends SimpleJsonResourceReloadListener {
             } catch (Exception e) {
                 Seamless.LOGGER.error("Failed to parse JSON object for outline rule " + key + ".json, Error: " + e);
             }
-        });
+        }
 
         RULES.addAll(temp);
     }

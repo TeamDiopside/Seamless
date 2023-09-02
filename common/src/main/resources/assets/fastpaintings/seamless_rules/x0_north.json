@@ -1,11 +1,12 @@
 {
   "blocks": ["fastpaintings:painting"],
   "blockstates": {
-    "y_offset": ["5"]
+    "x_offset": ["0"],
+    "facing": "north"
   },
-  "directions": ["up"],
+  "directions": ["west"],
   "connecting_blocks": ["fastpaintings:painting"],
   "connecting_blockstates": {
-    "y_offset": ["4"]
+    "x_offset": ["1"]
   }
 }

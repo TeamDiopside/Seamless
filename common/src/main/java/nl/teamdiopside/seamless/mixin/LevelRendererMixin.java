@@ -39,6 +39,7 @@ public abstract class LevelRendererMixin implements ResourceManagerReloadListene
 
     @Inject(method = "renderHitOutline", at = @At("HEAD"), cancellable = true)
     private void renderHitOutline(PoseStack poseStack, VertexConsumer vertexConsumer, Entity entity, double i, double b, double c, BlockPos blockPos, BlockState blockState, CallbackInfo ci) {
+
         Recursion recursion = findAndAddShapes(level, blockState, blockPos, new HashSet<>(), blockPos, entity);
         VoxelShape shape = recursion.voxelShape().optimize();
 
@@ -63,19 +64,8 @@ public abstract class LevelRendererMixin implements ResourceManagerReloadListene
 
             boolean blockstatesMatch = true;
             for (HashMap.Entry<String, Set<String>> entry : outlineRule.blockstates().entrySet()) {
-                Property<?> property = state.getBlock().getStateDefinition().getProperty(entry.getKey());
-                assert property != null : "Blockstate property " + entry.getKey() + " does not exist for " + state.getBlock().getName();
-                boolean propertyEquals = entry.getKey().equals(property.getName());
-
-                String valueName = state.getValue(property).toString();
-                if (state.getValue(property) instanceof StringRepresentable representable) {
-                    valueName = representable.getSerializedName();
-                }
-
-                boolean valueEquals = entry.getValue().contains(valueName);
-                if (!(propertyEquals && valueEquals)) {
+                if (propertyMatches(state, entry.getKey(), entry.getValue())) {
                     blockstatesMatch = false;
-                    break;
                 }
             }
             if (!blockstatesMatch) {
@@ -120,11 +110,17 @@ public abstract class LevelRendererMixin implements ResourceManagerReloadListene
     }
 
     @Unique
-    private static boolean propertyDoesntMatch(BlockState blockState, String propertyName, Set<String> values) {
-        Property<?> property = blockState.getBlock().getStateDefinition().getProperty(propertyName);
-        assert property != null : "Blockstate property " + propertyName + " does not exist for " + blockState.getBlock().getName();
+    private static boolean propertyMatches(BlockState state, String propertyName, Set<String> values) {
+        Property<?> property = state.getBlock().getStateDefinition().getProperty(propertyName);
+        assert property != null : "Blockstate property " + propertyName + " does not exist for " + state.getBlock().getName();
         boolean propertyEquals = propertyName.equals(property.getName());
-        boolean valueEquals = values.contains(blockState.getValue(property).toString());
-        return !(propertyEquals && valueEquals);
+
+        String valueName = state.getValue(property).toString();
+        if (state.getValue(property) instanceof StringRepresentable representable) {
+            valueName = representable.getSerializedName();
+        }
+        boolean valueEquals = values.contains(valueName);
+
+        return propertyEquals && valueEquals;
     }
 }

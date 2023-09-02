@@ -5,7 +5,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.RegisterEvent;
 import nl.teamdiopside.seamless.OutlineReloadListener;
 import nl.teamdiopside.seamless.Seamless;
 
@@ -19,9 +18,5 @@ public class SeamlessForge {
         Seamless.init();
         Consumer<AddReloadListenerEvent> eventConsumer = addReloadListenerEvent -> addReloadListenerEvent.addListener(new OutlineReloadListener());
         MinecraftForge.EVENT_BUS.addListener(eventConsumer);
-    }
-
-    private void eventHandler(RegisterEvent event) {
-
     }
 }

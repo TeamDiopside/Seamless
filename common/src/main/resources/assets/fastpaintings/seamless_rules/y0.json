@@ -3,7 +3,7 @@
   "blockstates": {
     "y_offset": ["0"]
   },
-  "directions": ["up", "down"],
+  "directions": ["down"],
   "connecting_blocks": ["fastpaintings:painting"],
   "connecting_blockstates": {
     "y_offset": ["1"]

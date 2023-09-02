@@ -13,7 +13,7 @@ public class Seamless {
     /*
      TODO
       small dripleaf lower shape
-      game start fix
+      load after tags
       compat
       check states
 
