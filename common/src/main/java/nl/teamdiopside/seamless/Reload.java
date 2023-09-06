@@ -27,7 +27,7 @@ public class Reload {
         apply(getJsons(resourceManager));
     }
 
-    public record OutlineRule(Set<Block> blocks, HashMap<String, Set<String>> blockstates, Set<Direction> directions, Set<Block> connectingBlocks, HashMap<String, Set<String>> connectingBlockstates) {}
+    public record OutlineRule(Set<String> blocks, HashMap<String, Set<String>> blockstates, Set<String> directions, Set<String> connectingBlocks, HashMap<String, Set<String>> connectingBlockstates, ResourceLocation location) {}
 
     public record JsonFile(ResourceLocation key, JsonElement json) {}
 
@@ -49,20 +49,26 @@ public class Reload {
                 return;
             }
             try {
-                Set<Block> blocks = getBlocks(key, json, "blocks");
+                Set<String> blocks = getSet(json, "blocks");
                 HashMap<String, Set<String>> blockstates = getBlockStates(json, "blockstates");
-                Set<Direction> directions = getDirections(key, json, "directions");
-                Set<Block> connectingBlocks = getBlocks(key, json, "connecting_blocks");
+                Set<String> directions = getSet(json, "directions");
+                Set<String> connectingBlocks = getSet(json, "connecting_blocks");
                 HashMap<String, Set<String>> connectingBlockstates = getBlockStates(json, "connecting_blockstates");
 
-                temp.add(new OutlineRule(blocks, blockstates, directions, connectingBlocks, connectingBlockstates));
+                temp.add(new OutlineRule(blocks, blockstates, directions, connectingBlocks, connectingBlockstates, key));
                 Seamless.LOGGER.info("Found outline rule " + key);
             } catch (Exception e) {
-                Seamless.LOGGER.error("Failed to parse JSON object for outline rule " + key + ".json, Error: " + e);
+                Seamless.LOGGER.error("Failed to parse JSON object for outline rule " + key + ".location, Error: " + e);
             }
         }
 
         RULES.addAll(temp);
+    }
+
+    private static Set<String> getSet(JsonElement json, String string) {
+        Set<String> set = new HashSet<>();
+        json.getAsJsonObject().get(string).getAsJsonArray().forEach(element -> set.add(element.getAsString()));
+        return set;
     }
 
     public static Set<Block> getBlocks(ResourceLocation key, JsonElement json, String string) {
@@ -115,10 +121,10 @@ public class Reload {
         Gson gson = new Gson();
         HashMap<ResourceLocation, JsonElement> map = Maps.newHashMap();
         int i = directory.length() + 1;
-        for (Map.Entry<ResourceLocation, Resource> entry : resourceManager.listResources(directory, resourceLocation -> resourceLocation.getPath().endsWith(".json")).entrySet()) {
+        for (Map.Entry<ResourceLocation, Resource> entry : resourceManager.listResources(directory, resourceLocation -> resourceLocation.getPath().endsWith(".location")).entrySet()) {
             ResourceLocation resourceLocation2 = entry.getKey();
             String string = resourceLocation2.getPath();
-            ResourceLocation resourceLocation22 = new ResourceLocation(resourceLocation2.getNamespace(), string.substring(i, string.length() - ".json".length()));
+            ResourceLocation resourceLocation22 = new ResourceLocation(resourceLocation2.getNamespace(), string.substring(i, string.length() - ".location".length()));
             try {
                 BufferedReader reader = entry.getValue().openAsReader();
                 try {
