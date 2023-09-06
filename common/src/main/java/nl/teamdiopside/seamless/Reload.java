@@ -58,7 +58,7 @@ public class Reload {
                 temp.add(new OutlineRule(blocks, blockstates, directions, connectingBlocks, connectingBlockstates, key));
                 Seamless.LOGGER.info("Found outline rule " + key);
             } catch (Exception e) {
-                Seamless.LOGGER.error("Failed to parse JSON object for outline rule " + key + ".location, Error: " + e);
+                Seamless.LOGGER.error("Failed to parse JSON object for outline rule " + key + ".json, Error: " + e);
             }
         }
 
@@ -121,10 +121,10 @@ public class Reload {
         Gson gson = new Gson();
         HashMap<ResourceLocation, JsonElement> map = Maps.newHashMap();
         int i = directory.length() + 1;
-        for (Map.Entry<ResourceLocation, Resource> entry : resourceManager.listResources(directory, resourceLocation -> resourceLocation.getPath().endsWith(".location")).entrySet()) {
+        for (Map.Entry<ResourceLocation, Resource> entry : resourceManager.listResources(directory, resourceLocation -> resourceLocation.getPath().endsWith(".json")).entrySet()) {
             ResourceLocation resourceLocation2 = entry.getKey();
             String string = resourceLocation2.getPath();
-            ResourceLocation resourceLocation22 = new ResourceLocation(resourceLocation2.getNamespace(), string.substring(i, string.length() - ".location".length()));
+            ResourceLocation resourceLocation22 = new ResourceLocation(resourceLocation2.getNamespace(), string.substring(i, string.length() - ".json".length()));
             try {
                 BufferedReader reader = entry.getValue().openAsReader();
                 try {
