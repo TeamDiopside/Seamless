@@ -1,13 +1,9 @@
 {
   "blocks": ["#beds"],
-  "blockstates": {
-    "facing": ["east"],
-    "part": ["foot"]
-  },
   "directions": ["east"],
-  "connecting_blocks": ["#beds"],
+  "connecting_blocks": ["/same"],
   "connecting_blockstates": {
-    "facing": ["east"],
-    "part": ["head"]
+    "facing": ["/same"],
+    "part": ["/!same"]
   }
 }

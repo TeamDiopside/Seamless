@@ -169,11 +169,15 @@ public abstract class LevelRendererMixin implements ResourceManagerReloadListene
 
         if (originalState != null) {
             for (String value : values) {
-                if (value.startsWith("/same")) {
+                if (value.startsWith("/")) {
                     Property<?> originalProperty = originalState.getBlock().getStateDefinition().getProperty(propertyName);
                     assert originalProperty != null : "Blockstate property " + propertyName + " does not exist for " + originalState.getBlock().getName();
 
-                    valuesMatch = values.contains(valueName) || checkingState.getValue(checkingProperty) == originalState.getValue(originalProperty);
+                    if (value.equals("/same")) {
+                        valuesMatch = values.contains(valueName) || checkingState.getValue(checkingProperty) == originalState.getValue(originalProperty);
+                    } else if (value.equals("/!same")) {
+                        valuesMatch = values.contains(valueName) || checkingState.getValue(checkingProperty) != originalState.getValue(originalProperty);
+                    }
                 }
             }
         }
