@@ -13,9 +13,9 @@ public class Seamless {
     /*
      TODO
       small dripleaf lower shape
-      load after tags
       compat
       check states
-
+      icon
+      docs
     */
 }

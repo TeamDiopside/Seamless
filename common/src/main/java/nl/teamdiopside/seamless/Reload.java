@@ -38,16 +38,19 @@ public class Reload {
         List<OutlineRule> temp = new ArrayList<>();
 
         List<JsonFile> files = new ArrayList<>();
-        jsons.forEach((key, json) -> files.add(new JsonFile(key, json)));
+        jsons.forEach((key, json) -> {
+            files.add(new JsonFile(key, json));
+        });
         files.sort(Comparator.comparing(jsonFile -> jsonFile.key.toString()));
 
         for (JsonFile file : files) {
-            ResourceLocation key = file.key;
-            JsonElement json = file.json;
+            ResourceLocation key = file.key();
+            JsonElement json = file.json();
 
             if (!Platform.getModIds().contains(key.getNamespace())) {
-                return;
+                continue;
             }
+
             try {
                 Set<String> blocks = getSet(json, "blocks");
                 HashMap<String, Set<String>> blockstates = getBlockStates(json, "blockstates");
@@ -56,9 +59,9 @@ public class Reload {
                 HashMap<String, Set<String>> connectingBlockstates = getBlockStates(json, "connecting_blockstates");
 
                 temp.add(new OutlineRule(blocks, blockstates, directions, connectingBlocks, connectingBlockstates, key));
-                Seamless.LOGGER.info("Found outline rule " + key);
+                Seamless.LOGGER.info("Loaded Seamless outline rule " + key);
             } catch (Exception e) {
-                Seamless.LOGGER.error("Failed to parse JSON object for outline rule " + key + ".json, Error: " + e);
+                Seamless.LOGGER.error("Failed to parse JSON for Seamless outline rule " + key + ".json, Error: " + e);
             }
         }
 
