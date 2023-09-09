@@ -5,16 +5,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import dev.architectury.platform.Platform;
-import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -68,28 +62,10 @@ public class Reload {
         RULES.addAll(temp);
     }
 
-    private static Set<String> getSet(JsonElement json, String string) {
+    public static Set<String> getSet(JsonElement json, String string) {
         Set<String> set = new HashSet<>();
         json.getAsJsonObject().get(string).getAsJsonArray().forEach(element -> set.add(element.getAsString()));
         return set;
-    }
-
-    public static Set<Block> getBlocks(ResourceLocation key, JsonElement json, String string) {
-        Set<Block> blocks = new HashSet<>();
-        json.getAsJsonObject().get(string).getAsJsonArray().forEach(jsonElement -> {
-            if (jsonElement.getAsString().startsWith("#")) {
-                TagKey<Block> blockTagKey = TagKey.create(Registries.BLOCK, new ResourceLocation(jsonElement.getAsString().replace("#", "")));
-                BuiltInRegistries.BLOCK.getOrCreateTag(blockTagKey).stream().forEach(blockHolder -> blocks.add(blockHolder.value()));
-            } else {
-                Block block = BuiltInRegistries.BLOCK.get(new ResourceLocation(jsonElement.getAsString()));
-                if (block == Blocks.AIR && !jsonElement.getAsString().replace("minecraft:", "").equals("air")) {
-                    Seamless.LOGGER.error("Block \"" + jsonElement.getAsString() + "\" from " + key + " does not exist!");
-                } else {
-                    blocks.add(block);
-                }
-            }
-        });
-        return blocks;
     }
 
     public static HashMap<String, Set<String>> getBlockStates(JsonElement json, String string) {
@@ -104,19 +80,6 @@ public class Reload {
 
         }
         return blockstates;
-    }
-
-    public static Set<Direction> getDirections(ResourceLocation key, JsonElement json, String string) {
-        Set<Direction> directions = new HashSet<>();
-        json.getAsJsonObject().get(string).getAsJsonArray().forEach(jsonElement -> {
-            Direction direction = Direction.byName(jsonElement.getAsString());
-            if (direction != null) {
-                directions.add(direction);
-            } else {
-                Seamless.LOGGER.error("Direction \"" + jsonElement.getAsString() + "\" from " + key + " does not exist!");
-            }
-        });
-        return directions;
     }
 
     public static Map<ResourceLocation, JsonElement> getJsons(ResourceManager resourceManager) {

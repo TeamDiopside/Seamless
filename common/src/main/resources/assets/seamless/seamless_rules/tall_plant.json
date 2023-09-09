@@ -1,5 +1,0 @@
-{
-  "blocks": ["#minecraft:tall_flowers", "tall_grass", "tall_seagrass", "large_fern", "small_dripleaf", "pitcher_crop"],
-  "directions": ["up", "down"],
-  "connecting_blocks": ["#minecraft:tall_flowers", "tall_grass", "tall_seagrass", "large_fern", "small_dripleaf", "pitcher_crop"]
-}

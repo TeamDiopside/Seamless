@@ -1,5 +1,0 @@
-{
-  "blocks": ["supplementaries:flax"],
-  "directions": ["up", "down"],
-  "connecting_blocks": ["supplementaries:flax"]
-}

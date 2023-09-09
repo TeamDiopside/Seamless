@@ -7,6 +7,7 @@
     "LevelRendererMixin"
   ],
   "mixins": [
+    "SmallDripleafBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

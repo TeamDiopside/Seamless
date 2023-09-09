@@ -12,9 +12,7 @@ public class Seamless {
 
     /*
      TODO
-      small dripleaf lower shape
       compat
-      check states
       icon
       docs
     */

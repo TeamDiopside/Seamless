@@ -34,7 +34,7 @@ public class OutlineFinder {
         BlockPos relativePos = pos.subtract(originalPos);
         VoxelShape shape = state.getShape(level, pos, CollisionContext.of(entity)).move(relativePos.getX(), relativePos.getY(), relativePos.getZ());
 
-        if (connectedPositions.size() > 2000) {
+        if (connectedPositions.size() > 1500) {
             return new Recursion(shape, connectedPositions);
         }
 
@@ -126,18 +126,20 @@ public class OutlineFinder {
         boolean useNono = false;
 
         if (originalState != null) {
-            for (String value : goodValues) {
+            for (String value : values) {
                 if (!(value.startsWith("/same") || value.startsWith("/!same"))) {
                     continue;
                 }
 
                 String addToPropertyString = value.contains("+") ? value.split("\\+")[1] : "0";
-                int addToProperty;
+                int addToProperty = 0;
 
-                try {
-                    addToProperty = Integer.parseInt(addToPropertyString);
-                } catch (NumberFormatException e) {
-                    throw (new NumberFormatException("Blockstate \"" + value + "\" from " + location + " does not exist because \"" + addToPropertyString + "\" is not an integer"));
+                if (!addToPropertyString.equals("opposite")) {
+                    try {
+                        addToProperty = Integer.parseInt(addToPropertyString);
+                    } catch (NumberFormatException e) {
+                        throw (new NumberFormatException("Blockstate \"" + value + "\" from " + location + " does not exist because \"" + addToPropertyString + "\" is not an integer"));
+                    }
                 }
 
                 Property<?> originalProperty = originalState.getBlock().getStateDefinition().getProperty(propertyName);
@@ -148,6 +150,9 @@ public class OutlineFinder {
                     Direction direction = originalState.getValue(directionProperty);
                     for (int i = 0; i < addToProperty; i++) {
                         direction = direction.getClockWise();
+                    }
+                    if (addToPropertyString.equals("opposite")) {
+                        direction = direction.getOpposite();
                     }
                     toAdd = direction.getName();
                 } else if (originalProperty instanceof IntegerProperty integerProperty) {
@@ -177,12 +182,14 @@ public class OutlineFinder {
             if (string.startsWith("/state:")) {
                 String propertyString = string.split(":")[1].split("\\+")[0];
                 String addToPropertyString = string.contains("+") ? string.split("\\+")[1] : "0";
-                int addToProperty;
+                int addToProperty = 0;
 
-                try {
-                    addToProperty = Integer.parseInt(addToPropertyString);
-                } catch (NumberFormatException e) {
-                    throw (new NumberFormatException("Direction \"" + string + "\" from " + location + " does not exist because \"" + addToPropertyString + "\" is not an integer"));
+                if (!addToPropertyString.equals("opposite")) {
+                    try {
+                        addToProperty = Integer.parseInt(addToPropertyString);
+                    } catch (NumberFormatException e) {
+                        throw (new NumberFormatException("Direction \"" + string + "\" from " + location + " does not exist because \"" + addToPropertyString + "\" is not an integer"));
+                    }
                 }
 
                 Property<?> property = state.getBlock().getStateDefinition().getProperty(propertyString);
@@ -192,6 +199,9 @@ public class OutlineFinder {
                     Direction direction = state.getValue(directionProperty);
                     for (int i = 0; i < addToProperty; i++) {
                         direction = direction.getClockWise();
+                    }
+                    if (addToPropertyString.equals("opposite")) {
+                        direction = direction.getOpposite();
                     }
                     directions.add(direction);
                 } else {
