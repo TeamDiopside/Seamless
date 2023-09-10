@@ -1,5 +1,5 @@
 {
-  "blocks": ["#beds"],
+  "blocks": ["#sleep_tight:hammocks", "sleep_tight:night_bag"],
   "blockstates": {
     "part": ["head"]
   },
@@ -7,6 +7,6 @@
   "connecting_blocks": ["/same"],
   "connecting_blockstates": {
     "facing": ["/same"],
-    "part": ["/!same"]
+    "part": ["foot"]
   }
 }

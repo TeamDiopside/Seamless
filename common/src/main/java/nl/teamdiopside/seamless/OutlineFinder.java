@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
@@ -114,7 +115,10 @@ public class OutlineFinder {
 
     public static boolean propertyMatches(BlockState checkingState, String propertyName, Set<String> values, BlockState originalState, ResourceLocation location) {
         Property<?> checkingProperty = checkingState.getBlock().getStateDefinition().getProperty(propertyName);
-        assert checkingProperty != null : "Blockstate property " + propertyName + " from " + location + " does not exist for " + checkingState.getBlock().getName();
+        if (checkingProperty == null) {
+            Seamless.LOGGER.error("Blockstate property \"" + propertyName + "\" from " + location + " does not exist for " + checkingState.getBlock().getName());
+            return false;
+        }
 
         String valueName = checkingState.getValue(checkingProperty).toString();
         if (checkingState.getValue(checkingProperty) instanceof StringRepresentable representable) {
@@ -143,9 +147,12 @@ public class OutlineFinder {
                 }
 
                 Property<?> originalProperty = originalState.getBlock().getStateDefinition().getProperty(propertyName);
-                assert originalProperty != null : "Blockstate property " + propertyName + " from " + location + " does not exist for " + originalState.getBlock().getName();
+                if (originalProperty == null) {
+                    Seamless.LOGGER.error("Blockstate property \"" + propertyName + "\" from " + location + " does not exist for " + originalState.getBlock().getName());
+                    continue;
+                }
 
-                String toAdd;
+                Set<String> toAdd = new HashSet<>();
                 if (originalProperty instanceof DirectionProperty directionProperty) {
                     Direction direction = originalState.getValue(directionProperty);
                     for (int i = 0; i < addToProperty; i++) {
@@ -154,18 +161,27 @@ public class OutlineFinder {
                     if (addToPropertyString.equals("opposite")) {
                         direction = direction.getOpposite();
                     }
-                    toAdd = direction.getName();
-                } else if (originalProperty instanceof IntegerProperty integerProperty) {
-                    toAdd = String.valueOf(originalState.getValue(integerProperty) + addToProperty);
+                    toAdd.add(direction.getName());
+                }
+                else if (originalProperty == BlockStateProperties.AXIS) {
+                    toAdd.add(Direction.fromAxisAndDirection(originalState.getValue(BlockStateProperties.AXIS), Direction.AxisDirection.NEGATIVE).toString());
+                    toAdd.add(Direction.fromAxisAndDirection(originalState.getValue(BlockStateProperties.AXIS), Direction.AxisDirection.POSITIVE).toString());
+                }
+                else if (originalProperty == BlockStateProperties.HORIZONTAL_AXIS) {
+                    toAdd.add(Direction.fromAxisAndDirection(originalState.getValue(BlockStateProperties.HORIZONTAL_AXIS), Direction.AxisDirection.NEGATIVE).toString());
+                    toAdd.add(Direction.fromAxisAndDirection(originalState.getValue(BlockStateProperties.HORIZONTAL_AXIS), Direction.AxisDirection.POSITIVE).toString());
+                }
+                else if (originalProperty instanceof IntegerProperty integerProperty) {
+                    toAdd.add(String.valueOf(originalState.getValue(integerProperty) + addToProperty));
                 } else {
-                    toAdd = String.valueOf(originalState.getValue(originalProperty));
+                    toAdd.add(String.valueOf(originalState.getValue(originalProperty)));
                 }
 
                 if (value.startsWith("/same")) {
-                    goodValues.add(toAdd);
+                    goodValues.addAll(toAdd);
                 } else if (value.startsWith("/!same")) {
                     useNono = true;
-                    nonoValues.add(toAdd);
+                    nonoValues.addAll(toAdd);
                 }
             }
         }
@@ -188,12 +204,15 @@ public class OutlineFinder {
                     try {
                         addToProperty = Integer.parseInt(addToPropertyString);
                     } catch (NumberFormatException e) {
-                        throw (new NumberFormatException("Direction \"" + string + "\" from " + location + " does not exist because \"" + addToPropertyString + "\" is not an integer"));
+                        Seamless.LOGGER.error("Direction \"" + string + "\" from " + location + " does not exist because \"" + addToPropertyString + "\" is not an integer");
                     }
                 }
 
                 Property<?> property = state.getBlock().getStateDefinition().getProperty(propertyString);
-                assert property != null : "Blockstate property \"" + propertyString + "\" from " + location + " does not exist for " + state.getBlock().getName();
+                if (property == null) {
+                    Seamless.LOGGER.error("Blockstate property \"" + propertyString + "\" from " + location + " does not exist for " + state.getBlock().getName());
+                    continue;
+                }
 
                 if (property instanceof DirectionProperty directionProperty) {
                     Direction direction = state.getValue(directionProperty);
@@ -204,6 +223,14 @@ public class OutlineFinder {
                         direction = direction.getOpposite();
                     }
                     directions.add(direction);
+                }
+                else if (property == BlockStateProperties.AXIS) {
+                    directions.add(Direction.fromAxisAndDirection(state.getValue(BlockStateProperties.AXIS), Direction.AxisDirection.NEGATIVE));
+                    directions.add(Direction.fromAxisAndDirection(state.getValue(BlockStateProperties.AXIS), Direction.AxisDirection.POSITIVE));
+                }
+                else if (property == BlockStateProperties.HORIZONTAL_AXIS) {
+                    directions.add(Direction.fromAxisAndDirection(state.getValue(BlockStateProperties.HORIZONTAL_AXIS), Direction.AxisDirection.NEGATIVE));
+                    directions.add(Direction.fromAxisAndDirection(state.getValue(BlockStateProperties.HORIZONTAL_AXIS), Direction.AxisDirection.POSITIVE));
                 } else {
                     Seamless.LOGGER.error("Property \"" + propertyString + "\" from " + location + "\" is not a direction property");
                 }

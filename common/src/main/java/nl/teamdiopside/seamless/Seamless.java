@@ -12,7 +12,6 @@ public class Seamless {
 
     /*
      TODO
-      compat
       icon
       docs
     */

@@ -1,0 +1,8 @@
+{
+  "blocks": ["environmental:giant_lilypad"],
+  "blockstates": {
+    "position": ["north"]
+  },
+  "directions": ["east", "south", "west"],
+  "connecting_blocks": ["/same"]
+}

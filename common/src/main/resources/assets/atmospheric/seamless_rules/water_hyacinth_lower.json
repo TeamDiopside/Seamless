@@ -1,5 +1,5 @@
 {
-  "blocks": ["supplementaries:flax"],
+  "blocks": ["atmospheric:water_hyacinth"],
   "blockstates": {
     "half": ["lower"]
   },

@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import nl.teamdiopside.seamless.SeamlessShapes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -28,8 +27,10 @@ public abstract class PickerelweedDoublePlantBlockMixin extends Block implements
 
     @Shadow @Final public static EnumProperty<DoubleBlockHalf> HALF;
 
+    @Shadow @Final protected static VoxelShape SHAPE;
+
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
     public void getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
-        cir.setReturnValue(SeamlessShapes.smallDripleaf(state.getValue(HALF) == DoubleBlockHalf.LOWER));
+        cir.setReturnValue(state.getValue(HALF) == DoubleBlockHalf.LOWER ? Block.box(2, 0, 2, 14, 16, 14) : SHAPE);
     }
 }

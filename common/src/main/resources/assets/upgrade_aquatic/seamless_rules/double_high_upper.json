@@ -1,5 +1,5 @@
 {
-  "blocks": ["supplementaries:flax"],
+  "blocks": ["upgrade_aquatic:tall_blue_pickerelweed", "upgrade_aquatic:tall_purple_pickerelweed", "upgrade_aquatic:tall_beachgrass"],
   "blockstates": {
     "half": ["upper"]
   },

@@ -1,5 +1,5 @@
 {
-  "blocks": ["supplementaries:flax"],
+  "blocks": ["biomesoplenty:brimstone_cluster", "biomesoplenty:eyebulb"],
   "blockstates": {
     "half": ["lower"]
   },

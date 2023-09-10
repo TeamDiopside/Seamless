@@ -1,9 +1,9 @@
 {
-  "blocks": ["#beds"],
+  "blocks": ["farmersdelight:full_tatami_mat"],
   "blockstates": {
-    "part": ["head"]
+    "part": ["foot"]
   },
-  "directions": ["/state:facing+opposite"],
+  "directions": ["/state:facing"],
   "connecting_blocks": ["/same"],
   "connecting_blockstates": {
     "facing": ["/same"],

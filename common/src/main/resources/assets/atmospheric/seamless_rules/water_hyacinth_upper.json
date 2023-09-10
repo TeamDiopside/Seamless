@@ -1,9 +1,9 @@
 {
-  "blocks": ["supplementaries:flax"],
+  "blocks": ["atmospheric:water_hyacinth"],
   "blockstates": {
-    "half": ["lower"]
+    "half": ["upper"]
   },
-  "directions": ["up"],
+  "directions": ["down"],
   "connecting_blocks": ["/same"],
   "connecting_blockstates": {
     "half": ["/!same"]

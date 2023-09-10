@@ -1,5 +1,5 @@
 {
-  "blocks": ["#beds"],
+  "blocks": ["farmersdelight:full_tatami_mat"],
   "blockstates": {
     "part": ["head"]
   },

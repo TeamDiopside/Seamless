@@ -1,0 +1,5 @@
+{
+  "blocks": ["oak_log"],
+  "directions": ["/state:axis"],
+  "connecting_blocks": ["/same"]
+}
