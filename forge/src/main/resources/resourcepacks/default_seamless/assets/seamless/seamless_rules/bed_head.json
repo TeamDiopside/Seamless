@@ -1,0 +1,12 @@
+{
+  "blocks": ["#beds"],
+  "blockstates": {
+    "part": ["head"]
+  },
+  "directions": ["/state:facing+opposite"],
+  "connecting_blocks": ["/same"],
+  "connecting_blockstates": {
+    "facing": ["/same"],
+    "part": ["/!same"]
+  }
+}

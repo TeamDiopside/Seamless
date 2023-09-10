@@ -1,0 +1,11 @@
+{
+  "blocks": ["environmental:tall_cattail", "environmental:tall_dead_bush", "environmental:giant_tall_grass"],
+  "blockstates": {
+    "half": ["lower"]
+  },
+  "directions": ["up"],
+  "connecting_blocks": ["/same"],
+  "connecting_blockstates": {
+    "half": ["/!same"]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "blocks": ["fastpaintings:painting"],
+  "directions": ["/state:facing+3"],
+  "connecting_blocks": ["/same"],
+  "connecting_blockstates": {
+    "facing": ["/same"],
+    "x_offset": ["/same+1"]
+  }
+}

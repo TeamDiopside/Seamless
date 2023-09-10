@@ -1,0 +1,12 @@
+{
+  "blocks": ["#sleep_tight:hammocks"],
+  "blockstates": {
+    "part": ["half_foot"]
+  },
+  "directions": ["/state:facing"],
+  "connecting_blocks": ["/same"],
+  "connecting_blockstates": {
+    "facing": ["/same"],
+    "part": ["middle"]
+  }
+}

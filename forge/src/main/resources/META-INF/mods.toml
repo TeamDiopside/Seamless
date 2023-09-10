@@ -11,7 +11,7 @@ authors = "LarsMans"
 description = '''
 A Fabric/Forge mod that connects the outlines of Double Blocks, like Doors and Beds.
 '''
-logoFile = "icon.png"
+logoFile = "../modicon.png"
 
 [[dependencies.seamless]]
 modId = "forge"

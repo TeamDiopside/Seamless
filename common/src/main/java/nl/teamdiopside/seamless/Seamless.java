@@ -9,10 +9,4 @@ public class Seamless {
 
     public static void init() {
     }
-
-    /*
-     TODO
-      icon
-      docs
-    */
 }

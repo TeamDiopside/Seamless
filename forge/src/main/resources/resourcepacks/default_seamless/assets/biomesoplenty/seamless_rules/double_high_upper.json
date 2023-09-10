@@ -1,0 +1,11 @@
+{
+  "blocks": ["biomesoplenty:brimstone_cluster", "biomesoplenty:eyebulb"],
+  "blockstates": {
+    "half": ["upper"]
+  },
+  "directions": ["down"],
+  "connecting_blocks": ["/same"],
+  "connecting_blockstates": {
+    "half": ["/!same"]
+  }
+}

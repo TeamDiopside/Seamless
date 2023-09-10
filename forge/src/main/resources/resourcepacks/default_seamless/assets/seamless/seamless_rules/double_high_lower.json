@@ -1,0 +1,11 @@
+{
+  "blocks": ["#tall_flowers", "#doors", "tall_grass", "tall_seagrass", "large_fern", "small_dripleaf", "pitcher_crop"],
+  "blockstates": {
+    "half": ["lower"]
+  },
+  "directions": ["up"],
+  "connecting_blocks": ["/same"],
+  "connecting_blockstates": {
+    "half": ["/!same"]
+  }
+}

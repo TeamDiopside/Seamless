@@ -1,0 +1,9 @@
+{
+  "blocks": ["piston_head"],
+  "directions": ["/state:facing+opposite"],
+  "connecting_blocks": ["piston", "sticky_piston"],
+  "connecting_blockstates": {
+    "facing": ["/same"],
+    "extended": ["true"]
+  }
+}

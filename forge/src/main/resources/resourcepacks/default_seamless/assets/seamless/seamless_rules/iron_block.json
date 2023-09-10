@@ -1,0 +1,5 @@
+{
+  "blocks": ["iron_block"],
+  "directions": ["north", "east", "south", "west", "up", "down"],
+  "connecting_blocks": ["/same"]
+}

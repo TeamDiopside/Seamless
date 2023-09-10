@@ -13,7 +13,7 @@
     "discord": "https://discord.gg/PJCXjSJnu2"
   },
   "license": "MIT",
-  "icon": "icon.png",
+  "icon": "modicon.png",
   "environment": "*",
   "entrypoints": {
     "main": [

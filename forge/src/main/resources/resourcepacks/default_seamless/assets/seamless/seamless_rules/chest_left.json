@@ -1,0 +1,12 @@
+{
+  "blocks": ["#c:chests", "#forge:chests"],
+  "blockstates": {
+    "type": ["left"]
+  },
+  "directions": ["/state:facing+1"],
+  "connecting_blocks": ["/same"],
+  "connecting_blockstates": {
+    "facing": ["/same"],
+    "type": ["right"]
+  }
+}

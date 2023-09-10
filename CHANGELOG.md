@@ -1,5 +1,8 @@
 # Seamless Changelog
 
+## 2.0.0
+- Made the mod entirely data-driven
+
 ## 1.4.1
 - Fixed Farmer's Delight crash
 - Changed package name

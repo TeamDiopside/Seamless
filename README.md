@@ -4,15 +4,18 @@
 
 ![](https://teamdiopside.nl/assets/seamless/Seamless2.png)
 
-A client-side Fabric/Forge mod that connects the outlines of Double Blocks, like Doors and Beds.
+A client-side data-driven mod that connects the outlines of Double Blocks, like Doors and Beds.
 
-**[Architectury API](https://modrinth.com/mod/architectury-api/versions) is required!**
+---
+[![architectury-api](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/requires/architectury-api_vector.svg)](https://modrinth.com/mod/architectury-api)
+[![Fabric API](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/requires/fabric-api_vector.svg)](https://modrinth.com/mod/fabric-api)
+[![Forge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/forge_vector.svg)](https://files.minecraftforge.net/net/minecraftforge/forge/)
 
 [![RocketNode](https://teamdiopside.nl/assets/diopside/rocketnode.png)](https://billing.rocketnode.com/aff.php?aff=150440)
 
 ---
 
-**Connected outlines for:**
+### Connected outlines for:
 
 - Doors
 - Beds
@@ -23,7 +26,12 @@ A client-side Fabric/Forge mod that connects the outlines of Double Blocks, like
 - Tall Seagrass
 - Pitcher Plant Crop
 
-**Optional Compatibility with:**
+### It's completely data-driven!
+
+This means that you can add compatibility for any mod yourself, through simple resource packs.  
+Want to learn how? Take a look at the [Docs](https://docs.teamdiopside.nl/seamless/).
+
+### Built-in Compatibility with:
 
 - Create (Glass, Train, Brass, Copper and Andesite Door)
 - Supplementaries (Flax, Spring Launcher)
