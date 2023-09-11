@@ -1,7 +1,8 @@
 # Seamless Changelog
 
 ## 2.0.0
-- Made the mod entirely data-driven
+- Rewrote the mod to be entirely data-driven
+- Added documentation [here](https://docs.teamdiopside.nl/seamless/)
 
 ## 1.4.1
 - Fixed Farmer's Delight crash

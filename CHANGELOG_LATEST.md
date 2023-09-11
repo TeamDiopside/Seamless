@@ -1,3 +1,3 @@
-## 1.4.1
-- Fixed Farmer's Delight crash
-- Changed package name
+## 2.0.0
+- Rewrote the mod to be entirely data-driven
+- Added documentation [here](https://docs.teamdiopside.nl/seamless/)
