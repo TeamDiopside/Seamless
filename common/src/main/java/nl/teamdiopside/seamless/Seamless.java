@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 public class Seamless {
     public static final String MOD_ID = "seamless";
+    public static final String RESOURCE_PACK = "default_seamless";
     public static final Logger LOGGER = LoggerFactory.getLogger("Seamless");
 
     public static void init() {
