@@ -55,8 +55,8 @@ dependencies {
 modrinth {
     token = System.getenv("MODRINTH_TOKEN")
     projectId = "seamless"
-    versionNumber = "${rootProject.mod_version}-forge"
-    versionName = "Seamless ${rootProject.mod_version} Forge"
+    versionNumber = "${rootProject.mod_version}-forge-1.20.1"
+    versionName = "${rootProject.mod_version} Forge 1.20.1"
     versionType = "release"
     uploadFile = remapJar
     gameVersions = ["1.20", "1.20.1"]
@@ -72,19 +72,20 @@ modrinth {
 
 curseforge {
     project {
-        apiKey = System.getenv('CURSEFORGE_TOKEN')
-        id = '855593'
+        apiKey = System.getenv("CURSEFORGE_TOKEN")
+        id = "855593"
         changelog = rootProject.file("CHANGELOG_LATEST.md").text
         changelogType = "markdown"
-        releaseType = 'release'
-        addGameVersion '1.20'
-        addGameVersion '1.20.1'
+        releaseType = "release"
+        addGameVersion "1.20"
+        addGameVersion "1.20.1"
+        addGameVersion "Forge"
 
         relations {
             requiredDependency "architectury-api"
         }
         mainArtifact(remapJar) {
-            displayName = "Seamless ${rootProject.mod_version} Forge"
+            displayName = "${rootProject.mod_version} Forge 1.20.1"
         }
         options {
             javaVersionAutoDetect = false
