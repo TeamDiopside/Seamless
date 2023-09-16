@@ -1,5 +1,5 @@
 {
-  "blocks": ["#beds"],
+  "blocks": ["#minecraft:beds"],
   "blockstates": {
     "part": ["foot"]
   },

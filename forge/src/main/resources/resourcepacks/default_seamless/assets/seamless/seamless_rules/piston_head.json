@@ -1,7 +1,7 @@
 {
-  "blocks": ["piston_head"],
+  "blocks": ["minecraft:piston_head"],
   "directions": ["/state:facing+opposite"],
-  "connecting_blocks": ["piston", "sticky_piston"],
+  "connecting_blocks": ["minecraft:piston", "minecraft:sticky_piston"],
   "connecting_blockstates": {
     "facing": ["/same"],
     "extended": ["true"]

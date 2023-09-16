@@ -1,5 +1,5 @@
 {
-  "blocks": ["#tall_flowers", "#doors", "tall_grass", "tall_seagrass", "large_fern", "small_dripleaf", "pitcher_crop"],
+  "blocks": ["#minecraft:tall_flowers", "#minecraft:doors", "minecraft:tall_grass", "minecraft:tall_seagrass", "minecraft:large_fern", "minecraft:small_dripleaf", "minecraft:pitcher_crop"],
   "blockstates": {
     "half": ["lower"]
   },
