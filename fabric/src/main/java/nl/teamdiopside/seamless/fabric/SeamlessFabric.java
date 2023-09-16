@@ -10,7 +10,6 @@ import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -30,7 +29,7 @@ public class SeamlessFabric implements ModInitializer {
         Seamless.init();
 
         ModContainer container = FabricLoader.getInstance().getModContainer(Seamless.MOD_ID).orElseThrow();
-        ResourceManagerHelper.registerBuiltinResourcePack(new ResourceLocation(Seamless.MOD_ID, Seamless.RESOURCE_PACK), container, Component.translatable("seamless.resource_pack"), ResourcePackActivationType.DEFAULT_ENABLED);
+        ResourceManagerHelper.registerBuiltinResourcePack(new ResourceLocation(Seamless.MOD_ID, Seamless.RESOURCE_PACK), container, "Default Seamless Resources", ResourcePackActivationType.DEFAULT_ENABLED);
 
         ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new IdentifiableResourceReloadListener() {
             @Override

@@ -1,10 +1,10 @@
 {
-  "blocks": ["piston", "sticky_piston"],
+  "blocks": ["minecraft:piston", "minecraft:sticky_piston"],
   "blockstates": {
     "extended": ["true"]
   },
   "directions": ["/state:facing"],
-  "connecting_blocks": ["piston_head"],
+  "connecting_blocks": ["minecraft:piston_head"],
   "connecting_blockstates": {
     "facing": ["/same"]
   }

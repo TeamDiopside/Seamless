@@ -2,8 +2,7 @@ package nl.teamdiopside.seamless;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.StringRepresentable;
@@ -100,10 +99,10 @@ public class OutlineFinder {
     public static Set<Block> getNormalBlocks(String string, ResourceLocation location) {
         Set<Block> blocks = new HashSet<>();
         if (string.startsWith("#")) {
-            TagKey<Block> blockTagKey = TagKey.create(Registries.BLOCK, new ResourceLocation(string.replace("#", "")));
-            BuiltInRegistries.BLOCK.getOrCreateTag(blockTagKey).stream().forEach(blockHolder -> blocks.add(blockHolder.value()));
+            TagKey<Block> blockTagKey = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(string.replace("#", "")));
+            Registry.BLOCK.getOrCreateTag(blockTagKey).stream().forEach(blockHolder -> blocks.add(blockHolder.value()));
         } else {
-            Block block = BuiltInRegistries.BLOCK.get(new ResourceLocation(string));
+            Block block = Registry.BLOCK.get(new ResourceLocation(string));
             if (block == Blocks.AIR && !string.split(":")[1].equals("air")) {
                 Seamless.LOGGER.error("Block \"" + string + "\" from " + location + " does not exist!");
             } else {
