@@ -1,0 +1,13 @@
+{
+  "blocks": ["#minecraft:doors"],
+  "blockstates": {
+    "half": ["lower"]
+  },
+  "directions": ["up"],
+  "connecting_blocks": ["/same"],
+  "connecting_blockstates": {
+    "half": ["/!same"],
+    "open": ["/same"],
+    "hinge": ["/same"]
+  }
+}
