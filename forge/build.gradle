@@ -37,19 +37,6 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
-
-    modCompileOnly("curse.maven:upgrade_aquatic_forge-326895:4415517") // Not updated
-    modCompileOnly("curse.maven:blueprint_forge-382216:4442628") // Not updated
-    modCompileOnly("curse.maven:supplementaries_forge-412082:4627388")
-    modCompileOnly("curse.maven:create_forge-328085:4626108")
-    modCompileOnly("curse.maven:biomes_o_plenty_forge-220318:4617259")
-    modCompileOnly("maven.modrinth:farmers-delight:1.20.1-1.2.3")
-    modCompileOnly("curse.maven:haunted_harvest_forge-541753:4622565")
-    modCompileOnly("curse.maven:sleep_tight_forge-817564:4612817")
-    modCompileOnly("curse.maven:moonlight_forge-499980:4627905")
-    modCompileOnly("curse.maven:atmospheric_forge-362393:4415516") // Not updated
-    modCompileOnly("curse.maven:environmental_forge-388992:4415514") // Not updated
-    modCompileOnly("curse.maven:fast_paintings_forge-883287:4621175")
 }
 
 modrinth {
