@@ -41,13 +41,13 @@ public class OutlineFinder {
         for (Reload.OutlineRule outlineRule : RULES) {
             ResourceLocation location = outlineRule.location();
 
-            if (!getBlocks(outlineRule.blocks(), null, location).contains(state.getBlock())) {
+            if (blockDoesntMatch(outlineRule.blocks(), state.getBlock(), null, location)) {
                 continue;
             }
 
             boolean blockstatesMatch = true;
             for (HashMap.Entry<String, Set<String>> entry : outlineRule.blockstates().entrySet()) {
-                if (!propertyMatches(state, entry.getKey(), entry.getValue(), null, location)) {
+                if (propertyDoesntMatch(state, entry.getKey(), entry.getValue(), null, location)) {
                     blockstatesMatch = false;
                 }
             }
@@ -59,13 +59,13 @@ public class OutlineFinder {
                 BlockPos checkingPos = pos.relative(direction);
                 BlockState checkingState = level.getBlockState(checkingPos);
 
-                if (connectedPositions.contains(checkingPos) || !getBlocks(outlineRule.connectingBlocks(), state, location).contains(checkingState.getBlock())) {
+                if (connectedPositions.contains(checkingPos) || blockDoesntMatch(outlineRule.connectingBlocks(), checkingState.getBlock(), state.getBlock(), location)) {
                     continue;
                 }
 
                 boolean connectingBlockstatesMatch = true;
                 for (HashMap.Entry<String, Set<String>> entry : outlineRule.connectingBlockstates().entrySet()) {
-                    if (!propertyMatches(checkingState, entry.getKey(), entry.getValue(), state, location)) {
+                    if (propertyDoesntMatch(checkingState, entry.getKey(), entry.getValue(), state, location)) {
                         connectingBlockstatesMatch = false;
                         break;
                     }
@@ -82,18 +82,21 @@ public class OutlineFinder {
         return new Recursion(shape, connectedPositions);
     }
 
-    public static Set<Block> getBlocks(Set<String> set, BlockState state, ResourceLocation location) {
-        Set<Block> blocks = new HashSet<>();
+    public static boolean blockDoesntMatch(Set<String> set, Block checkingBlock, Block originalBlock, ResourceLocation location) {
+        Set<Block> goodBlocks = new HashSet<>();
+        Set<Block> nonoBlocks = new HashSet<>();
 
         for (String string : set) {
-            if (string.startsWith("/same") && state != null) {
-                blocks.add(state.getBlock());
+            if (string.equals("/same") && originalBlock != null) {
+                goodBlocks.add(originalBlock);
+            } else if (string.startsWith("!")) {
+                nonoBlocks.addAll(getNormalBlocks(string.substring(1), location));
             } else {
-                blocks.addAll(getNormalBlocks(string, location));
+                goodBlocks.addAll(getNormalBlocks(string, location));
             }
         }
 
-        return blocks;
+        return !goodBlocks.contains(checkingBlock) || nonoBlocks.contains(checkingBlock);
     }
 
     public static Set<Block> getNormalBlocks(String string, ResourceLocation location) {
@@ -112,11 +115,11 @@ public class OutlineFinder {
         return blocks;
     }
 
-    public static boolean propertyMatches(BlockState checkingState, String propertyName, Set<String> values, BlockState originalState, ResourceLocation location) {
+    public static boolean propertyDoesntMatch(BlockState checkingState, String propertyName, Set<String> values, BlockState originalState, ResourceLocation location) {
         Property<?> checkingProperty = checkingState.getBlock().getStateDefinition().getProperty(propertyName);
         if (checkingProperty == null) {
             Seamless.LOGGER.error("Blockstate property \"" + propertyName + "\" from " + location + " does not exist for " + checkingState.getBlock().getName());
-            return false;
+            return true;
         }
 
         String valueName = checkingState.getValue(checkingProperty).toString();
@@ -188,7 +191,7 @@ public class OutlineFinder {
         boolean propertiesMatch = propertyName.equals(checkingProperty.getName());
         boolean valuesMatch = goodValues.contains(valueName) || (!nonoValues.contains(valueName) && useNono);
 
-        return propertiesMatch && valuesMatch;
+        return !propertiesMatch || !valuesMatch;
     }
 
     public static Set<Direction> getDirections(Set<String> set, ResourceLocation location, BlockState state) {

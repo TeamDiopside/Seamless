@@ -24,8 +24,6 @@ public abstract class LevelRendererMixin implements ResourceManagerReloadListene
 
     @Shadow private @Nullable ClientLevel level;
 
-    @Shadow public abstract void setLevel(@Nullable ClientLevel clientLevel);
-
     @Inject(method = "renderHitOutline", at = @At("HEAD"), cancellable = true)
     private void renderHitOutline(PoseStack poseStack, VertexConsumer vertexConsumer, Entity entity, double i, double b, double c, BlockPos blockPos, BlockState blockState, CallbackInfo ci) {
 
