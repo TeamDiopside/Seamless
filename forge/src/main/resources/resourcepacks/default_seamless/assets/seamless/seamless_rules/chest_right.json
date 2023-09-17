@@ -1,5 +1,5 @@
 {
-  "blocks": ["#c:chests", "#forge:chests"],
+  "blocks": ["#c:chests", "#forge:chests", "!minecraft:ender_chest"],
   "blockstates": {
     "type": ["right"]
   },
