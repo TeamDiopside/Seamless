@@ -1,5 +1,6 @@
 package nl.teamdiopside.seamless;
 
+import dev.architectury.platform.Platform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
@@ -90,21 +91,26 @@ public class OutlineFinder {
             if (string.equals("/same") && originalBlock != null) {
                 goodBlocks.add(originalBlock);
             } else if (string.startsWith("!")) {
-                nonoBlocks.addAll(getNormalBlocks(string.substring(1), location));
+                nonoBlocks.addAll(getBlocks(string.substring(1), location));
             } else {
-                goodBlocks.addAll(getNormalBlocks(string, location));
+                goodBlocks.addAll(getBlocks(string, location));
             }
         }
 
         return !goodBlocks.contains(checkingBlock) || nonoBlocks.contains(checkingBlock);
     }
 
-    public static Set<Block> getNormalBlocks(String string, ResourceLocation location) {
+    public static Set<Block> getBlocks(String string, ResourceLocation location) {
         Set<Block> blocks = new HashSet<>();
+
         if (string.startsWith("#")) {
             TagKey<Block> blockTagKey = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(string.replace("#", "")));
             Registry.BLOCK.getOrCreateTag(blockTagKey).stream().forEach(blockHolder -> blocks.add(blockHolder.value()));
         } else {
+            if (!Platform.getModIds().contains(string.replace("#", "").split(":")[0])) {
+                return blocks;
+            }
+
             Block block = Registry.BLOCK.get(new ResourceLocation(string));
             if (block == Blocks.AIR && !string.split(":")[1].equals("air")) {
                 Seamless.LOGGER.error("Block \"" + string + "\" from " + location + " does not exist!");
