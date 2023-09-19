@@ -16,11 +16,11 @@ A client-side data-driven mod that connects the outlines of double blocks, like 
 - Doors
 - Beds
 - Double Chests
-- Large Plants, like Tall Grass, Peony and Pitcher Plant
-- Small Dripleaf
+- Large Plants, like Tall Grass, Peonies and Pitcher Plants
+- Small Dripleaves
 - Pistons
 - Tall Seagrass
-- Pitcher Plant Crop
+- Pitcher Plant Crops
 
 ### It's completely data-driven!
 
@@ -29,19 +29,22 @@ Want to learn how? Take a look at the [Docs](https://docs.teamdiopside.nl/seamle
 
 ### Built-in Compatibility with:
 
-- **Create** (Glass, Train, Brass, Copper and Andesite Door)
-- **Supplementaries** (Flax, Spring Launcher)
+- **Create** (Glass, Train, Brass, Copper and Andesite Doors)
+- **Supplementaries** (Flax, Spring Launchers)
 - **Fast Paintings** (Paintings)
-- **Farmer's Delight** (Rice, Full Tatami Mat)
+- **Farmer's Delight** (Rice, Full Tatami Mats)
 - **Haunted harvest** (Corn)
-- **Sleep Tight** (Hammocks, Night Bag)
+- **Sleep Tight** (Hammocks, Night Bags)
 - **Upgrade Aquatic** (Bedrolls, Flowering Rush, Pickerelweed, Beach Grass)
-- **Biomes o' Plenty** (Brimstone Cluster, Eyebulb)
-- **Environmental** (Cattail, Large and Giant Lily Pads, Tall Dead Bush)
-- **Atmospheric** (Water Hyacinth, Yucca Flower)
+- **Biomes o' Plenty** (Brimstone Clusters, Eyebulbs)
+- **Environmental** (Cattails, Large and Giant Lily Pads, Tall Dead Bushes)
+- **Atmospheric** (Water Hyacinths, Yucca Flowers)
 
 
 - *Got a suggestion? Please let me know!*
+
+### Mods that added their own Compat:
+- **Dramatic Doors** (Tall Doors)
 
 ***Most other modded Plants, Doors, Chests and Beds should work too!***
 
