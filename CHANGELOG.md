@@ -1,5 +1,10 @@
 # Seamless Changelog
 
+## 2.1.0
+- Backported to 1.18 and 1.19.
+- Added the ability to add an exclamation mark before blocks if you want to exclude them from, for example, a tag.
+- Blocks with namespaces that don't exist are now ignored while checking, to prevent errors if a certain mod is not loaded.
+
 ## 2.0.0
 - Rewrote the mod to be entirely data-driven
 - Added documentation [here](https://docs.teamdiopside.nl/seamless/)
