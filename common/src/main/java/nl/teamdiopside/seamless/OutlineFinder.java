@@ -88,9 +88,15 @@ public class OutlineFinder {
         Set<Block> nonoBlocks = new HashSet<>();
 
         for (String string : set) {
-            if (string.equals("/same") && originalBlock != null) {
-                goodBlocks.add(originalBlock);
-            } else if (string.startsWith("!")) {
+            if (originalBlock != null) {
+                if (string.equals("/same")) {
+                    goodBlocks.add(originalBlock);
+                } else if (string.equals("/!same")) {
+                    nonoBlocks.add(originalBlock);
+                }
+            }
+
+            if (string.startsWith("!")) {
                 nonoBlocks.addAll(getBlocks(string.substring(1), location));
             } else {
                 goodBlocks.addAll(getBlocks(string, location));
