@@ -34,11 +34,11 @@ dependencies {
 modrinth {
     token = System.getenv("MODRINTH_TOKEN")
     projectId = "seamless"
-    versionNumber = "${rootProject.mod_version}-fabric-1.19.2"
-    versionName = "${rootProject.mod_version} Fabric 1.19.2"
+    versionNumber = "${rootProject.mod_version}-fabric-1.19.4"
+    versionName = "${rootProject.mod_version} Fabric 1.19.4"
     versionType = "release"
     uploadFile = remapJar
-    gameVersions = ["1.19", "1.19.1", "1.19.2"]
+    gameVersions = ["1.19.3", "1.19.4"]
     loaders = ["fabric"]
     dependencies {
         required.project "architectury-api"
@@ -56,16 +56,15 @@ curseforge {
         changelog = rootProject.file("CHANGELOG_LATEST.md").text
         changelogType = "markdown"
         releaseType = "release"
-        addGameVersion "1.19"
-        addGameVersion "1.19.1"
-        addGameVersion "1.19.2"
+        addGameVersion "1.19.3"
+        addGameVersion "1.19.4"
         addGameVersion "Fabric"
 
         relations {
             requiredDependency "architectury-api"
         }
         mainArtifact(remapJar) {
-            displayName = "${rootProject.mod_version} Fabric 1.19.2"
+            displayName = "${rootProject.mod_version} Fabric 1.19.4"
         }
         options {
             javaVersionAutoDetect = false
