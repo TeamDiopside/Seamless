@@ -1,6 +1,5 @@
 package nl.teamdiopside.seamless.forge.mixin;
 
-import com.teamabnormals.blueprint.common.block.BlueprintTallFlowerBlock;
 import com.teamabnormals.upgrade_aquatic.common.block.FloweringRushBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
@@ -9,6 +8,7 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.spongepowered.asm.mixin.Final;
@@ -19,9 +19,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FloweringRushBlock.class)
-public abstract class FloweringRushBlockMixin extends BlueprintTallFlowerBlock implements SimpleWaterloggedBlock, BonemealableBlock {
+public abstract class FloweringRushBlockMixin extends Block implements SimpleWaterloggedBlock, BonemealableBlock {
 
     @Shadow @Final private static VoxelShape SHAPE;
+
+    @Shadow @Final public static EnumProperty<DoubleBlockHalf> HALF;
 
     public FloweringRushBlockMixin(Properties properties) {
         super(properties);

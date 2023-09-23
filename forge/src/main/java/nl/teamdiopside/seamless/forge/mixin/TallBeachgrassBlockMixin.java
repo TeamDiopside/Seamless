@@ -5,9 +5,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.spongepowered.asm.mixin.Final;
@@ -18,9 +18,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(TallBeachgrassBlock.class)
-public abstract class TallBeachgrassBlockMixin extends DoublePlantBlock implements BonemealableBlock {
+public abstract class TallBeachgrassBlockMixin extends Block implements BonemealableBlock {
 
     @Shadow @Final private static VoxelShape SHAPE;
+
+    @Shadow @Final public static EnumProperty<DoubleBlockHalf> HALF;
 
     public TallBeachgrassBlockMixin(Properties properties) {
         super(properties);
