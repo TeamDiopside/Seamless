@@ -1,5 +1,5 @@
 {
-  "blocks": ["farmersdelight:rice_panicle"],
+  "blocks": ["farmersdelight:rice_panicles"],
   "directions": ["down"],
   "connecting_blocks": ["farmersdelight:rice"]
 }
