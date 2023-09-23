@@ -3,7 +3,8 @@ package nl.teamdiopside.seamless;
 import dev.architectury.platform.Platform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.StringRepresentable;
@@ -29,7 +30,7 @@ import static nl.teamdiopside.seamless.Reload.RULES;
 
 public class OutlineFinder {
     public record Recursion(VoxelShape voxelShape, Set<BlockPos> connectedPositions) {}
-    
+
     public static Recursion findAndAddShapes(Level level, BlockState state, BlockPos pos, Set<BlockPos> connectedPositions, BlockPos originalPos, Entity entity) {
         connectedPositions.add(pos);
         BlockPos relativePos = pos.subtract(originalPos);
@@ -110,14 +111,14 @@ public class OutlineFinder {
         Set<Block> blocks = new HashSet<>();
 
         if (string.startsWith("#")) {
-            TagKey<Block> blockTagKey = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(string.replace("#", "")));
-            Registry.BLOCK.getOrCreateTag(blockTagKey).stream().forEach(blockHolder -> blocks.add(blockHolder.value()));
+            TagKey<Block> blockTagKey = TagKey.create(Registries.BLOCK, new ResourceLocation(string.replace("#", "")));
+            BuiltInRegistries.BLOCK.getOrCreateTag(blockTagKey).stream().forEach(blockHolder -> blocks.add(blockHolder.value()));
         } else {
             if (!Platform.getModIds().contains(string.replace("#", "").split(":")[0])) {
                 return blocks;
             }
 
-            Block block = Registry.BLOCK.get(new ResourceLocation(string));
+            Block block = BuiltInRegistries.BLOCK.get(new ResourceLocation(string));
             if (block == Blocks.AIR && !string.split(":")[1].equals("air")) {
                 Seamless.LOGGER.error("Block \"" + string + "\" from " + location + " does not exist!");
             } else {
