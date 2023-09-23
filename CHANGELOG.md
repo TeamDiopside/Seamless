@@ -2,9 +2,11 @@
 
 ## 2.1.0
 - Backported to 1.18 and 1.19.
+  - Forge 1.18 - 1.19.2 won't have the default resources as an optional pack.
 - Added the ability to add an exclamation mark before blocks if you want to exclude them from, for example, a tag.
 - Blocks with namespaces that don't exist are now ignored, to prevent errors if a certain mod is not loaded.
 - Door outlines are now combined more strictly.
+- Rice now works properly on Forge.
 
 ## 2.0.0
 - Rewrote the mod to be entirely data-driven
