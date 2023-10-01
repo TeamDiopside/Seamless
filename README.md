@@ -35,6 +35,7 @@ Want to learn how? Take a look at the [Docs](https://docs.teamdiopside.nl/seamle
 - **Farmer's Delight** (Rice, Full Tatami Mats)
 - **Haunted harvest** (Corn)
 - **Sleep Tight** (Hammocks, Night Bags)
+- **Waystones** (Waystones)
 - **Upgrade Aquatic** (Bedrolls, Flowering Rush, Pickerelweed, Beach Grass)
 - **Biomes o' Plenty** (Brimstone Clusters, Eyebulbs)
 - **Environmental** (Cattails, Large and Giant Lily Pads, Tall Dead Bushes)
