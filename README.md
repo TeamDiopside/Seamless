@@ -41,8 +41,7 @@ Want to learn how? Take a look at the [Docs](https://docs.teamdiopside.nl/seamle
 - **Environmental** (Cattails, Large and Giant Lily Pads, Tall Dead Bushes)
 - **Atmospheric** (Water Hyacinths, Yucca Flowers)
 
-
-- *Got a suggestion? Please let me know!*
+*Got a suggestion? Please let me know!*
 
 ### Mods that added their own Compat:
 - **Dramatic Doors** (Tall Doors)
