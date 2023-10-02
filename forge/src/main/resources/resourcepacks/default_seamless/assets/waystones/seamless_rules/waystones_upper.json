@@ -1,5 +1,5 @@
 {
-  "blocks": ["#waystones:waystones"],
+  "blocks": ["#waystones:waystones", "#waystones:sharestones", "waystones:portstone"],
   "blockstates": {
     "half": ["upper"]
   },
