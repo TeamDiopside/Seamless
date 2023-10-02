@@ -6,10 +6,12 @@ import dev.architectury.platform.forge.EventBuses;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.PathPackResources;
 import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
 import net.minecraft.server.packs.repository.Pack;
+import net.minecraft.server.packs.repository.PackCompatibility;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -27,6 +29,7 @@ import nl.teamdiopside.seamless.Reload;
 import nl.teamdiopside.seamless.Seamless;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -78,9 +81,18 @@ public class SeamlessForge {
                         folderName.getPath(),
                         Component.translatable("seamless.resource_pack"),
                         false,
-                        string -> pack,
-                        new Pack.Info(metadata.getDescription(), metadata.getPackFormat(), FeatureFlagSet.of()),
-                        PackType.CLIENT_RESOURCES,
+                        new Pack.ResourcesSupplier() {
+                            @Override
+                            public PackResources openPrimary(String string) {
+                                return pack;
+                            }
+
+                            @Override
+                            public PackResources openFull(String string, Pack.Info arg) {
+                                return pack;
+                            }
+                        },
+                        new Pack.Info(metadata.description(), PackCompatibility.COMPATIBLE, FeatureFlagSet.of(), new ArrayList<>(), false),
                         Pack.Position.TOP,
                         false,
                         PackSource.BUILT_IN
