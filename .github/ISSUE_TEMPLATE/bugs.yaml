@@ -1,0 +1,44 @@
+name: Bug Report
+description: Report a bug
+title: "[Bug]: "
+label: ["bug"]
+assignees: 
+  - LarsMans64
+body:
+  - type: checkboxes
+    attributes:
+      label: Latest Version
+      options:
+        - label: I am running the latest version of the mod.
+          required: true
+      
+  - type: textarea
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+      
+  - type: textarea
+    attributes:
+      label: What did you expect to happen?
+      description: Not required
+      
+  - type: textarea
+    attributes:
+      label: How do you reproduce the bug?
+      description: Not required
+      
+  - type: input
+    attributes:
+      label: What version of Minecraft are you running?
+      placeholder: "1.20"
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: What mod loader are you using?
+      options: ["Fabric", "Forge"]
+      multiple: true
+    validations:
+      required: true
