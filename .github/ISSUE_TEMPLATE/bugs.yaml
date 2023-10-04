@@ -5,6 +5,10 @@ labels: ["bug"]
 assignees: 
   - LarsMans64
 body:
+  - type: markdown
+    attributes:
+      value: "# Bug Report"
+    
   - type: checkboxes
     attributes:
       label: Latest Version
@@ -45,3 +49,9 @@ body:
       multiple: true
     validations:
       required: true
+
+  - type: input
+    attributes:
+      label: latest.log
+      description: Please give us a URL to your latest.log (we recommend uploading it to https://gist.github.com/)
+      placeholder: https://gist.github.com/<user>/<gist id>
