@@ -15,23 +15,26 @@ body:
   - type: textarea
     attributes:
       label: What happened?
+      placecholder: The game crashed
     validations:
       required: true
       
   - type: textarea
     attributes:
       label: What did you expect to happen?
+      placeholder: To not crash
       description: Not required
       
   - type: textarea
     attributes:
-      label: How do you reproduce the bug?
+      label: How to reproduce the bug?
+      placeholder: Do this and that
       description: Not required
       
   - type: input
     attributes:
       label: What version of Minecraft are you running?
-      placeholder: "1.20"
+      placeholder: 1.20
     validations:
       required: true
 
