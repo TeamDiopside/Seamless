@@ -1,0 +1,57 @@
+name: Bug Report
+description: Report a bug
+title: "[Bug]: "
+labels: ["bug"]
+assignees: 
+  - LarsMans64
+body:
+  - type: markdown
+    attributes:
+      value: "# Bug Report"
+    
+  - type: checkboxes
+    attributes:
+      label: Latest Version
+      options:
+        - label: I am running the latest version of the mod.
+          required: true
+      
+  - type: textarea
+    attributes:
+      label: What happened?
+      placeholder: The game crashed
+    validations:
+      required: true
+      
+  - type: textarea
+    attributes:
+      label: What did you expect to happen?
+      placeholder: To not crash
+      description: Not required!
+      
+  - type: textarea
+    attributes:
+      label: How to reproduce the bug?
+      placeholder: Do this and that
+      description: Not required!
+      
+  - type: input
+    attributes:
+      label: What version of Minecraft are you running?
+      placeholder: "1.20"
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: What mod loader are you using?
+      options: ["Fabric", "Forge"]
+      multiple: true
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: latest.log
+      description: Please give us a URL to your latest.log (we recommend uploading it to https://gist.github.com/)
+      placeholder: https://gist.github.com/<user>/<gist id>

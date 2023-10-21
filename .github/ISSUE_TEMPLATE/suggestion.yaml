@@ -1,0 +1,14 @@
+name: Suggestion
+description: Suggest a new feature
+title: "[Suggestion]: "
+labels: ["enhancement"]
+assignees:
+  - LarsMans64
+body:
+  - type: markdown
+    attributes:
+      value: "# Suggestion"
+    
+  - type: textarea
+    attributes:
+      label: What is your suggestion?
