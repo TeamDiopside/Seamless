@@ -1,7 +1,8 @@
 # Seamless Changelog
 
 ## 2.1.1
-- Fixed error spam when Sophisticated Storage is installed
+- Fixed log spam when Sophisticated Storage is installed
+- The built-in resource pack should now work correctly on 1.20.2
 
 ## 2.1.0
 - Updated to 1.20.2
