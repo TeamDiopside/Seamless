@@ -3,7 +3,7 @@
   "id": "seamless",
   "version": "${version}",
   "name": "Seamless",
-  "description": "A mod that connects the outlines of Double Blocks, like Doors and Beds.",
+  "description": "A Fabric/Forge mod that connects the outlines of Double Blocks, like Doors and Beds.",
   "authors": [
     "LarsMans"
   ],
@@ -28,5 +28,8 @@
     "fabric": "*",
     "minecraft": ">=1.19 <=1.19.2",
     "architectury": ">=5.14.84"
+  },
+  "conflicts": {
+    "highlight": "*"
   }
 }
