@@ -1,5 +1,5 @@
 {
-  "blocks": ["#c:chests", "#forge:chests", "!minecraft:ender_chest"],
+  "blocks": ["#c:chests", "#forge:chests", "!minecraft:ender_chest", "!sophisticatedstorage:chest", "!sophisticatedstorage:gold_chest", "!sophisticatedstorage:iron_chest", "!sophisticatedstorage:diamond_chest", "!sophisticatedstorage:netherite_chest"],
   "blockstates": {
     "type": ["right"]
   },
