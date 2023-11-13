@@ -20,6 +20,5 @@ public class Seamless {
 
     public static void init() {
         modIds = Platform.getModIds().stream().toList();
-        fastEnabled = fastOption.get();
     }
 }
