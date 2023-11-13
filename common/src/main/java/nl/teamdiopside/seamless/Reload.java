@@ -4,7 +4,6 @@ import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import dev.architectury.platform.Platform;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -43,7 +42,7 @@ public class Reload {
             ResourceLocation key = file.key();
             JsonElement json = file.json();
 
-            if (!Platform.getModIds().contains(key.getNamespace())) {
+            if (!Seamless.modIds.contains(key.getNamespace())) {
                 continue;
             }
 
