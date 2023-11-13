@@ -1,6 +1,6 @@
 package nl.teamdiopside.seamless.mixin;
 
-import net.minecraft.client.OptionInstance;
+import net.minecraft.client.Option;
 import net.minecraft.client.gui.components.OptionsList;
 import net.minecraft.client.gui.screens.VideoSettingsScreen;
 import nl.teamdiopside.seamless.Seamless;
@@ -16,6 +16,6 @@ public abstract class VideoSettingsScreenMixin {
 
     @Inject(method = "init", at = @At("TAIL"))
     public void init(CallbackInfo ci) {
-        list.addSmall(new OptionInstance[]{Seamless.fastOption});
+        list.addSmall(new Option[]{Seamless.fastOption});
     }
 }

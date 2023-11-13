@@ -1,9 +1,7 @@
 package nl.teamdiopside.seamless;
 
 import dev.architectury.platform.Platform;
-import net.minecraft.client.OptionInstance;
-import net.minecraft.client.gui.components.Tooltip;
-import net.minecraft.network.chat.Component;
+import net.minecraft.client.CycleOption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +15,7 @@ public class Seamless {
     public static List<String> modIds = new ArrayList<>();
 
     public static boolean fastEnabled = false;
-    public static OptionInstance<Boolean> fastOption = OptionInstance.createBoolean("options.fast_seamless", bool -> Tooltip.create(Component.translatable("options.fast_seamless.tooltip")), OptionInstance.BOOLEAN_TO_STRING, false, aBoolean -> fastEnabled = aBoolean);
+    public static CycleOption<Boolean> fastOption = CycleOption.createOnOff("options.fast_seamless", (options) -> fastEnabled, (options, option, object) -> fastEnabled = object);
 
     public static void init() {
         modIds = Platform.getModIds().stream().toList();
