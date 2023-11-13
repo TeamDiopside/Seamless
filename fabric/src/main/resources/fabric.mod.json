@@ -14,7 +14,7 @@
   },
   "license": "MIT",
   "icon": "modicon.png",
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "main": [
       "nl.teamdiopside.seamless.fabric.SeamlessFabric"

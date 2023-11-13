@@ -1,6 +1,5 @@
 package nl.teamdiopside.seamless;
 
-import dev.architectury.platform.Platform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -114,7 +113,7 @@ public class OutlineFinder {
             TagKey<Block> blockTagKey = TagKey.create(Registries.BLOCK, new ResourceLocation(string.replace("#", "")));
             BuiltInRegistries.BLOCK.getOrCreateTag(blockTagKey).stream().forEach(blockHolder -> blocks.add(blockHolder.value()));
         } else {
-            if (!Platform.getModIds().contains(string.replace("#", "").split(":")[0])) {
+            if (!Seamless.modIds.contains(string.replace("#", "").split(":")[0])) {
                 return blocks;
             }
 
