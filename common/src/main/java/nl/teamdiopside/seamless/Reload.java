@@ -29,6 +29,8 @@ public class Reload {
     public static final List<OutlineRule> RULES = new ArrayList<>();
 
     public static void apply(Map<ResourceLocation, JsonElement> jsons) {
+        Seamless.fastEnabled = Seamless.fastOption.get();
+
         RULES.clear();
         List<OutlineRule> temp = new ArrayList<>();
 
