@@ -11,6 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class OptionsMixin {
     @Inject(method = "processOptions", at = @At("HEAD"))
     private void processOptions(Options.FieldAccess fieldAccess, CallbackInfo ci) {
-        fieldAccess.process("fastSeamless", Seamless.fastOption);
+        Seamless.fastEnabled = fieldAccess.process("fastSeamless", Seamless.fastEnabled);
     }
 }
