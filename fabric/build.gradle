@@ -29,8 +29,6 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
-
-    modCompileOnly("maven.modrinth:grass-kiss:1.20-fabric0.83.0-0.5.0")
 }
 
 modrinth {

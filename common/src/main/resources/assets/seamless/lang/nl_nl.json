@@ -1,0 +1,5 @@
+{
+  "seamless.resource_pack": "Standaard Seamless Bronnen",
+  "options.fast_seamless": "Snelle Seamless",
+  "options.fast_seamless.tooltip": "Dit zorgt ervoor dat als je naar een nieuwe locatie kijkt, dat Seamless maar één keer checkt welke andere blokken er samengevoegd moeten worden, wat prestaties verbetert. Een nadeel is dat de outlines van sommige blokken niet meteen samenvoegen bij het plaatsen van het blok, totdat je wegkijkt. Ook zullen veranderingen aan samengevoegde blokken niet gedetecteerd worden."
+}
