@@ -1,5 +1,5 @@
 {
-  "blocks": ["environmental:large_lilypad", "environmental:giant_lilypad"],
+  "blocks": ["environmental:large_lily_pad", "environmental:giant_lily_pad"],
   "blockstates": {
     "position": ["southeast"]
   },
