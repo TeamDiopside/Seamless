@@ -30,7 +30,7 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
-    modCompileOnly("maven.modrinth:sodium:mc1.20.2-0.5.3")
+    modCompileOnly("maven.modrinth:sodium:mc1.19.4-0.4.10")
 }
 
 modrinth {
