@@ -1,5 +1,4 @@
-## 2.2.0
-- Improved performance
-- Added a new option in the video settings, called "Fast Seamless"
-  - Enabling this option simplifies the way seamless checks for blocks, improving performance, but it has some side effects
-- The mod now has the client badge in ModMenu
+## 2.2.1
+- The "Fast Seamless" button now shows up in the Sodium and Rubidium video settings screen
+- Seamless errors will now only be outputted once, rather than every frame
+- Environmental's Large and Giant Lily Pads work again
