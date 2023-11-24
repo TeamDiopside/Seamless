@@ -19,15 +19,9 @@ body:
   - type: textarea
     attributes:
       label: What happened?
-      placeholder: The game crashed
+      placeholder: The game crashed when...
     validations:
       required: true
-      
-  - type: textarea
-    attributes:
-      label: What did you expect to happen?
-      placeholder: To not crash
-      description: Not required!
       
   - type: textarea
     attributes:
@@ -38,14 +32,14 @@ body:
   - type: input
     attributes:
       label: What version of Minecraft are you running?
-      placeholder: "1.20"
+      placeholder: "1.20.2"
     validations:
       required: true
 
   - type: dropdown
     attributes:
       label: What mod loader are you using?
-      options: ["Fabric", "Forge"]
+      options: ["Fabric", "Forge", "Quilt", "NeoForged"]
       multiple: true
     validations:
       required: true
