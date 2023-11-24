@@ -40,6 +40,8 @@ dependencies {
 
     modCompileOnly("curse.maven:upgrade-aquatic-326895:4365140")
     modCompileOnly("curse.maven:blueprint-382216:3991478")
+
+    modCompileOnly("maven.modrinth:rubidium:0.7.1")
 }
 
 modrinth {
