@@ -119,7 +119,7 @@ public class OutlineFinder {
 
             Block block = BuiltInRegistries.BLOCK.get(new ResourceLocation(string));
             if (block == Blocks.AIR && !string.split(":")[1].equals("air")) {
-                Seamless.LOGGER.error("Block \"" + string + "\" from " + location + " does not exist!");
+                initialError("Block \"" + string + "\" from " + location + " does not exist!");
             } else {
                 blocks.add(block);
             }
@@ -130,7 +130,7 @@ public class OutlineFinder {
     public static boolean propertyDoesntMatch(BlockState checkingState, String propertyName, Set<String> values, BlockState originalState, ResourceLocation location) {
         Property<?> checkingProperty = checkingState.getBlock().getStateDefinition().getProperty(propertyName);
         if (checkingProperty == null) {
-            Seamless.LOGGER.error("Blockstate property \"" + propertyName + "\" from " + location + " does not exist for " + checkingState.getBlock().getName());
+            initialError("Blockstate property \"" + propertyName + "\" from " + location + " does not exist for " + checkingState.getBlock().getName());
             return true;
         }
 
@@ -162,7 +162,7 @@ public class OutlineFinder {
 
                 Property<?> originalProperty = originalState.getBlock().getStateDefinition().getProperty(propertyName);
                 if (originalProperty == null) {
-                    Seamless.LOGGER.error("Blockstate property \"" + propertyName + "\" from " + location + " does not exist for " + originalState.getBlock().getName());
+                    initialError("Blockstate property \"" + propertyName + "\" from " + location + " does not exist for " + originalState.getBlock().getName());
                     continue;
                 }
 
@@ -218,13 +218,13 @@ public class OutlineFinder {
                     try {
                         addToProperty = Integer.parseInt(addToPropertyString);
                     } catch (NumberFormatException e) {
-                        Seamless.LOGGER.error("Direction \"" + string + "\" from " + location + " does not exist because \"" + addToPropertyString + "\" is not an integer");
+                        initialError("Direction \"" + string + "\" from " + location + " does not exist because \"" + addToPropertyString + "\" is not an integer");
                     }
                 }
 
                 Property<?> property = state.getBlock().getStateDefinition().getProperty(propertyString);
                 if (property == null) {
-                    Seamless.LOGGER.error("Blockstate property \"" + propertyString + "\" from " + location + " does not exist for " + state.getBlock().getName());
+                    initialError("Blockstate property \"" + propertyString + "\" from " + location + " does not exist for " + state.getBlock().getName());
                     continue;
                 }
 
@@ -246,17 +246,24 @@ public class OutlineFinder {
                     directions.add(Direction.fromAxisAndDirection(state.getValue(BlockStateProperties.HORIZONTAL_AXIS), Direction.AxisDirection.NEGATIVE));
                     directions.add(Direction.fromAxisAndDirection(state.getValue(BlockStateProperties.HORIZONTAL_AXIS), Direction.AxisDirection.POSITIVE));
                 } else {
-                    Seamless.LOGGER.error("Property \"" + propertyString + "\" from " + location + "\" is not a direction property");
+                    initialError("Property \"" + propertyString + "\" from " + location + "\" is not a direction property");
                 }
             } else {
                 Direction direction = Direction.byName(string);
                 if (direction != null) {
                     directions.add(direction);
                 } else {
-                    Seamless.LOGGER.error("Direction \"" + string + "\" from " + location + " does not exist!");
+                    initialError("Direction \"" + string + "\" from " + location + " does not exist!");
                 }
             }
         }
         return directions;
+    }
+    
+    public static void initialError(String string) {
+        if (!Seamless.errors.contains(string)) {
+            Seamless.LOGGER.error(string);
+            Seamless.errors.add(string);
+        }
     }
 }
