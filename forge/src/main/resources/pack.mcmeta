@@ -1,6 +1,10 @@
 {
   "pack": {
     "description": "Seamless",
-    "pack_format": 13
+    "pack_format": 13,
+    "supported_formats": {
+      "min_inclusive": 1,
+      "max_inclusive": 1000
+    }
   }
 }
