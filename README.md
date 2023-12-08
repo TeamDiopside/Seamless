@@ -3,11 +3,10 @@
 A client-side data-driven mod that connects the outlines of double blocks, like doors and beds. The mod is entirely configurable through resource packs, which allows any combined block, no matter its size, to have one big outline.
 
 ---
+
 [![architectury-api](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/requires/architectury-api_vector.svg)](https://modrinth.com/mod/architectury-api)
 [![Fabric API](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/requires/fabric-api_vector.svg)](https://modrinth.com/mod/fabric-api)
 [![Forge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/forge_vector.svg)](https://files.minecraftforge.net/net/minecraftforge/forge/)
-
-[![RocketNode](https://teamdiopside.nl/assets/diopside/rocketnode2.png)](https://billing.rocketnode.com/aff.php?aff=150440)
 
 ---
 
@@ -22,12 +21,14 @@ A client-side data-driven mod that connects the outlines of double blocks, like 
 - Tall Seagrass
 - Pitcher Plant Crops
 
+***Most modded Plants, Doors, Chests and Beds should work too!***
+
 ### It's completely data-driven!
 
 This means that you can add compatibility for any mod yourself, through simple resource packs.  
 Want to learn how? Take a look at the [Docs](https://docs.teamdiopside.nl/seamless/).
 
-### Built-in Compatibility with:
+### Built-in compatibility with:
 
 - **Create** (Glass, Train, Brass, Copper and Andesite Doors)
 - **Supplementaries** (Flax, Spring Launchers)
@@ -43,10 +44,8 @@ Want to learn how? Take a look at the [Docs](https://docs.teamdiopside.nl/seamle
 
 *Got a suggestion? Please let me know!*
 
-### Mods that added their own Compat:
+### Mods that added their own compat:
 - **Dramatic Doors** (Tall Doors)
-
-***Most other modded Plants, Doors, Chests and Beds should work too!***
 
 ---
 
