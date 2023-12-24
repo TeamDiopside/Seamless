@@ -12,8 +12,8 @@ public class SeamlessForge {
 
     public SeamlessForge() {
         // Submit our event bus to let architectury register our content on the right time
-        EventBuses.registerModEventBus(Seamless.MOD_ID, FMLJavaModLoadingContext.get().getModEventBus());
+        EventBuses.registerModEventBus("seamless", FMLJavaModLoadingContext.get().getModEventBus());
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> SeamlessForgeClient::init);
-        Seamless.init();
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> Seamless::init);
     }
 }
