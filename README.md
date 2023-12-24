@@ -45,6 +45,7 @@ Want to learn how? Take a look at the [Docs](https://docs.teamdiopside.nl/seamle
 *Got a suggestion? Please let me know!*
 
 ### Mods that added their own compat:
+- **Comforts** (Sleeping Bags, Hammocks)
 - **Dramatic Doors** (Tall Doors)
 
 ---
