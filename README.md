@@ -7,6 +7,7 @@ A client-side data-driven mod that connects the outlines of double blocks, like 
 [![architectury-api](https://badges.penpow.dev/badges/requires/architectury-api/cozy.svg)](https://modrinth.com/mod/architectury-api)
 [![Fabric API](https://badges.penpow.dev/badges/requires/fabric-api/cozy.svg)](https://modrinth.com/mod/fabric-api)
 [![Forge](https://badges.penpow.dev/badges/supported/forge/cozy.svg)](https://files.minecraftforge.net/net/minecraftforge/forge/)
+[![Docs](https://badges.penpow.dev/badges/documentation/gitbook/cozy.svg)](https://docs.teamdiopside.nl/seamless)
 
 ---
 
