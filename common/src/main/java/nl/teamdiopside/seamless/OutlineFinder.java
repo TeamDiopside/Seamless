@@ -2,6 +2,7 @@ package nl.teamdiopside.seamless;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -10,10 +11,9 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -23,6 +23,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static nl.teamdiopside.seamless.Reload.RULES;
@@ -39,17 +40,19 @@ public class OutlineFinder {
             return new Recursion(shape, connectedPositions);
         }
 
-        for (Reload.OutlineRule outlineRule : RULES) {
-            ResourceLocation location = outlineRule.location();
+        for (ResourceLocation location : RULES.keySet()) {
+            Reload.OutlineRule outlineRule = RULES.get(location);
 
             if (blockDoesntMatch(outlineRule.blocks(), state.getBlock(), null, location)) {
                 continue;
             }
 
             boolean blockstatesMatch = true;
-            for (HashMap.Entry<String, Set<String>> entry : outlineRule.blockstates().entrySet()) {
-                if (propertyDoesntMatch(state, entry.getKey(), entry.getValue(), null, location)) {
-                    blockstatesMatch = false;
+            if (outlineRule.blockstates().isPresent()) {
+                for (HashMap.Entry<String, Set<String>> entry : outlineRule.blockstates().get().entrySet()) {
+                    if (propertyDoesntMatch(state, entry.getKey(), entry.getValue(), null, location)) {
+                        blockstatesMatch = false;
+                    }
                 }
             }
             if (!blockstatesMatch) {
@@ -65,10 +68,12 @@ public class OutlineFinder {
                 }
 
                 boolean connectingBlockstatesMatch = true;
-                for (HashMap.Entry<String, Set<String>> entry : outlineRule.connectingBlockstates().entrySet()) {
-                    if (propertyDoesntMatch(checkingState, entry.getKey(), entry.getValue(), state, location)) {
-                        connectingBlockstatesMatch = false;
-                        break;
+                if (outlineRule.connectingBlockstates().isPresent()) {
+                    for (HashMap.Entry<String, Set<String>> entry : outlineRule.connectingBlockstates().get().entrySet()) {
+                        if (propertyDoesntMatch(checkingState, entry.getKey(), entry.getValue(), state, location)) {
+                            connectingBlockstatesMatch = false;
+                            break;
+                        }
                     }
                 }
                 if (!connectingBlockstatesMatch) {
@@ -111,17 +116,17 @@ public class OutlineFinder {
 
         if (string.startsWith("#")) {
             TagKey<Block> blockTagKey = TagKey.create(Registries.BLOCK, ResourceLocation.parse(string.replace("#", "")));
-            BuiltInRegistries.BLOCK.getOrCreateTag(blockTagKey).stream().forEach(blockHolder -> blocks.add(blockHolder.value()));
+            BuiltInRegistries.BLOCK.get(blockTagKey).ifPresent(named -> named.forEach(blockHolder -> blocks.add(blockHolder.value())));
         } else {
             if (!Seamless.modIds.contains(string.replace("#", "").split(":")[0])) {
                 return blocks;
             }
 
-            Block block = BuiltInRegistries.BLOCK.get(ResourceLocation.parse(string));
-            if (block == Blocks.AIR && !string.split(":")[1].equals("air")) {
+            Optional<Holder.Reference<Block>> block = BuiltInRegistries.BLOCK.get(ResourceLocation.parse(string));
+            if (block.isEmpty()) {
                 initialError("Block \"" + string + "\" from " + location + " does not exist!");
             } else {
-                blocks.add(block);
+                blocks.add(block.get().value());
             }
         }
         return blocks;
@@ -167,8 +172,8 @@ public class OutlineFinder {
                 }
 
                 Set<String> toAdd = new HashSet<>();
-                if (originalProperty instanceof DirectionProperty directionProperty) {
-                    Direction direction = originalState.getValue(directionProperty);
+                if (originalProperty instanceof EnumProperty<?> directionProperty && directionProperty.getValueClass() == Direction.class) {
+                    Direction direction = (Direction) originalState.getValue(directionProperty);
                     for (int i = 0; i < addToProperty; i++) {
                         direction = direction.getClockWise();
                     }
@@ -228,8 +233,8 @@ public class OutlineFinder {
                     continue;
                 }
 
-                if (property instanceof DirectionProperty directionProperty) {
-                    Direction direction = state.getValue(directionProperty);
+                if (property instanceof EnumProperty<?> directionProperty && directionProperty.getValueClass() == Direction.class) {
+                    Direction direction = (Direction) state.getValue(directionProperty);
                     for (int i = 0; i < addToProperty; i++) {
                         direction = direction.getClockWise();
                     }

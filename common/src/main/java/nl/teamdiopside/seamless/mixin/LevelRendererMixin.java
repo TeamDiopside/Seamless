@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.ShapeRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import nl.teamdiopside.seamless.OutlineFinder;
@@ -40,7 +42,7 @@ public abstract class LevelRendererMixin implements ResourceManagerReloadListene
     @Shadow private @Nullable ClientLevel level;
 
     @Inject(method = "renderHitOutline", at = @At("HEAD"), cancellable = true)
-    private void renderHitOutline(PoseStack poseStack, VertexConsumer vertexConsumer, Entity entity, double i, double b, double c, BlockPos blockPos, BlockState blockState, CallbackInfo ci) {
+    private void renderHitOutline(PoseStack poseStack, VertexConsumer vertexConsumer, Entity entity, double d, double e, double f, BlockPos blockPos, BlockState blockState, int i, CallbackInfo ci) {
 
         if (Seamless.modIds.contains("diagonalfences") && blockState.is(BlockTags.FENCES)
                 || Seamless.modIds.contains("diagonalwindows") && (blockState.is(Blocks.IRON_BARS) || blockState.is(getTag("forge:glass_panes")) || blockState.is(getTag("c:glass_panes")))
@@ -66,7 +68,7 @@ public abstract class LevelRendererMixin implements ResourceManagerReloadListene
             shape = recursion.voxelShape().optimize();
         }
 
-        LevelRenderer.renderShape(poseStack, vertexConsumer, shape, (double)blockPos.getX() - i, (double)blockPos.getY() - b, (double)blockPos.getZ() - c, 0.0f, 0.0f, 0.0f, 0.4f);
+        ShapeRenderer.renderShape(poseStack, vertexConsumer, shape, (double)blockPos.getX() - d, (double)blockPos.getY() - e, (double)blockPos.getZ() - f, i);
         ci.cancel();
     }
 
