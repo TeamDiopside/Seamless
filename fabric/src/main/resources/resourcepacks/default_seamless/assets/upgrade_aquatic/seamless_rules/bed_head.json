@@ -1,5 +1,5 @@
 {
-  "blocks": ["#beds"],
+  "blocks": ["#upgrade_aquatic:bedrolls"],
   "blockstates": {
     "part": ["head"]
   },
