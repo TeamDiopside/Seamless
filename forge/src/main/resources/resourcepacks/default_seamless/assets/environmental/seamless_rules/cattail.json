@@ -1,0 +1,5 @@
+{
+  "blocks": ["environmental:cattail"],
+  "directions": ["down"],
+  "connecting_blocks": ["environmental:cattail_stalk"]
+}
