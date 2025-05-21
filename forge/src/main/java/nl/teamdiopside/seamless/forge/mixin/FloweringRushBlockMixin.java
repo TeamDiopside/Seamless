@@ -1,10 +1,10 @@
 package nl.teamdiopside.seamless.forge.mixin;
 
-import com.teamabnormals.blueprint.common.block.BlueprintTallFlowerBlock;
 import com.teamabnormals.upgrade_aquatic.common.block.FloweringRushBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.TallFlowerBlock;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FloweringRushBlock.class)
-public abstract class FloweringRushBlockMixin extends BlueprintTallFlowerBlock implements SimpleWaterloggedBlock, BonemealableBlock {
+public abstract class FloweringRushBlockMixin extends TallFlowerBlock implements SimpleWaterloggedBlock, BonemealableBlock {
 
     @Shadow @Final private static VoxelShape SHAPE;
 
