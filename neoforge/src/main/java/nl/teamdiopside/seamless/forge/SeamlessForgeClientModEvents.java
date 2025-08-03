@@ -10,7 +10,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 import nl.teamdiopside.seamless.Seamless;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = Seamless.MOD_ID)
+@EventBusSubscriber(modid = Seamless.MOD_ID)
 public class SeamlessForgeClientModEvents {
 
     @SubscribeEvent

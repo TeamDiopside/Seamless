@@ -13,7 +13,7 @@ import java.util.Set;
 public class Seamless {
     public static final String MOD_ID = "seamless";
     public static final String RESOURCE_PACK = "default_seamless";
-    public static final String RESOURCE_PACK_FORGE = "mod/seamless:resourcepacks/default_seamless";
+    public static final String FORGE_RESOURCE_PACK_ID = "mod/seamless:resourcepacks/default_seamless";
     public static final String RESOURCE_PACK_PATH = "resourcepacks/default_seamless";
     public static final Logger LOGGER = LoggerFactory.getLogger("Seamless");
     public static Set<String> modIds = new HashSet<>();

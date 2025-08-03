@@ -13,16 +13,20 @@ import nl.teamdiopside.seamless.Seamless;
 import java.io.File;
 
 @Mod(value = Seamless.MOD_ID, dist = Dist.CLIENT)
-@EventBusSubscriber(modid = Seamless.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Seamless.MOD_ID, value = Dist.CLIENT)
 public class SeamlessForgeClient {
 
-    public static File file = new File(Minecraft.getInstance().gameDirectory, "seamless.txt");
+    private static File file;
 
     public SeamlessForgeClient() {
-
-//        NeoForge.EVENT_BUS.register(SeamlessForgeClientModEvents.class);
-
         Seamless.init();
+    }
+
+    public static File getFile() {
+        if (file == null) {
+            file = new File(Minecraft.getInstance().gameDirectory, "seamless.txt");
+        }
+        return file;
     }
 
     @SubscribeEvent
