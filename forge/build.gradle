@@ -38,8 +38,8 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
-    modCompileOnly("curse.maven:upgrade-aquatic-326895:4415517")
-    modCompileOnly("curse.maven:blueprint-382216:4749000")
+    modCompileOnly("curse.maven:upgrade-aquatic-326895:5296565")
+    modCompileOnly("curse.maven:blueprint-382216:5201927")
 
     modCompileOnly("maven.modrinth:rubidium:0.7.0a")
 }
