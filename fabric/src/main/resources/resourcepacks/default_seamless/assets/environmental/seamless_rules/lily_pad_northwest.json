@@ -1,8 +1,0 @@
-{
-  "blocks": ["environmental:large_lily_pad", "environmental:giant_lily_pad"],
-  "blockstates": {
-    "position": ["northwest"]
-  },
-  "directions": ["east", "south"],
-  "connecting_blocks": ["/same"]
-}

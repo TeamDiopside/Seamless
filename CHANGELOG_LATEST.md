@@ -1,4 +1,5 @@
 ## 2.3.3
-- Fixed Environmental's Giant Lily Pad
 - Fixed crash with Upgrade Aquatic
-- Fixed Biomes O' Plenty's tall flowers
+- Fixed Environmental's Cattail
+- Fixed Biomes O' Plenty's tall flowers & huge lily pads
+- Fixed Upgrade Aquatic's Pickerelweed
