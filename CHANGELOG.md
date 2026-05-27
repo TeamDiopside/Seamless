@@ -1,5 +1,10 @@
 # Seamless Changelog
 
+## 2.3.3
+- Fixed Environmental's Giant Lily Pad
+- Fixed crash with Upgrade Aquatic
+- Fixed Biomes O' Plenty's tall flowers
+
 ## 2.3.2
 - Ported to 1.21.4
 - Fixed Upgrade Aquatic's Bedrolls
