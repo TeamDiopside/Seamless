@@ -1,0 +1,8 @@
+{
+  "blocks": ["biomesoplenty:huge_lily_pad"],
+  "blockstates": {
+    "quarter": ["south_east"]
+  },
+  "directions": ["/state:facing", "/state:facing+3"],
+  "connecting_blocks": ["/same"]
+}

@@ -1,9 +1,10 @@
 # Seamless Changelog
 
 ## 2.3.3
-- Fixed Environmental's Giant Lily Pad
 - Fixed crash with Upgrade Aquatic
-- Fixed Biomes O' Plenty's tall flowers
+- Fixed Environmental's Cattail
+- Fixed Biomes O' Plenty's tall flowers & huge lily pads
+- Fixed Upgrade Aquatic's Pickerelweed
 
 ## 2.3.2
 - Ported to 1.21.4
