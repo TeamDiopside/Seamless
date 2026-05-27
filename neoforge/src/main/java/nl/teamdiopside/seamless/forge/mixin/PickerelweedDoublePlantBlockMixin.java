@@ -32,7 +32,7 @@ public abstract class PickerelweedDoublePlantBlockMixin extends Block implements
 
     @Shadow @Final protected static VoxelShape SHAPE;
 
-    @Inject(method = "m_5940_", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
     public void getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
         cir.setReturnValue(state.getValue(HALF) == DoubleBlockHalf.LOWER ? Block.box(2, 0, 2, 14, 16, 14) : SHAPE);
     }

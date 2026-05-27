@@ -44,8 +44,8 @@ dependencies {
     shadowBundle project(path: ':common', configuration: 'transformProductionNeoForge')
 
     modCompileOnly("maven.modrinth:rubidium:0.7.1")
-    modCompileOnly("maven.modrinth:upgrade-aquatic:6.0.0")
-    modCompileOnly("maven.modrinth:blueprint:7.1.0")
+    modCompileOnly("maven.modrinth:upgrade-aquatic:7.0.1")
+    modCompileOnly("maven.modrinth:blueprint:8.1.0")
 }
 
 modrinth {
