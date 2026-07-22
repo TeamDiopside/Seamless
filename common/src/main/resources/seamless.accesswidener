@@ -1,4 +1,4 @@
-accessWidener   v2  named
+accessWidener v2 official
 
 accessible method net/minecraft/client/renderer/LevelRenderer renderShape (Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lnet/minecraft/world/phys/shapes/VoxelShape;DDDFFFF)V
 accessible class net/minecraft/client/Options$FieldAccess

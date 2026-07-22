@@ -20,3 +20,5 @@ classes/
 
 fabric libs.lnk
 forge libs.lnk
+
+.architectury-transformer/

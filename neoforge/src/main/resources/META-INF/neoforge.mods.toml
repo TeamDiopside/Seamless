@@ -16,21 +16,21 @@ logoFile = "modicon.png"
 [[dependencies.seamless]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.0,)"
+versionRange = "[26.0,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.seamless]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.2,)"
+versionRange = "[26,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.seamless]]
 modId = "architectury"
 type = "required"
-versionRange = "[13.0.2,)"
+versionRange = "[20.0.4,)"
 ordering = "AFTER"
 side = "BOTH"
 

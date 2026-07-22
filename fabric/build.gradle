@@ -27,18 +27,18 @@ configurations {
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+    implementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
 
     // Fabric API. This is technically optional, but you probably want it anyway.
-    modImplementation "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
+    implementation "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
 
     // Architectury API. This is optional, and you can comment it out if you don't need it.
-    modImplementation "dev.architectury:architectury-fabric:$rootProject.architectury_api_version"
+    implementation "dev.architectury:architectury-fabric:$rootProject.architectury_api_version"
 
-    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
+    common(project(path: ':common')) { transitive false }
     shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
 
-    modCompileOnly("maven.modrinth:sodium:mc1.21-0.5.11")
+    compileOnly("maven.modrinth:sodium:mc26.2-0.9.1-fabric")
 }
 
 modrinth {
@@ -47,8 +47,8 @@ modrinth {
     versionNumber = "${rootProject.mod_version}-fabric-${rootProject.latest_version}"
     versionName = "${rootProject.mod_version}"
     versionType = "release"
-    uploadFile = remapJar
-    gameVersions = ["1.21.4"]
+    uploadFile = shadowJar
+    gameVersions = ["26.1", "26.2"]
     loaders = ["fabric"]
     dependencies {
         required.project "architectury-api"
@@ -66,13 +66,14 @@ curseforge {
         changelog = rootProject.file("CHANGELOG_LATEST.md").text
         changelogType = "markdown"
         releaseType = "release"
-        addGameVersion "1.21.4"
+        addGameVersion "26.1"
+        addGameVersion "26.2"
         addGameVersion "Fabric"
 
         relations {
             requiredDependency "architectury-api"
         }
-        mainArtifact(remapJar) {
+        mainArtifact(shadowJar) {
             displayName = "${rootProject.mod_version}"
         }
         options {
@@ -89,12 +90,16 @@ processResources {
     }
 }
 
-shadowJar {
-    configurations = [project.configurations.shadowBundle]
-    archiveClassifier = 'dev-shadow'
+jar {
+    archiveClassifier = "raw"
 }
 
-remapJar {
-    input.set shadowJar.archiveFile
-    archiveClassifier = "fabric-${rootProject.latest_version}"
+shadowJar {
+    dependsOn(jar)
+    mainSpec.sourcePaths.clear()       // Remove default source set inclusion
+    from(zipTree(jar.archiveFile))     // Unpack jar output (preserves Loom modifications)
+
+    configurations = [project.configurations.shadowBundle]
+    archiveClassifier = null           // shadowJar becomes the main artifact
+    from rootProject.file("LICENSE.md")
 }
